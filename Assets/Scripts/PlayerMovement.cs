@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
-    
+
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
@@ -16,34 +18,61 @@ public class PlayerMovement : MonoBehaviour
 
     private float gravity;
 
+    public GameObject pickaxe; //TODO this should be moved to a craftingTable
+
+    //TODO this should not be in playerMovement but I'm lazy
+    void callInventory()
+    {
+        
+        //TODO maybe this could be done better. Instead of working with a tag, work with layers?
+        Collider[] hits = Physics.OverlapSphere(controller.transform.position, 3).Where(hit => hit.CompareTag("Item")).ToArray();
+
+        //TODO stupid check
+        if (hits.Length == 2)
+        {
+            foreach (var hit in hits)
+            {
+                Destroy(hit.gameObject);
+            }
+            Instantiate(pickaxe, controller.transform.position, Quaternion.identity);
+        }
+    }
+
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
         if (controller.isGrounded) gravity = 0;
         controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
-        
+
         // Now we read the inputs and move our character accordingly
         var horizontal = Input.GetAxisRaw("Horizontal");
         var vertical = Input.GetAxisRaw("Vertical");
         var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f) {
+        if (direction.magnitude >= 0.1f)
+        {
             var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+            var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
+                turnSmoothTime);
 
             transform.rotation = Quaternion.Euler(0f, angle, 0);
             var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime); //deltaTime to make game frame rate independent
+            controller.Move(moveDir.normalized * speed *
+                            Time.deltaTime); //deltaTime to make game frame rate independent
         }
 
         // Move the camera to a position above the player
         mainCamera.transform.position = transform.position - cameraOffset;
+
+        if (Input.GetKeyUp(KeyCode.Space)) callInventory();
     }
-    
+
     // If we run up against something with a rigidbody, we move it
-    void OnControllerColliderHit(ControllerColliderHit hit) {
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
         Rigidbody body = hit.collider.attachedRigidbody;
 
         // no rigidbody
