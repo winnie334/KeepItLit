@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7968455023987225191}
   - component: {fileID: 863052535398109994}
   - component: {fileID: 1237560214333556349}
-  - component: {fileID: 1859736223604519661}
+  - component: {fileID: 5982630789533390002}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Item
@@ -209,7 +209,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1859736223604519661
+--- !u!114 &5982630789533390002
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7403314171369623301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9461adb1b64740d7a78b067ec6a05917, type: 3}
+  m_Script: {fileID: 11500000, guid: 7016011e241d7a6488d236754948d884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}

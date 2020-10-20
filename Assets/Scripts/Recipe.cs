@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class Recipe : ScriptableObject
-{
-    public List<Item> requiredItems; //TODO maybe this should be a dictionary instead DICT<Item item, Int AmountRequired>
-    public Item resultingItem;
+public class Recipe : ScriptableObject {
+    public List<Item> requiredItems; // Making this a serializable dictionary for Unity is lethal :skull:
+    public GameObject resultingItem;
 }
