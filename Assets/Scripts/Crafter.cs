@@ -18,7 +18,7 @@ public class Crafter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Space)) {
+        if (Input.GetKeyDown("c")) {
             // Debug.Log(getAvailableItems());
             // Debug.Log(getPossibleRecipes());
             craftRecipe(knownRecipes[0]);
@@ -72,10 +72,6 @@ public class Crafter : MonoBehaviour {
 
         return true;
     }
-    
-    void OnDrawGizmosSelected() {
-        Gizmos.color = new Color(1, 1, 0, 0.75F);
-        Gizmos.DrawSphere(transform.position, craftRadius);
-    }
+
 
 }
