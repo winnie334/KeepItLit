@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -69,5 +68,11 @@ public class Crafter : MonoBehaviour {
         return true;
     }
 
-
+    // Returns the amount of necessary items for a given recipe and how many of those items are available
+    public Dictionary<Item, Tuple<int, int>> getNeededItems(Recipe recipe) {
+        var availableCount = getAvailableItems().ToDictionary(entry => entry.Key, entry => entry.Value.Count);
+        var requiredCount = recipe.requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        return recipe.requiredItems.ToDictionary(item => item, item => 
+            new Tuple<int, int>(availableCount.GetOrDef(item), requiredCount[item]));
+    }
 }

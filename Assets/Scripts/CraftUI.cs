@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +11,10 @@ public class CraftUI : MonoBehaviour {
     public GameObject craftUI;
     public GameObject optionsPanel;
     public GameObject craftOption;
-
     public Button craftButton;
     public Color canCraftColor;
+
+    private Crafter crafter; // The crafter which is using this menu (e.g. player or workbench)
 
     void Start() {
         craftButton.onClick.AddListener(craftSelected);
@@ -27,10 +29,16 @@ public class CraftUI : MonoBehaviour {
         if (craftUI.activeInHierarchy) {
             craftUI.SetActive(false);
         } else {
+            setCrafter();
             craftUI.SetActive(true);
             detailPanel.SetActive(false);
             refreshUI();
         }
+    }
+
+    // If we ever want to craft using workbenches or other special stations, this is where you should set them
+    void setCrafter() {
+        crafter = player.GetComponent<Crafter>();
     }
 
     // Fetches all the possible recipes again
@@ -42,8 +50,6 @@ public class CraftUI : MonoBehaviour {
         optionsList = new GameObject("OptionsList"); // Empty GameObject to easily contain all recipe options
         optionsList.transform.SetParent(optionsPanel.transform, false);
 
-        var crafter = player.GetComponent<Crafter>(); // If we have workbenches at some point, we should check for 
-                                                      // their presence here
         var possibleRecipes = crafter.getPossibleRecipes();
 
         var xOffset = 0;
@@ -60,26 +66,29 @@ public class CraftUI : MonoBehaviour {
     public GameObject detailPanel;
     public Text detailTitle;
     public Text detailDescription;
-    public GameObject detailIngredients; // TODO: displaying which ingredients you have and still need is kinda a hassle
-                                         // TODO: I think the best option is to add a function to crafter which tells you
-                                         // TODO: for one specific recipe. Only issue is that you might have moved since opening UI 
+    public Text detailIngredients;
     private Recipe currentlySelected;
     void selectRecipe(Recipe recipe) {
         if (!detailPanel.activeInHierarchy) detailPanel.SetActive(true);
         detailTitle.text = recipe.name;
         detailDescription.text = recipe.description;
         currentlySelected = recipe;
+        var neededItems = crafter.getNeededItems(recipe);
+        // TODO replace string display with icons
+        detailIngredients.text = neededItems.Keys.Aggregate("", (current, item) => 
+            current + (item.name + ": " + neededItems[item].Item1 + "/" + neededItems[item].Item2 + "\n"));
     }
 
     void craftSelected() {
-        player.GetComponent<Crafter>().craftRecipe(currentlySelected);
-        StartCoroutine(nameof(delayedRefresh));
+        crafter.craftRecipe(currentlySelected);
+        StartCoroutine(nameof(delayedUpdate));
     }
     
     // Calls refresh after a short bit, to allow unity to delete the crafting ingredients of the previous recipe
     // This is not a very pretty way so feel free to improve it
-    IEnumerator delayedRefresh() {
+    IEnumerator delayedUpdate() {
         yield return new WaitForSeconds(0.05f);
         refreshUI();
+        selectRecipe(currentlySelected); // Despite already selected, we need to reselect it to update the ingredients
     }
 }
