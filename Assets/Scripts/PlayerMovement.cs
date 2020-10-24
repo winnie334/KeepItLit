@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
             if (objectToGrab == null) return; // Player tried to grab something when there was nothing in this range
             currentlyGrabbed = objectToGrab;
             objectToGrab.transform.parent = transform; // One day we should make a better holding animation
-            objectToGrab.transform.localPosition = new Vector3(0, 0.5f, 1f);
+            objectToGrab.transform.localPosition = new Vector3(0, 0, 1f);
             objectToGrab.GetComponent<Rigidbody>().isKinematic = true; 
         } else { // We are dropping our current item
             currentlyGrabbed.transform.parent = null;

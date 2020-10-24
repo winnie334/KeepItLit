@@ -16,7 +16,7 @@ public class Grid : MonoBehaviour {
 	private Mesh mesh;
 	private Vector3[] vertices;
 
-	private void Awake () {
+	private void Start () {
 		Generate();
 	}
 
@@ -45,6 +45,7 @@ public class Grid : MonoBehaviour {
 		 mesh.uv = uv;
 		mesh.tangents = tangents;
 
+		// Now we have our vertices, we create triangles between them to have a visible mesh
 		int[] triangles = new int[xSize * ySize * 6];
 		for (int ti = 0, vi = 0, y = 0; y < ySize; y++, vi++) {
 			for (int x = 0; x < xSize; x++, ti += 6, vi++) {
@@ -59,8 +60,9 @@ public class Grid : MonoBehaviour {
 		GetComponent<MeshCollider>().sharedMesh = mesh;
 	}
 
-
-	void OnValidate() {
-		Generate();
-	}
+	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
+	// The reason this is commented out is because unity has a warning glitch which can be annoying
+	// void OnValidate() {
+	// 	Generate();
+	// }
 }

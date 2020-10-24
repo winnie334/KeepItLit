@@ -11,18 +11,14 @@ public class Crafter : MonoBehaviour {
 
     public List<Recipe> knownRecipes;
     private float craftRadius = 6;
-    
+
     void Start() {
         
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown("c")) {
-            // Debug.Log(getAvailableItems());
-            // Debug.Log(getPossibleRecipes());
-            craftRecipe(knownRecipes[0]);
-        }
+
     }
     
     // Returns all available items nearby for crafting, along with their corresponding GameObjects 
@@ -44,13 +40,13 @@ public class Crafter : MonoBehaviour {
     }
 
     // Gives a list of recipes the player has the necessary materials for
-    List<Recipe> getPossibleRecipes() {
+    public List<Recipe> getPossibleRecipes() {
         var availableItems = getAvailableItems();
         return knownRecipes.Where(recipe => canMakeRecipe(recipe, availableItems)).ToList();
     }
 
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
-    void craftRecipe(Recipe recipe) { // maybe save available items? Has some design consequences, todo discuss
+    public void craftRecipe(Recipe recipe) { // maybe save available items? Has some design consequences, todo discuss
         var availableItems = getAvailableItems();
         Assert.IsTrue(canMakeRecipe(recipe, availableItems));
         foreach (var requiredItem in recipe.requiredItems) {
@@ -58,7 +54,7 @@ public class Crafter : MonoBehaviour {
             availableItems[requiredItem].Remove(bestObject);
             Destroy(bestObject);
         }
-        Instantiate(recipe.resultingItem, transform.position, Quaternion.identity);
+        Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward, Quaternion.identity);
     }
 
     // Returns true if the given recipe can be made with a given list of items
