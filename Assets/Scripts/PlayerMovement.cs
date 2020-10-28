@@ -21,8 +21,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject currentlyGrabbed; // is either null or the object we are holding
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
         if (Input.GetMouseButtonDown(0) && currentlyGrabbed) handleItemAction();
@@ -31,10 +30,10 @@ public class PlayerMovement : MonoBehaviour
         mainCamera.transform.position = transform.position - cameraOffset;
     }
 
-    void handleMovement()
-    {
+    void handleMovement() {
         // First we move the controller down with gravity
-        gravity -= !controller.isGrounded ? 9.81f * Time.deltaTime : 0;
+        gravity -= 9.81f * Time.deltaTime;
+        if (controller.isGrounded) gravity = 0;
         controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
 
         // Now we read the inputs and move our character accordingly
@@ -52,10 +51,8 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(moveDir.normalized * (speed * Time.deltaTime)); //deltaTime to make game frame rate independent
     }
 
-    void handleGrab()
-    {
-        if (currentlyGrabbed == null)
-        {
+    void handleGrab() {
+        if (currentlyGrabbed == null) {
             // We are trying to pick up a new item
             var curPos = transform.position;
             GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
@@ -69,9 +66,7 @@ public class PlayerMovement : MonoBehaviour
             objectToGrab.transform.parent = transform; // One day we should make a better holding animation
             objectToGrab.transform.localPosition = new Vector3(0, 0, 1f);
             objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
-        }
-        else
-        {
+        } else {
             // We are dropping our current item
             currentlyGrabbed.transform.parent = null;
             currentlyGrabbed.GetComponent<Rigidbody>().isKinematic = false;
@@ -79,16 +74,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void handleItemAction()
-    {
+    void handleItemAction() {
         var action = currentlyGrabbed.GetComponent<IAction>();
         if (action != null) action.execute();
         else Debug.Log("Item has no action");
     }
 
     // If we run up against something with a rigidbody, we move it
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
+    void OnControllerColliderHit(ControllerColliderHit hit) {
         Rigidbody body = hit.collider.attachedRigidbody;
 
         // no rigidbody
@@ -104,8 +97,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnDrawGizmosSelected()
-    {
+    void OnDrawGizmosSelected() {
         Gizmos.color = new Color(1, 1, 0, 0.75F);
         Gizmos.DrawSphere(transform.position + transform.rotation * Vector3.forward * 2, 2);
     }

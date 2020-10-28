@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: A pickaxe, but longer
   requiredItems:
-  - {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}
+  - {fileID: 11400000, guid: 9ca14c4bcfbafac488546ad8a8194e58, type: 2}
+  - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   resultingItem: {fileID: 7403314171369623301, guid: ca601057cd8410f45821616459795019, type: 3}

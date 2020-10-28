@@ -72,7 +72,7 @@ public class Crafter : MonoBehaviour {
     public Dictionary<Item, Tuple<int, int>> getNeededItems(Recipe recipe) {
         var availableCount = getAvailableItems().ToDictionary(entry => entry.Key, entry => entry.Value.Count);
         var requiredCount = recipe.requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
-        return recipe.requiredItems.ToDictionary(item => item, item => 
+        return requiredCount.Keys.ToDictionary(item => item, item => 
             new Tuple<int, int>(availableCount.GetOrDef(item), requiredCount[item]));
     }
 }
