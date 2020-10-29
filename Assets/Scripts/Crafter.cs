@@ -53,6 +53,7 @@ public class Crafter : MonoBehaviour {
             availableItems[requiredItem].Remove(bestObject);
             Destroy(bestObject);
         }
+        
         Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward, Quaternion.identity);
     }
 

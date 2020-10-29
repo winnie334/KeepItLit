@@ -8,6 +8,9 @@ public class CraftUI : MonoBehaviour {
 
     public GameObject player;
     
+    public AudioSource audioSource;
+    public AudioClip craftSound;
+
     public GameObject craftUI;
     public GameObject optionsPanel;
     public GameObject craftOption;
@@ -55,7 +58,7 @@ public class CraftUI : MonoBehaviour {
         var xOffset = 0;
         foreach (var recipe in crafter.knownRecipes) {
             var newButton = Instantiate(craftOption, optionsList.transform, false);
-            newButton.transform.localPosition += new Vector3(xOffset, 0, 0); xOffset += 120; // TODO make actual craft UI
+            newButton.transform.localPosition += new Vector3(xOffset % 360, -(xOffset / 360) * 120, 0); xOffset += 120; // TODO make actual craft UI
             newButton.GetComponentInChildren<Text>().text = recipe.name;
             newButton.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(recipe); });
             if (!possibleRecipes.Contains(recipe)) continue; // We can't craft this recipe
@@ -81,6 +84,7 @@ public class CraftUI : MonoBehaviour {
 
     void craftSelected() {
         crafter.craftRecipe(currentlySelected);
+        audioSource.PlayOneShot(craftSound); // todo - currently always plays regardless of success
         StartCoroutine(nameof(delayedUpdate));
     }
     

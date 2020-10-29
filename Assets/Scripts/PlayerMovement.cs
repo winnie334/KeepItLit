@@ -11,6 +11,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform mainCamera;
     public Vector3 cameraOffset;
 
+    public AudioSource audioSource;
+    public AudioClip pickupSound;
+    public AudioClip dropSound;
+
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
@@ -66,11 +70,13 @@ public class PlayerMovement : MonoBehaviour
             objectToGrab.transform.parent = transform; // One day we should make a better holding animation
             objectToGrab.transform.localPosition = new Vector3(0, 0, 1f);
             objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
+            audioSource.PlayOneShot(pickupSound);
         } else {
             // We are dropping our current item
             currentlyGrabbed.transform.parent = null;
             currentlyGrabbed.GetComponent<Rigidbody>().isKinematic = false;
             currentlyGrabbed = null;
+            audioSource.PlayOneShot(dropSound);
         }
     }
 
