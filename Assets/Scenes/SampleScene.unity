@@ -5451,8 +5451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001abee98ff6b9a45a59c0a9cf2f790d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleFire: 0.6
-  speedDreasing: 0
+  scaleFire: 2
+  speedDreasing: 0.05
   minScale: 0.5
   densityFire: 500
 --- !u!1 &1876856390

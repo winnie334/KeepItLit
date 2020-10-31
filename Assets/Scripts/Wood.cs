@@ -2,18 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wood : MonoBehaviour
-{
+public class Wood : MonoBehaviour {
     public float size;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
