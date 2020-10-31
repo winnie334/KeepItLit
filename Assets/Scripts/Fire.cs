@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Fire : MonoBehaviour {
     public float scaleFire;
@@ -18,21 +19,25 @@ public class Fire : MonoBehaviour {
     }
 
     void Update() {
-        var woods = Physics.OverlapSphere(transform.position, sh.scale.x + 1);
-        foreach (var wood in woods) {
-            if (!part.isStopped && wood.gameObject.GetComponent<Wood>()) {
-                sh.scale += Vector3.ClampMagnitude(Vector3.one, wood.gameObject.GetComponent<Wood>().size);
-                em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3));
-                Destroy(wood.gameObject);
+        if (!part.isStopped) {
+            var collids = Physics.OverlapSphere(transform.position, sh.scale.magnitude);
+            collids = collids.Where(x => x.CompareTag("Item")).ToArray<Collider>();
+
+            foreach (var collid in collids) {
+                var item = collid.gameObject.GetComponent<ItemAssociation>().item;
+                if (item.fuelSize > 0) {
+                    sh.scale += Vector3.ClampMagnitude(Vector3.one, item.fuelSize);
+                    em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3));
+                    Destroy(collid.gameObject);
+                }
+            }
+
+            if (sh.scale.magnitude < minScale) {
+                part.Stop();
+            } else if (!part.isStopped) {
+                sh.scale -= Vector3.ClampMagnitude(Vector3.one, speedDecreasing * Time.deltaTime);
+                em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3) * densityFire);
             }
         }
-
-        if (!part.isStopped && sh.scale.magnitude < minScale) {
-            part.Stop();
-        } else if (!part.isStopped) {
-            sh.scale -= Vector3.ClampMagnitude(Vector3.one, speedDecreasing * Time.deltaTime);
-            em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3) * densityFire);
-        }
-
     }
 }
