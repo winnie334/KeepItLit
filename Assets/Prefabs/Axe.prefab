@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 863052535398109994}
   - component: {fileID: 1237560214333556349}
   - component: {fileID: 5982630789533390002}
-  - component: {fileID: 7837858836849039859}
   - component: {fileID: -302940579648172283}
   m_Layer: 0
   m_Name: Axe
@@ -224,19 +223,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 4aec522cfcab57c49a24f28e95986739, type: 2}
---- !u!114 &7837858836849039859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403314171369623301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c701692affaf34149ad9ba860e8a6860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: -302940579648172283}
 --- !u!82 &-302940579648172283
 AudioSource:
   m_ObjectHideFlags: 0

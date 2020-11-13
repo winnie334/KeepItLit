@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class Grid : MonoBehaviour {
@@ -13,6 +14,10 @@ public class Grid : MonoBehaviour {
 	public int xSize, ySize;
 	public List<Vector2> heightScales; // Vector indicating the heightscale and the density
 	public float dropOff;
+
+	[Tooltip("Min and max amount of trees on the island")]
+	public Vector2 treeRange;
+	public GameObject tree;
 
 	private Mesh mesh;
 	private Vector3[] vertices;
@@ -64,11 +69,34 @@ public class Grid : MonoBehaviour {
 		mesh.triangles = triangles;
 		mesh.RecalculateNormals();
 		GetComponent<MeshCollider>().sharedMesh = mesh;
+		
+		SpawnTrees();
+	}
+
+	private void SpawnTrees() {
+		var treeAmount = Random.Range(treeRange.x, treeRange.y);
+		var chosenLocations = new List<int>(); // Saves the vertices indices on which we already spawned a tree
+		var waterHeight = -gameObject.transform.position.y;
+		
+		for (var i = 0; i < treeAmount; i++) {
+			var pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
+			var vertexIndex = (int) pos.y * xSize + (int) pos.x;
+			// Keep re-rolling a new position until it is above the water and not selected before
+			var rolls = 0; // We keep track to prevent theoretical infinite loop, although normally impossible
+			while ((chosenLocations.Contains(vertexIndex) || vertices[vertexIndex].y < waterHeight) && rolls++ < 100) {
+				pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
+				vertexIndex = (int) pos.y * xSize + (int) pos.x;
+			}
+			chosenLocations.Add(vertexIndex);
+			// Eventually we can later use Normals instead of Quaternion.identity to spawn trees angled to their ground
+			var newTree = Instantiate(tree, vertices[vertexIndex] + gameObject.transform.position, Quaternion.identity);
+			newTree.transform.parent = gameObject.transform;
+		}
 	}
 
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
 	// The reason this is commented out is because unity has a warning glitch which can be annoying
-	void OnValidate() {
-		Generate();
-	}
+	// void OnValidate() {
+	// 	Generate();
+	// }
 }
