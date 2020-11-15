@@ -12,10 +12,8 @@ public class Loot : MonoBehaviour {
 
     private void OnDestroy() {
         if (isQuitting) return;
-        foreach (var item in loot)
-        {
-            var position = transform.position;
-            Instantiate(item, new Vector3(position.x, position.y + 10, position.z),
+        foreach (var item in loot) {
+            Instantiate(item, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z),
                 Quaternion.identity);
         }
     }
