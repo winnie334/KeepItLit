@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
@@ -15,6 +16,8 @@ public class Grid : MonoBehaviour {
 	public List<Vector2> heightScales; // Vector indicating the heightscale and the density
 	public float dropOff;
 
+	public int seed;
+
 	[Tooltip("Min and max amount of trees on the island")]
 	public Vector2 treeRange;
 	public GameObject tree;
@@ -24,6 +27,8 @@ public class Grid : MonoBehaviour {
 
 	private void Start () {
 		Generate();
+		SpawnTrees();
+		bakeNavMesh();
 	}
 
 	private void Generate () {
@@ -36,16 +41,15 @@ public class Grid : MonoBehaviour {
 		Vector2[] uv = new Vector2[vertices.Length];
 		Vector4[] tangents = new Vector4[vertices.Length];
 		Vector4 tangent = new Vector4(1f, 0f, 0f, -1f);
-		
+		var center = new Vector2(xSize / 2, ySize/2);
 		for (int i = 0, y = 0; y <= ySize; y++) { // For each point, we assign a height based on its xy position
 			for (int x = 0; x <= xSize; x++, i++) {
 				float height = 0;
 				for (var h = 0; h < heightScales.Count; h++) {
-					height += Mathf.PerlinNoise(x * heightScales[h].y, y * heightScales[h].y) * heightScales[h].x;
+					height += Mathf.PerlinNoise(x * heightScales[h].y +seed, y * heightScales[h].y + seed) * heightScales[h].x;
 				}
-				//height *= (float) Math.Abs(xSize/2 - x) / xSize + (float) Math.Abs(ySize/2 - y) / ySize * 2;
-				var dist = Vector2.Distance(new Vector2(x, y), new Vector2(xSize / 2, ySize / 2));
-				height -= dist * dropOff;
+				var dist = Vector2.Distance(new Vector2(x, y), center);
+				height -= dist * dropOff * xSize / 100;
 				vertices[i] = new Vector3(x, height, y);
 				uv[i] = new Vector2((float)x / xSize, (float)y / ySize);
 				tangents[i] = tangent;
@@ -69,10 +73,9 @@ public class Grid : MonoBehaviour {
 		mesh.triangles = triangles;
 		mesh.RecalculateNormals();
 		GetComponent<MeshCollider>().sharedMesh = mesh;
-		
-		SpawnTrees();
 	}
 
+	// Spawns a random amount of trees on the island at the correct heights
 	private void SpawnTrees() {
 		var treeAmount = Random.Range(treeRange.x, treeRange.y);
 		var chosenLocations = new List<int>(); // Saves the vertices indices on which we already spawned a tree
@@ -89,14 +92,22 @@ public class Grid : MonoBehaviour {
 			}
 			chosenLocations.Add(vertexIndex);
 			// Eventually we can later use Normals instead of Quaternion.identity to spawn trees angled to their ground
-			var newTree = Instantiate(tree, vertices[vertexIndex] + gameObject.transform.position, Quaternion.identity);
+			var localScale = transform.localScale;
+			var vertexPos = vertices[vertexIndex];
+			var posOffset = new Vector3(vertexPos.x * localScale.x, vertexPos.y * localScale.y, vertexPos.z * localScale.z);
+			var newTree = Instantiate(tree, posOffset + transform.position, Quaternion.identity);
 			newTree.transform.parent = gameObject.transform;
 		}
 	}
 
+	private void bakeNavMesh() {
+		var navMeshSurface = GetComponent<NavMeshSurface>();
+		navMeshSurface.BuildNavMesh();
+	}
+
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
 	// The reason this is commented out is because unity has a warning glitch which can be annoying
-	// void OnValidate() {
-	// 	Generate();
-	// }
+	void OnValidate() {
+		Generate();
+	}
 }
