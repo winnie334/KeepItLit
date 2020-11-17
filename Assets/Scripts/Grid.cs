@@ -107,7 +107,7 @@ public class Grid : MonoBehaviour {
 
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
 	// The reason this is commented out is because unity has a warning glitch which can be annoying
-	void OnValidate() {
-		Generate();
-	}
+	// void OnValidate() {
+	// 	Generate();
+	// }
 }
