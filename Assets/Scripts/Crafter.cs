@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,18 +10,14 @@ public class Crafter : MonoBehaviour {
 
     public List<Recipe> knownRecipes;
     private float craftRadius = 6;
-    
+
     void Start() {
         
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Space)) {
-            // Debug.Log(getAvailableItems());
-            // Debug.Log(getPossibleRecipes());
-            craftRecipe(knownRecipes[0]);
-        }
+
     }
     
     // Returns all available items nearby for crafting, along with their corresponding GameObjects 
@@ -44,13 +39,13 @@ public class Crafter : MonoBehaviour {
     }
 
     // Gives a list of recipes the player has the necessary materials for
-    List<Recipe> getPossibleRecipes() {
+    public List<Recipe> getPossibleRecipes() {
         var availableItems = getAvailableItems();
         return knownRecipes.Where(recipe => canMakeRecipe(recipe, availableItems)).ToList();
     }
 
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
-    void craftRecipe(Recipe recipe) { // maybe save available items? Has some design consequences, todo discuss
+    public void craftRecipe(Recipe recipe) { // maybe save available items? Has some design consequences, todo discuss
         var availableItems = getAvailableItems();
         Assert.IsTrue(canMakeRecipe(recipe, availableItems));
         foreach (var requiredItem in recipe.requiredItems) {
@@ -58,7 +53,8 @@ public class Crafter : MonoBehaviour {
             availableItems[requiredItem].Remove(bestObject);
             Destroy(bestObject);
         }
-        Instantiate(recipe.resultingItem, transform.position, Quaternion.identity);
+        
+        Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward, Quaternion.identity);
     }
 
     // Returns true if the given recipe can be made with a given list of items
@@ -72,10 +68,12 @@ public class Crafter : MonoBehaviour {
 
         return true;
     }
-    
-    void OnDrawGizmosSelected() {
-        Gizmos.color = new Color(1, 1, 0, 0.75F);
-        Gizmos.DrawSphere(transform.position, craftRadius);
-    }
 
+    // Returns the amount of necessary items for a given recipe and how many of those items are available
+    public Dictionary<Item, Tuple<int, int>> getNeededItems(Recipe recipe) {
+        var availableCount = getAvailableItems().ToDictionary(entry => entry.Key, entry => entry.Value.Count);
+        var requiredCount = recipe.requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        return requiredCount.Keys.ToDictionary(item => item, item => 
+            new Tuple<int, int>(availableCount.GetOrDef(item), requiredCount[item]));
+    }
 }

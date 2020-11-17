@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
-  m_Name: Pickaxe
+  m_Name: LongerPickaxe
   m_EditorClassIdentifier: 
-  description: To mine stuff, I suppose
+  description: A pickaxe, but longer
   requiredItems:
   - {fileID: 11400000, guid: 9ca14c4bcfbafac488546ad8a8194e58, type: 2}
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
-  resultingItem: {fileID: 7403314171369623301, guid: 77705a70507ea5942baf09816e90322f, type: 3}
+  - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
+  resultingItem: {fileID: 7403314171369623301, guid: ca601057cd8410f45821616459795019, type: 3}

@@ -10,8 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 988aa8a270a464c45acc1af27c34172e, type: 3}
-  m_Name: Wood
+  m_Name: Axe
   m_EditorClassIdentifier: 
-  title: Wood
+  title: 
   description: 
-  fuelSize: 1
