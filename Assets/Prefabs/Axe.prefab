@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1237560214333556349}
   - component: {fileID: 5982630789533390002}
   - component: {fileID: -302940579648172283}
+  - component: {fileID: 1543942838235709997}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Item
@@ -319,3 +320,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1543942838235709997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403314171369623301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: -302940579648172283}
