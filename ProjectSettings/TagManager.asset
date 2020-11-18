@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Holdable
   - Tree
+  - Animal
   layers:
   - Default
   - TransparentFX

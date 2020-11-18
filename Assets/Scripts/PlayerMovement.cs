@@ -81,9 +81,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void handleItemAction() {
-        var action = currentlyGrabbed.GetComponent<IAction>();
-        if (action != null) action.execute();
-        else Debug.Log("Item has no action");
+        var actions = currentlyGrabbed.GetComponents<IAction>();
+        foreach (var action in actions) {
+            action.execute();
+        }
     }
 
     // If we run up against something with a rigidbody, we move it

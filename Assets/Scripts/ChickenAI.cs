@@ -4,32 +4,31 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum animalState {
+public enum chickenState {
     IDLE,
-    ATTACKING,
     FLEEING,
 } 
 
-public class AnimalAI : MonoBehaviour {
+public class ChickenAI : Animal {
     
     public float wanderRadius;
     public Vector2 wanderTimer; // Min and max time for next wander
  
     private Transform target;
-    private NavMeshAgent agent;
+
     private float timer;
     private float nextWanderTimer; // The threshold we need to pass for our next wander
  
     // Use this for initialization
     void OnEnable () {
-        agent = GetComponent<NavMeshAgent>();
         nextWanderTimer = 0;
     }
-    
-    void Update () {
+
+    new void Update () {
+        base.Update();
         timer += Time.deltaTime;
  
-        if (timer >= nextWanderTimer) {
+        if (timer >= nextWanderTimer && agent.enabled) {
             Vector3 newPos = RandomNearPosition(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
             timer = 0;
