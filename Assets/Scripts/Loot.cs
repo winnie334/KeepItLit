@@ -13,7 +13,7 @@ public class Loot : MonoBehaviour {
     private void OnDestroy() {
         if (isQuitting) return;
         foreach (var item in loot) {
-            Instantiate(item, new Vector3(transform.position.x, transform.position.y + 10, transform.position.z),
+            Instantiate(item, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z),
                 Quaternion.identity);
         }
     }
