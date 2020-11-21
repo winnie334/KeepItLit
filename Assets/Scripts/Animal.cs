@@ -13,12 +13,14 @@ public class Animal : MonoBehaviour {
     protected NavMeshAgent agent;
 
     private double fallenOverTime;
+    private AudioSource audioSource;
     
     // Start is called before the first frame update
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         health = maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class Animal : MonoBehaviour {
     public void Update() {
         if (fallenOverTime > 0) {
             fallenOverTime -= Time.deltaTime;
-        } else if (rb.velocity.magnitude <= 0.1f) {
+        } else if (rb.velocity.magnitude <= 0.3f) {
             rb.isKinematic = true;
             agent.enabled = true;
         }
@@ -34,6 +36,7 @@ public class Animal : MonoBehaviour {
 
     public void takeDamage(int amount, Vector3 origin = new Vector3(), int force = 0) {
         health -= amount;
+        audioSource.PlayOneShot(audioSource.clip);
         if (health <= 0) die();
 
         if (origin == Vector3.zero) return;
@@ -48,5 +51,14 @@ public class Animal : MonoBehaviour {
 
     private void die() {
         Destroy(gameObject);
+    }
+    
+    // Gets a random point in space on the navmesh within a certain radius of the given origin
+    protected static Vector3 RandomNearPosition(Vector3 origin, float dist, int layermask) {
+        Vector3 randDirection = Random.insideUnitSphere * dist;
+        randDirection += origin;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition (randDirection, out navHit, dist, layermask);
+        return navHit.position;
     }
 }

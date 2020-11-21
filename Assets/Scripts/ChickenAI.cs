@@ -35,16 +35,7 @@ public class ChickenAI : Animal {
             nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
         }    
     }
- 
-    // Gets a random point in space on the navmesh within a certain radius of the given origin
-    private static Vector3 RandomNearPosition(Vector3 origin, float dist, int layermask) {
-        Vector3 randDirection = Random.insideUnitSphere * dist;
-        randDirection += origin;
-        NavMeshHit navHit;
-        NavMesh.SamplePosition (randDirection, out navHit, dist, layermask);
-        return navHit.position;
-    }
-    
+
     public void OnDrawGizmosSelected() {
         Handles.color = Color.red;
         Handles.DrawWireDisc(transform.position, transform.up, wanderRadius);

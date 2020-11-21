@@ -13,8 +13,8 @@ public class Loot : MonoBehaviour {
     private void OnDestroy() {
         if (isQuitting) return;
         foreach (var item in loot) {
-            Instantiate(item, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z),
-                Quaternion.identity);
+            var spawnPos = transform.position + (Vector3) Random.insideUnitCircle + new Vector3(0, 2, 0);
+            Instantiate(item, spawnPos, Quaternion.identity);
         }
     }
 }

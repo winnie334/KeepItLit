@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Fire : MonoBehaviour {
     public float scaleFire;
@@ -34,6 +35,7 @@ public class Fire : MonoBehaviour {
 
             if (sh.scale.magnitude < minScale) {
                 part.Stop();
+                GetComponent<NavMeshObstacle>().enabled = false; // Todo verify this works
             } else if (!part.isStopped) {
                 sh.scale -= Vector3.ClampMagnitude(Vector3.one, speedDecreasing * Time.deltaTime);
                 em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3) * densityFire);
