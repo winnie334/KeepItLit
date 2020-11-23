@@ -2,6 +2,6 @@ namespace Actions
 {
     public interface IAction
     {
-        void execute();
+        void execute(PlayerMovement player);
     }
 }

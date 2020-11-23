@@ -3,11 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CharacterMovement.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CharacterMovement.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,22 +37,23 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemPickup.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Recipe.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ItemAssociation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/IAction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pick..cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loot.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
       </list>
     </option>
   </component>
@@ -114,7 +118,8 @@
       <workItem from="1603199177034" duration="1364000" />
       <workItem from="1603741902396" duration="7449000" />
       <workItem from="1605472782731" duration="7642000" />
-      <workItem from="1605518703597" duration="1688000" />
+      <workItem from="1605518703597" duration="2403000" />
+      <workItem from="1606139867207" duration="3609000" />
     </task>
     <servers />
   </component>
@@ -134,10 +139,10 @@
       <screen x="0" y="0" width="1504" height="1003" />
     </state>
     <state x="254" y="147" key="SettingsEditor/0.0.1504.1003@0.0.1504.1003" timestamp="1605474815605" />
-    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog" timestamp="1605474816102">
+    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog" timestamp="1606142900521">
       <screen x="0" y="0" width="1504" height="1003" />
     </state>
-    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog/0.0.1504.1003@0.0.1504.1003" timestamp="1605474816102" />
+    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog/0.0.1504.1003@0.0.1504.1003" timestamp="1606142900521" />
     <state x="415" y="216" width="672" height="678" key="search.everywhere.popup" timestamp="1605473671954">
       <screen x="0" y="0" width="1504" height="1003" />
     </state>

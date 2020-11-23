@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Actions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,22 +20,26 @@ public class PlayerMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
 
-    private float turnSmoothVelocity;
+    [FormerlySerializedAs("weightLimit")] public float carryLimit = 3;
 
+    private float turnSmoothVelocity;
     private float gravity;
-    private GameObject currentlyGrabbed; // is either null or the object we are holding
+    private List<GameObject> currentlyGrabbed = new List<GameObject>();
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
-        if (Input.GetMouseButtonDown(0) && currentlyGrabbed) handleItemAction();
+        if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
+            handleItemAction(); //currentlyGrabbed condition is wonky xd
 
         // Move the camera to a position above the player
         mainCamera.transform.position = transform.position - cameraOffset;
     }
 
-    void handleMovement() {
+    void handleMovement()
+    {
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
         if (controller.isGrounded) gravity = 0;
@@ -55,40 +60,77 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(moveDir.normalized * (speed * Time.deltaTime)); //deltaTime to make game frame rate independent
     }
 
-    void handleGrab() {
-        if (currentlyGrabbed == null) {
-            // We are trying to pick up a new item
-            var curPos = transform.position;
-            GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
-                .Select(hit => hit.gameObject)
-                .Where(obj => obj.GetComponent<ItemAssociation>() != null)
-                .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
-                .FirstOrDefault();
-            ;
-            if (objectToGrab == null) return; // Player tried to grab something when there was nothing in this range
-            currentlyGrabbed = objectToGrab;
-            objectToGrab.transform.parent = transform; // One day we should make a better holding animation
-            objectToGrab.transform.localPosition = new Vector3(0, 0, 1f);
-            objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
-            audioSource.PlayOneShot(pickupSound);
-        } else {
-            // We are dropping our current item
-            currentlyGrabbed.transform.parent = null;
-            currentlyGrabbed.GetComponent<Rigidbody>().isKinematic = false;
-            currentlyGrabbed = null;
-            audioSource.PlayOneShot(dropSound);
+    GameObject lookForClosestGrabbableItem(GameObject itemToCompare)
+    {
+        var curPos = transform.position;
+        GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
+            .Select(hit => hit.gameObject)
+            .Where(obj => obj.GetComponent<ItemAssociation>() != null
+                          && (itemToCompare is null || (!currentlyGrabbed.Contains(obj) &&
+                                                        obj.GetComponent<ItemAssociation>().item
+                                                        == itemToCompare.GetComponent<ItemAssociation>().item)))
+            .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
+            .FirstOrDefault();
+        ;
+        return objectToGrab;
+    }
+
+    void grabObject(GameObject objectToGrab)
+    {
+        if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
+        currentlyGrabbed.Add(objectToGrab);
+        objectToGrab.transform.parent = transform; // One day we should make a better holding animation
+        Vector3 localPosition = currentlyGrabbed.Count == 1
+            ? new Vector3(0, 0, 1f)
+            : new Vector3(0, currentlyGrabbed.Count - 1, 1f);
+        objectToGrab.transform.localPosition = localPosition;
+        objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
+        audioSource.PlayOneShot(pickupSound);
+    }
+
+    void releaseObjects()
+    {
+        currentlyGrabbed.ForEach(grabbedItem =>
+        {
+            grabbedItem.transform.parent = null;
+            grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
+        });
+        currentlyGrabbed = new List<GameObject>();
+        audioSource.PlayOneShot(dropSound);
+    }
+
+    public void removeObject(GameObject obj)
+    {
+        currentlyGrabbed.Remove(obj);
+    }
+
+    void handleGrab()
+    {
+        if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
+        else
+        {
+            if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
+            else
+            {
+                var objectToGrab = lookForClosestGrabbableItem(currentlyGrabbed[0]);
+                if (objectToGrab is null) releaseObjects();
+                else grabObject(objectToGrab);
+            }
         }
     }
 
-    void handleItemAction() {
-        var actions = currentlyGrabbed.GetComponents<IAction>();
-        foreach (var action in actions) {
-            action.execute();
+    void handleItemAction()
+    {
+        var actions = currentlyGrabbed[0].GetComponents<IAction>();
+        foreach (var action in actions)
+        {
+            action.execute(this);
         }
     }
 
     // If we run up against something with a rigidbody, we move it
-    void OnControllerColliderHit(ControllerColliderHit hit) {
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
         Rigidbody body = hit.collider.attachedRigidbody;
 
         // no rigidbody
@@ -104,7 +146,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnDrawGizmosSelected() {
+    void OnDrawGizmosSelected()
+    {
         Gizmos.color = new Color(1, 1, 0, 0.75F);
         Gizmos.DrawSphere(transform.position + transform.rotation * Vector3.forward * 2, 2);
     }

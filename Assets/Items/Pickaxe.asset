@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Pickaxe
   description: Strong Item
+  fuelSize: 0
