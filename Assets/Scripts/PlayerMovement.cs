@@ -6,8 +6,7 @@ using Actions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
@@ -19,12 +18,21 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
+    public float maxHealth = 100;
+    public float actualHealth = 100;
+
+    public HealthUI healthUI;
 
     [FormerlySerializedAs("weightLimit")] public float carryLimit = 3;
 
     private float turnSmoothVelocity;
     private float gravity;
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
+
+    private void Start() {
+        healthUI.SetMaxHealth(maxHealth);
+        healthUI.SetHealth(actualHealth);
+    }
 
     // Update is called once per frame
     void Update() {
@@ -131,6 +139,16 @@ public class PlayerMovement : MonoBehaviour
         foreach (var action in actions) {
             action.execute(this);
         }
+    }
+
+    public void TakeDamage(float damage) {
+        actualHealth = Math.Max(actualHealth - damage, 0);
+        healthUI.SetHealth(actualHealth);
+    }
+
+    public void Heal(float life) {
+        actualHealth = Math.Min(actualHealth + life, maxHealth);
+        healthUI.SetHealth(actualHealth);
     }
 
     // If we run up against something with a rigidbody, we move it
