@@ -27,8 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
         if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
@@ -38,12 +37,9 @@ public class PlayerMovement : MonoBehaviour
         mainCamera.transform.position = transform.position - cameraOffset;
     }
 
-    void handleMovement()
-    {
-        // First we move the controller down with gravity
-        gravity -= 9.81f * Time.deltaTime;
-        if (controller.isGrounded) gravity = 0;
-        controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
+    void handleMovement() {
+
+        var originalPos = transform.position; // We save this to revert to it in case we do illegal movement (e.g drown)
 
         // Now we read the inputs and move our character accordingly
         var horizontal = Input.GetAxisRaw("Horizontal");
@@ -57,11 +53,28 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, angle, 0);
         var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDir.normalized * (speed * Time.deltaTime)); //deltaTime to make game frame rate independent
+        controller.Move(moveDir.normalized * (speed * Time.deltaTime));
+        
+        // First we move the controller down with gravity
+        gravity -= 9.81f * Time.deltaTime;
+        if (controller.isGrounded) gravity = 0;
+        controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
+
+        if (outOfBounds(transform.position, -2.3f)) transform.position = originalPos;
+
     }
 
-    GameObject lookForClosestGrabbableItem(GameObject itemToCompare)
-    {
+    // Raycast down from position to see if we would fall below the height parameter
+    private bool outOfBounds(Vector3 pos, float height) {
+        RaycastHit hit;
+        if (Physics.Raycast(pos, Vector3.down, out hit, 100)) {
+            return hit.point.y <= height;
+        }
+
+        return true;
+    }
+
+    GameObject lookForClosestGrabbableItem(GameObject itemToCompare) {
         var curPos = transform.position;
         GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
             .Select(hit => hit.gameObject)
@@ -75,8 +88,7 @@ public class PlayerMovement : MonoBehaviour
         return objectToGrab;
     }
 
-    void grabObject(GameObject objectToGrab)
-    {
+    void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
@@ -88,8 +100,7 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(pickupSound);
     }
 
-    void releaseObjects()
-    {
+    void releaseObjects() {
         currentlyGrabbed.ForEach(grabbedItem =>
         {
             grabbedItem.transform.parent = null;
@@ -99,19 +110,15 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(dropSound);
     }
 
-    public void removeObject(GameObject obj)
-    {
+    public void removeObject(GameObject obj) {
         currentlyGrabbed.Remove(obj);
     }
 
-    void handleGrab()
-    {
+    void handleGrab() {
         if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
-        else
-        {
+        else {
             if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
-            else
-            {
+            else {
                 var objectToGrab = lookForClosestGrabbableItem(currentlyGrabbed[0]);
                 if (objectToGrab is null) releaseObjects();
                 else grabObject(objectToGrab);
@@ -119,18 +126,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void handleItemAction()
-    {
+    void handleItemAction() {
         var actions = currentlyGrabbed[0].GetComponents<IAction>();
-        foreach (var action in actions)
-        {
+        foreach (var action in actions) {
             action.execute(this);
         }
     }
 
     // If we run up against something with a rigidbody, we move it
-    void OnControllerColliderHit(ControllerColliderHit hit)
-    {
+    void OnControllerColliderHit(ControllerColliderHit hit) {
         Rigidbody body = hit.collider.attachedRigidbody;
 
         // no rigidbody
@@ -146,8 +150,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    void OnDrawGizmosSelected()
-    {
+    void OnDrawGizmosSelected() {
         Gizmos.color = new Color(1, 1, 0, 0.75F);
         Gizmos.DrawSphere(transform.position + transform.rotation * Vector3.forward * 2, 2);
     }

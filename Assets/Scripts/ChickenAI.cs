@@ -29,7 +29,7 @@ public class ChickenAI : Animal {
         timer += Time.deltaTime;
  
         if (timer >= nextWanderTimer && agent.enabled) {
-            Vector3 newPos = RandomNearPosition(transform.position, wanderRadius, -1);
+            Vector3 newPos = RandomNearAboveWater(transform.position, wanderRadius, -1);
             agent.SetDestination(newPos);
             timer = 0;
             nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);

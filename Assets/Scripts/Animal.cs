@@ -61,4 +61,16 @@ public class Animal : MonoBehaviour {
         NavMesh.SamplePosition (randDirection, out navHit, dist, layermask);
         return navHit.position;
     }
+
+    // Calls RandomNearPosition multiple times until it receives a position which is above the water layer
+    protected static Vector3 RandomNearAboveWater(Vector3 origin, float dist, int layermask) {
+        var pos = RandomNearPosition(origin, dist, layermask);
+        var attempts = 0;
+        while (pos.y < 0.3 && attempts < 10) {
+            attempts++;
+            pos = RandomNearPosition(origin, dist, layermask);
+        }
+
+        return pos;
+    }
 }

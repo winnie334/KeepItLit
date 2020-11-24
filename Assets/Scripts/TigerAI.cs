@@ -61,7 +61,7 @@ public class TigerAI : Animal {
                 }
                 idleTimer += Time.deltaTime;
                 if (!(idleTimer >= nextWanderTimer)) return;
-                agent.SetDestination(RandomNearPosition(transform.position, wanderRadius, -1));
+                agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius, -1));
                 idleTimer = 0;
                 nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
                 break;
