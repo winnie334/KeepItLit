@@ -563,6 +563,7 @@ GameObject:
   - component: {fileID: 123565241}
   - component: {fileID: 123565240}
   - component: {fileID: 123565244}
+  - component: {fileID: 123565245}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -674,6 +675,18 @@ MonoBehaviour:
   detailTitle: {fileID: 1069900005}
   detailDescription: {fileID: 2015447859}
   detailIngredients: {fileID: 2144099263}
+--- !u!114 &123565245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123565239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2790a1accd090a847a4022bf70fe58ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &146155397 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7532815761107935926, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
@@ -3058,6 +3071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shipyard Construction Kit
       objectReference: {fileID: 0}
+    - target: {fileID: 6530272949616095710, guid: cf0d916ca8c5ce0448d0871a3a47838a, type: 3}
+      propertyPath: gameInterface
+      value: 
+      objectReference: {fileID: 123565245}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf0d916ca8c5ce0448d0871a3a47838a, type: 3}
 --- !u!1 &2086281656

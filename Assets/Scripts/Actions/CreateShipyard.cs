@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using Actions;
 using UnityEngine;
 
-public class CreateShipyard : MonoBehaviour, IAction
-{
+public class CreateShipyard : MonoBehaviour, IAction {
     public GameObject shipyard;
 
     public void execute(PlayerMovement player)
