@@ -241,10 +241,10 @@ MonoBehaviour:
   speed: 6
   turnSmoothTime: 0.1
   pushPower: 2
-  carryLimit: 3
   maxHealth: 100
   actualHealth: 100
   healthUI: {fileID: 1905018752}
+  carryLimit: 3
 --- !u!143 &13634002
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1918,6 +1918,7 @@ Transform:
   m_Children:
   - {fileID: 1247250978}
   - {fileID: 76993965}
+  - {fileID: 1992230798}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2060,6 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f06f757f6ee4b14ca37ac44f0be5abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthFill: 10
 --- !u!4 &1063323014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5257806503321550939, guid: 792d86a0b135f4444b9ebfe8d3600c63, type: 3}
@@ -3448,6 +3450,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 792d86a0b135f4444b9ebfe8d3600c63, type: 3}
+--- !u!4 &1992230798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7371961024252273640, guid: 503995839faf6a8448b7953f0220fc42, type: 3}
+  m_PrefabInstance: {fileID: 189104910}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2015447858
 GameObject:
   m_ObjectHideFlags: 0

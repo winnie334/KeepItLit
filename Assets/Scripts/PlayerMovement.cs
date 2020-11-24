@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = Quaternion.Euler(0f, angle, 0);
         var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         controller.Move(moveDir.normalized * (speed * Time.deltaTime));
-        
+
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
         if (controller.isGrounded) gravity = 0;
@@ -109,8 +109,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void releaseObjects() {
-        currentlyGrabbed.ForEach(grabbedItem =>
-        {
+        currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
         });
@@ -142,8 +141,12 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void TakeDamage(float damage) {
-        actualHealth = Math.Max(actualHealth - damage, 0);
-        healthUI.SetHealth(actualHealth);
+        if (actualHealth - damage > 0) {
+            actualHealth = Math.Max(actualHealth - damage, 0);
+            healthUI.SetHealth(actualHealth);
+        } else {
+            Game.EndGame(false, "You died form damage");
+        }
     }
 
     public void Heal(float life) {
