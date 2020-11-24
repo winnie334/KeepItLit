@@ -29,6 +29,8 @@ public class Fire : MonoBehaviour {
                 if (item.fuelSize > 0) {
                     sh.scale += Vector3.ClampMagnitude(Vector3.one, item.fuelSize);
                     em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3));
+                    // todo fix particle amount (or real fire animation)
+                    // Todo update light size
                     Destroy(collid.gameObject);
                 }
             }
