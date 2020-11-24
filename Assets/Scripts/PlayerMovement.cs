@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Actions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
@@ -18,27 +18,36 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
+    public float maxHealth = 100;
+    public float actualHealth = 100;
+
+    public HealthUI healthUI;
+
+    [FormerlySerializedAs("weightLimit")] public float carryLimit = 3;
 
     private float turnSmoothVelocity;
-
     private float gravity;
-    private GameObject currentlyGrabbed; // is either null or the object we are holding
+    private List<GameObject> currentlyGrabbed = new List<GameObject>();
+
+    private void Start() {
+        healthUI.SetMaxHealth(maxHealth);
+        healthUI.SetHealth(actualHealth);
+    }
 
     // Update is called once per frame
     void Update() {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
-        if (Input.GetMouseButtonDown(0) && currentlyGrabbed) handleItemAction();
+        if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
+            handleItemAction(); //currentlyGrabbed condition is wonky xd
 
         // Move the camera to a position above the player
         mainCamera.transform.position = transform.position - cameraOffset;
     }
 
     void handleMovement() {
-        // First we move the controller down with gravity
-        gravity -= 9.81f * Time.deltaTime;
-        if (controller.isGrounded) gravity = 0;
-        controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
+
+        var originalPos = transform.position; // We save this to revert to it in case we do illegal movement (e.g drown)
 
         // Now we read the inputs and move our character accordingly
         var horizontal = Input.GetAxisRaw("Horizontal");
@@ -52,38 +61,97 @@ public class PlayerMovement : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0f, angle, 0);
         var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDir.normalized * (speed * Time.deltaTime)); //deltaTime to make game frame rate independent
+        controller.Move(moveDir.normalized * (speed * Time.deltaTime));
+
+        // First we move the controller down with gravity
+        gravity -= 9.81f * Time.deltaTime;
+        if (controller.isGrounded) gravity = 0;
+        controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
+
+        if (outOfBounds(transform.position, -2.3f)) transform.position = originalPos;
+
+    }
+
+    // Raycast down from position to see if we would fall below the height parameter
+    private bool outOfBounds(Vector3 pos, float height) {
+        RaycastHit hit;
+        if (Physics.Raycast(pos, Vector3.down, out hit, 100)) {
+            return hit.point.y <= height;
+        }
+
+        return true;
+    }
+
+    GameObject lookForClosestGrabbableItem(GameObject itemToCompare) {
+        var curPos = transform.position;
+        GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
+            .Select(hit => hit.gameObject)
+            .Where(obj => obj.GetComponent<ItemAssociation>() != null
+                          && (itemToCompare is null || (!currentlyGrabbed.Contains(obj) &&
+                                                        obj.GetComponent<ItemAssociation>().item
+                                                        == itemToCompare.GetComponent<ItemAssociation>().item)))
+            .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
+            .FirstOrDefault();
+        ;
+        return objectToGrab;
+    }
+
+    void grabObject(GameObject objectToGrab) {
+        if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
+        currentlyGrabbed.Add(objectToGrab);
+        objectToGrab.transform.parent = transform; // One day we should make a better holding animation
+        Vector3 localPosition = currentlyGrabbed.Count == 1
+            ? new Vector3(0, 0, 1f)
+            : new Vector3(0, currentlyGrabbed.Count - 1, 1f);
+        objectToGrab.transform.localPosition = localPosition;
+        objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
+        audioSource.PlayOneShot(pickupSound);
+    }
+
+    void releaseObjects() {
+        currentlyGrabbed.ForEach(grabbedItem => {
+            grabbedItem.transform.parent = null;
+            grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
+        });
+        currentlyGrabbed = new List<GameObject>();
+        audioSource.PlayOneShot(dropSound);
+    }
+
+    public void removeObject(GameObject obj) {
+        currentlyGrabbed.Remove(obj);
     }
 
     void handleGrab() {
-        if (currentlyGrabbed == null) {
-            // We are trying to pick up a new item
-            var curPos = transform.position;
-            GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
-                .Select(hit => hit.gameObject)
-                .Where(obj => obj.GetComponent<ItemAssociation>() != null)
-                .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
-                .FirstOrDefault();
-            ;
-            if (objectToGrab == null) return; // Player tried to grab something when there was nothing in this range
-            currentlyGrabbed = objectToGrab;
-            objectToGrab.transform.parent = transform; // One day we should make a better holding animation
-            objectToGrab.transform.localPosition = new Vector3(0, 0, 1f);
-            objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
-            audioSource.PlayOneShot(pickupSound);
-        } else {
-            // We are dropping our current item
-            currentlyGrabbed.transform.parent = null;
-            currentlyGrabbed.GetComponent<Rigidbody>().isKinematic = false;
-            currentlyGrabbed = null;
-            audioSource.PlayOneShot(dropSound);
+        if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
+        else {
+            if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
+            else {
+                var objectToGrab = lookForClosestGrabbableItem(currentlyGrabbed[0]);
+                if (objectToGrab is null) releaseObjects();
+                else grabObject(objectToGrab);
+            }
         }
     }
 
     void handleItemAction() {
-        var action = currentlyGrabbed.GetComponent<IAction>();
-        if (action != null) action.execute();
-        else Debug.Log("Item has no action");
+        var actions = currentlyGrabbed[0].GetComponents<IAction>();
+        foreach (var action in actions) {
+            action.execute(this);
+        }
+    }
+
+    public void TakeDamage(float damage) {
+        if (actualHealth - damage > 0) {
+            actualHealth = Math.Max(actualHealth - damage, 0);
+            healthUI.SetHealth(actualHealth);
+        } else {
+            Game.EndGame(false, "You died form damage");
+        }
+    }
+
+    public void Heal(float life) {
+        actualHealth = Math.Min(actualHealth + life, maxHealth);
+        healthUI.SetHealth(actualHealth);
     }
 
     // If we run up against something with a rigidbody, we move it
