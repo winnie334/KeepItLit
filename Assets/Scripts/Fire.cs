@@ -2,15 +2,18 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class Fire : MonoBehaviour {
     public float scaleFire;
     public float speedDecreasing;
     public float minScale;
     public int densityFire;
+
     public float damageFire;
     public Light lightFire;
     public GameObject col;
     public PlayerMovement player;
+
     private ParticleSystem part;
     private ParticleSystem.ShapeModule sh;
     private ParticleSystem.EmissionModule em;
@@ -26,6 +29,7 @@ public class Fire : MonoBehaviour {
 
     void Update() {
         if (!part.isStopped) {
+
             if (sh.scale.magnitude < minScale) {
                 part.Stop();
                 lightFire.intensity = 0;
@@ -34,6 +38,7 @@ public class Fire : MonoBehaviour {
                 col.transform.localScale -= Vector3.one * speedDecreasing * 100 * Time.deltaTime;
                 lightFire.range = col.transform.localScale.magnitude;
                 sh.scale -= Vector3.one * speedDecreasing * Time.deltaTime;
+
                 em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3) * densityFire);
             }
         }
@@ -59,4 +64,5 @@ public class Fire : MonoBehaviour {
             other.gameObject.GetComponent<PlayerMovement>().TakeDamage(damageFire * Time.deltaTime);
         }
     }
+
 }
