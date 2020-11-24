@@ -13,6 +13,5 @@ public class CreateShipyard : MonoBehaviour, IAction {
             Quaternion.identity);
         player.removeObject(this.gameObject);
         Destroy(this.gameObject);
-
     }
 }
