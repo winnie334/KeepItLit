@@ -6,8 +6,7 @@ using Actions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
@@ -19,12 +18,21 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
+    public float maxHealth = 100;
+    public float actualHealth = 100;
+
+    public HealthUI healthUI;
 
     [FormerlySerializedAs("weightLimit")] public float carryLimit = 3;
 
     private float turnSmoothVelocity;
     private float gravity;
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
+
+    private void Start() {
+        healthUI.SetMaxHealth(maxHealth);
+        healthUI.SetHealth(actualHealth);
+    }
 
     // Update is called once per frame
     void Update() {
@@ -54,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, angle, 0);
         var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
         controller.Move(moveDir.normalized * (speed * Time.deltaTime));
-        
+
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
         if (controller.isGrounded) gravity = 0;
@@ -101,8 +109,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void releaseObjects() {
-        currentlyGrabbed.ForEach(grabbedItem =>
-        {
+        currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
         });
@@ -131,6 +138,20 @@ public class PlayerMovement : MonoBehaviour
         foreach (var action in actions) {
             action.execute(this);
         }
+    }
+
+    public void TakeDamage(float damage) {
+        if (actualHealth - damage > 0) {
+            actualHealth = Math.Max(actualHealth - damage, 0);
+            healthUI.SetHealth(actualHealth);
+        } else {
+            Game.EndGame(false, "You died form damage");
+        }
+    }
+
+    public void Heal(float life) {
+        actualHealth = Math.Min(actualHealth + life, maxHealth);
+        healthUI.SetHealth(actualHealth);
     }
 
     // If we run up against something with a rigidbody, we move it
