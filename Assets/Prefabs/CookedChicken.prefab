@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5659809443514898477}
   - component: {fileID: -4356723042361440418}
   m_Layer: 0
-  m_Name: RawChicken
+  m_Name: CookedChicken
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e0748c022a8fc654fb0e9c533baad165, type: 2}
+  - {fileID: 2100000, guid: 0cb38bc8fa6a9654084fbd7b2b37dbbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -140,5 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f06f757f6ee4b14ca37ac44f0be5abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthFill: 5
-  cookedVersion: {fileID: 3503415072969503526, guid: fd873559b092dda4fb9980db2f585b24, type: 3}
+  healthFill: 25
+  cookedVersion: {fileID: 0}

@@ -7,6 +7,7 @@ public class DayNightCycle : MonoBehaviour {
     
     public Transform SunTransform;
     public Light Sun;
+    public Light Moon; // Will always be present, but simply intensity changed
 
     public float maxIntensity;
 
@@ -26,7 +27,7 @@ public class DayNightCycle : MonoBehaviour {
         float intensity;
         float rotationX;
         if (time < dayTime) { // Intensity ranges from 0 to maxIntensity based on time distance to noon
-            intensity = HelperFunctions.p5Map(Math.Abs(time - dayTime / 2), 0, dayTime / 2, maxIntensity, 0);
+            intensity = HelperFunctions.p5Map(Math.Abs(time - dayTime / 2), 0, dayTime / 2, maxIntensity + 0.5f, 0);
             rotationX = time / dayTime * 180;
         } else {
             intensity = 0;
@@ -34,7 +35,9 @@ public class DayNightCycle : MonoBehaviour {
         }
         
         SunTransform.rotation = Quaternion.Euler(rotationX, originalSunRotation.y, originalSunRotation.z);
+        intensity = Math.Min(maxIntensity, intensity);
         Sun.intensity = intensity;
+        Moon.intensity = Math.Max(0.2f - intensity, 0);
     }
 
 }

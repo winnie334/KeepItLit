@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour {
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
     public float maxHealth = 100;
-    public float actualHealth = 100;
 
     public HealthUI healthUI;
 
@@ -28,10 +27,12 @@ public class PlayerMovement : MonoBehaviour {
     private float turnSmoothVelocity;
     private float gravity;
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
+    private float currentHealth;
 
     private void Start() {
+        currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
-        healthUI.SetHealth(actualHealth);
+        healthUI.SetHealth(currentHealth);
     }
 
     // Update is called once per frame
@@ -92,11 +93,10 @@ public class PlayerMovement : MonoBehaviour {
                                                         == itemToCompare.GetComponent<ItemAssociation>().item)))
             .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
             .FirstOrDefault();
-        ;
         return objectToGrab;
     }
 
-    void grabObject(GameObject objectToGrab) {
+    public void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
@@ -141,17 +141,17 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void TakeDamage(float damage) {
-        if (actualHealth - damage > 0) {
-            actualHealth = Math.Max(actualHealth - damage, 0);
-            healthUI.SetHealth(actualHealth);
+        if (currentHealth - damage > 0) {
+            currentHealth = Math.Max(currentHealth - damage, 0);
+            healthUI.SetHealth(currentHealth);
         } else {
             Game.EndGame(false, "You died form damage");
         }
     }
 
     public void Heal(float life) {
-        actualHealth = Math.Min(actualHealth + life, maxHealth);
-        healthUI.SetHealth(actualHealth);
+        currentHealth = Math.Min(currentHealth + life, maxHealth);
+        healthUI.SetHealth(currentHealth);
     }
 
     // If we run up against something with a rigidbody, we move it

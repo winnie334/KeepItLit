@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Actions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,7 +46,7 @@ public class Fire : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider collider) {
-        Debug.Log("Something is in the fire");
+        Debug.Log("Something entered  the fire");
         if (collider.gameObject.CompareTag("Item")) {
             var item = collider.gameObject.GetComponent<ItemAssociation>().item;
             if (item.fuelSize > 0) {
@@ -55,6 +56,9 @@ public class Fire : MonoBehaviour {
                 em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3));
                 player.removeObject(collider.gameObject);
                 Destroy(collider.gameObject);
+            } else if (collider.gameObject.GetComponent<Food>() != null) {
+                var foodToCook = collider.gameObject.GetComponent<Food>();
+                foodToCook.cookFood();
             }
         }
     }
