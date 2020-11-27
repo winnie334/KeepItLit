@@ -4,13 +4,7 @@
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,20 +41,15 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
       </list>
     </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="276" />
-    <option name="width" value="1401" />
-    <option name="height" value="1002" />
   </component>
   <component name="ProjectId" id="1kLH338wGlScBHjG8eKppdHh4yw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -119,7 +108,8 @@
       <workItem from="1603741902396" duration="7449000" />
       <workItem from="1605472782731" duration="7642000" />
       <workItem from="1605518703597" duration="2403000" />
-      <workItem from="1606139867207" duration="3609000" />
+      <workItem from="1606139867207" duration="4287000" />
+      <workItem from="1606455062552" duration="1382000" />
     </task>
     <servers />
   </component>
