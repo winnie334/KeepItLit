@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 863052535398109994}
   - component: {fileID: 1237560214333556349}
   - component: {fileID: 5982630789533390002}
-  - component: {fileID: 5810284533998638864}
+  - component: {fileID: 482383070977264057}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Item
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}
---- !u!114 &5810284533998638864
+--- !u!114 &482383070977264057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,6 +232,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7403314171369623301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5abdf9c323294dcb84a4d6aa7f6b4768, type: 3}
+  m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
+  audioSource: {fileID: 0}
