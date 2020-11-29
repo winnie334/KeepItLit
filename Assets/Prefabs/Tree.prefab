@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8910852216105633516}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Tree
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,10 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931fcf4b0233d2542a91ae9a02c5a274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot:
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
+  tools:
+  - {fileID: 11400000, guid: 4aec522cfcab57c49a24f28e95986739, type: 2}
+  loots:
+  - resource: {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
+    number: 10
+  maxHealth: 100
+  stepNumber: 9
 --- !u!114 &-8028484603257991698
 MonoBehaviour:
   m_ObjectHideFlags: 0
