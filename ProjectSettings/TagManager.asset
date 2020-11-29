@@ -8,7 +8,7 @@ TagManager:
   - Holdable
   - Tree
   - Animal
-  - Ressource
+  - Resource
   layers:
   - Default
   - TransparentFX

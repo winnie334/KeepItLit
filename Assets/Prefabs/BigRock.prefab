@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8463098141256663058}
   m_Layer: 0
   m_Name: BigRock
-  m_TagString: Ressource
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   tools:
   - {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}
   loots:
-  - ressource: {fileID: 132408523772158365, guid: 243c35a440cb30f4d8680855ab776dd8, type: 3}
+  - resource: {fileID: 132408523772158365, guid: 243c35a440cb30f4d8680855ab776dd8, type: 3}
     number: 10
   maxHealth: 100
-  stepNumber: 4
+  stepNumber: 9

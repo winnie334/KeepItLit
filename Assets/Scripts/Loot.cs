@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public struct Loots {
-    public GameObject ressource;
+    public GameObject resource;
     public int number;
 }
 
@@ -17,19 +17,17 @@ public class Loot : MonoBehaviour {
     private int health;
     private int step;
     private int nextStep;
-    private int ressourcesByStep;
+    private int resourcesByStep;
 
     private void Start() {
         health = maxHealth;
         step = health / (stepNumber + 1);
         nextStep = health - step;
 
-        var totalRessources = 0;
-        foreach (var loot in loots) {
-            totalRessources += loot.number;
-        }
+        var totalResources = 0;
+        loots.ForEach(loot => { totalResources += loot.number; });
 
-        ressourcesByStep = totalRessources / (stepNumber + 1);
+        resourcesByStep = totalResources / (stepNumber + 1);
     }
 
     public void Extract(Item item, int damage) {
@@ -45,16 +43,16 @@ public class Loot : MonoBehaviour {
             foreach (var loot in loots) {
                 for (var i = 0; i < loot.number; i++) {
                     var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
-                    Instantiate(loot.ressource, spawnPos, Quaternion.identity);
+                    Instantiate(loot.resource, spawnPos, Quaternion.identity);
                 }
                 Destroy(this.gameObject);
             }
         } else {
-            while (nextStep > health) {
+            while (nextStep >= health) {
                 nextStep -= step;
-                var ressourcesExtracted = 0;
-                while (ressourcesExtracted < ressourcesByStep) {
-                    var diff = ressourcesByStep - ressourcesExtracted;
+                var resourcesExtracted = 0;
+                while (resourcesExtracted < resourcesByStep) {
+                    var diff = resourcesByStep - resourcesExtracted;
 
                     var loot = loots[loots.Count - 1];
                     loots.RemoveAt(loots.Count - 1);
@@ -68,9 +66,9 @@ public class Loot : MonoBehaviour {
 
                     for (var i = 0; i < diff; i++) {
                         var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
-                        Instantiate(loot.ressource, spawnPos, Quaternion.identity);
+                        Instantiate(loot.resource, spawnPos, Quaternion.identity);
                     }
-                    ressourcesExtracted += diff;
+                    resourcesExtracted += diff;
                 }
             }
         }
