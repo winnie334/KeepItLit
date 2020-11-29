@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Items/Axe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Items/Axe.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Items/Destroyer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Items/Destroyer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Items/LongerPickaxe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Items/LongerPickaxe.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Items/Pickaxe.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Items/Pickaxe.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Fire.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Fire.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Item.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,17 +44,18 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/IAction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pick..cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loot.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Fire.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
       </list>
     </option>
   </component>
@@ -109,7 +117,9 @@
       <workItem from="1605472782731" duration="7642000" />
       <workItem from="1605518703597" duration="2403000" />
       <workItem from="1606139867207" duration="4287000" />
-      <workItem from="1606455062552" duration="1382000" />
+      <workItem from="1606455062552" duration="1384000" />
+      <workItem from="1606577376975" duration="3808000" />
+      <workItem from="1606628352525" duration="10009000" />
     </task>
     <servers />
   </component>

@@ -10,9 +10,12 @@ public class Crafter : MonoBehaviour
 {
     public List<Recipe> knownRecipes;
     private float craftRadius = 6;
+    private Dictionary<Item, List<GameObject>> availableItems;
+    private CraftUI craftUI;
 
     void Start()
     {
+        craftUI = GameObject.Find("Canvas").GetComponent<CraftUI>();
     }
 
     // Update is called once per frame
@@ -44,7 +47,7 @@ public class Crafter : MonoBehaviour
     // Gives a list of recipes the player has the necessary materials for
     public List<Recipe> getPossibleRecipes()
     {
-        var availableItems = getAvailableItems();
+        if (availableItems is null) availableItems = getAvailableItems();
         return knownRecipes.Where(recipe => canMakeRecipe(recipe, availableItems)).ToList();
     }
 
@@ -54,7 +57,10 @@ public class Crafter : MonoBehaviour
         // Assert.IsTrue(canMakeRecipe(recipe, availableItems)); //TODO put back on
         foreach (var requiredMaterial in requiredMaterials)
         {
-            var bestObject = availableItems[requiredMaterial][0]; // If you want to do smart picking (closest first, direct raycast, ...) do it here
+            var bestObject =
+                availableItems[
+                    requiredMaterial][
+                    0]; // If you want to do smart picking (closest first, direct raycast, ...) do it here
             availableItems[requiredMaterial].Remove(bestObject);
             Destroy(bestObject);
         }
@@ -96,5 +102,31 @@ public class Crafter : MonoBehaviour
         var requiredCount = recipe.requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
         return requiredCount.Keys.ToDictionary(item => item, item =>
             new Tuple<int, int>(availableCount.GetOrDef(item), requiredCount[item]));
+    }
+
+    public void resetAvailableItems()
+    {
+        availableItems = new Dictionary<Item, List<GameObject>>();
+    }
+
+    private void OnTriggerEnter(Collider hit)
+    {
+        if (availableItems is null) return;
+        var itemAssociation = hit.gameObject.GetComponent<ItemAssociation>();
+        if (itemAssociation is null) return;
+        if (!availableItems.ContainsKey(itemAssociation.item))
+            availableItems.Add(itemAssociation.item, new List<GameObject> {hit.gameObject});
+        else availableItems[itemAssociation.item].Add(hit.gameObject);
+        craftUI.refreshUI();
+    }
+
+    private void OnTriggerExit(Collider hit)
+    {
+        if (availableItems is null) return;
+        var itemAssociation = hit.gameObject.GetComponent<ItemAssociation>();
+        if (itemAssociation is null) return;
+        if (availableItems.ContainsKey(itemAssociation.item))
+            availableItems[itemAssociation.item].Remove(hit.gameObject);
+        craftUI.refreshUI();
     }
 }

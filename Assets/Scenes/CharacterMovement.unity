@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 13634001}
   - component: {fileID: 13634003}
   - component: {fileID: 13634004}
+  - component: {fileID: 13634005}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -234,7 +235,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 13634002}
   mainCamera: {fileID: 686664199}
-  cameraOffset: {x: 0, y: -9.99, z: 8.76}
+  cameraSensitivity: 2
+  cameraDistance: 10
+  cameraHeight: 8
   audioSource: {fileID: 13634004}
   pickupSound: {fileID: 8300000, guid: 895c1c4d406709741875782ed9e01716, type: 3}
   dropSound: {fileID: 8300000, guid: bbffe3167cea49d49a006bca9811abf0, type: 3}
@@ -375,6 +378,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &13634005
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13633999}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 6
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &52780088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7532815761107935926, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}

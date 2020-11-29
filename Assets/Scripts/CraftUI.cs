@@ -37,6 +37,7 @@ public class CraftUI : MonoBehaviour
         if (craftUI.activeInHierarchy)
         {
             craftUI.SetActive(false);
+            crafter.resetAvailableItems();
         }
         else
         {
@@ -72,8 +73,9 @@ public class CraftUI : MonoBehaviour
     // a smart idea regarding performance - there are many expensive calls (especially getPossibleRecipes)
     private GameObject optionsList;
 
-    void refreshUI()
+    public void refreshUI()
     {
+        if (!craftUI.activeInHierarchy) return;
         if (optionsList != null) Destroy(optionsList); // Destroy any options we created earlier
         optionsList = new GameObject("OptionsList"); // Empty GameObject to easily contain all recipe options
         optionsList.transform.SetParent(optionsPanel.transform, false);

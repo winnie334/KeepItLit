@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Actions;
 using UnityEngine;
 using UnityEngine.AI;
@@ -46,7 +47,6 @@ public class Fire : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider collider) {
-        Debug.Log("Something entered  the fire");
         if (collider.gameObject.CompareTag("Item")) {
             var item = collider.gameObject.GetComponent<ItemAssociation>().item;
             if (item.fuelSize > 0) {
@@ -62,8 +62,10 @@ public class Fire : MonoBehaviour {
             }
         }
     }
+    
 
     private void OnTriggerStay(Collider other) {
+        if (other.bounds.size.x > 10) return; //TODO this is a stupid hack to not trigger this function with the collider that is being used for automatic crafting ui
         if (other.gameObject.CompareTag("Player") && !part.isStopped) {
             other.gameObject.GetComponent<PlayerMovement>().TakeDamage(damageFire * Time.deltaTime);
         }
