@@ -14,49 +14,60 @@ public enum tigerState {
 public class TigerAI : Animal {
     
     public float wanderRadius;
-
-    public float viewDistance; // distance the tiger can look around for the player
+    
     public Transform player;
+    public float attackDamage;
 
+    public float daySpeed;
+    public float nightSpeed;
+
+    public float viewDistanceDay;
+    public float viewDistanceNight;
+    private float viewDistance; // distance the tiger can look around for the player
+    
     private Transform target;
     private tigerState state;
     
     public Vector2 wanderTimer; // Min and max time for next wander
     private float idleTimer;
     public float boredTimer; // Time until tiger gets bored of chasing the player
-    private float attackingTimer; // Time we have been chasing the player
+    private float chaseTimer; // Time we have been chasing the player
     public float cooldownThreshold; // Time the tiger ignores the player after having chased for a while
     private float cooldownTimer;
+    public float attackDuration; // Time the tiger will stand still after attacking
+    private float attackTimer; // If this is below the attackDuration the tiger will stand still
 
     private float nextWanderTimer; // The threshold we need to pass for our next wander
     private Vector3 lastPlayerPos; // The position the player was last seen from the point of view of the tiger
+
+    private DayNightCycle dayNightCycle;
 
     // Use this for initialization
     void OnEnable () {
         nextWanderTimer = 0;
         cooldownTimer = cooldownThreshold;
+        attackTimer = attackDuration;
+        dayNightCycle = GameObject.Find("Sun").GetComponent<DayNightCycle>();
     }
 
     new void Update () {
         base.Update();
         if (!agent.enabled) return;
+        
+        // Not the cleanest to set this every loop, but in event-based the sun would need a list of tigers... or something
+        agent.speed = dayNightCycle.isDay() ? daySpeed : nightSpeed; 
+        viewDistance = dayNightCycle.isDay() ? viewDistanceDay : viewDistanceNight; 
+        
         if (canSeePlayer()) {
             lastPlayerPos = player.position;
-
-                // } else { // Get closest point on the circle of fire distance to the player
-            //     lastPlayerPos = fire.transform.position + fireDistance *
-            //         (player.position - fire.transform.position) /
-            //         Vector3.Distance(player.position, fire.transform.position);
-            // }
         }
-            
-
+        
         switch (state) {
             case tigerState.IDLE:
                 cooldownTimer += Time.deltaTime;
                 if (canSeePlayer() && cooldownTimer > cooldownThreshold) {
                     state = tigerState.CHASING;
-                    attackingTimer = 0;
+                    chaseTimer = 0;
                     return;
                 }
                 idleTimer += Time.deltaTime;
@@ -66,8 +77,14 @@ public class TigerAI : Animal {
                 nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
                 break;
             case tigerState.CHASING:
-                attackingTimer += Time.deltaTime;
-                if (attackingTimer > boredTimer) {
+                if (attackTimer < attackDuration) {
+                    attackTimer += Time.deltaTime;
+                    return;
+                }
+                
+                // Chase until bored threshold is reached (twice as long at night)
+                chaseTimer += Time.deltaTime;
+                if (chaseTimer > (dayNightCycle.isDay() ? boredTimer : boredTimer * 2)) {
                     state = tigerState.IDLE;
                     idleTimer = nextWanderTimer; // Immediately repath to idle location
                     cooldownTimer = 0;
@@ -97,10 +114,13 @@ public class TigerAI : Animal {
         if (Application.isPlaying) Gizmos.DrawLine(transform.position, agent.destination);
     }
 
-    public void OnCollisionEnter(Collision other) {
+    public void OnTriggerEnter(Collider other) {
+        if (chaseTimer < attackDuration) return; // This is still the same attack
         if (other.gameObject.CompareTag("Player")) {
-            var player = other.gameObject.GetComponent<PlayerMovement>();
-            // Todo give player damage (and knockback?)
+            var playerScript = other.gameObject.GetComponent<PlayerMovement>();
+            playerScript.TakeDamage(attackDamage);
+            chaseTimer = 0;
+            // Todo play some attack animation and sound
         }
     }
 }

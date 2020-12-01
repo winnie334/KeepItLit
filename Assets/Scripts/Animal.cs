@@ -7,6 +7,7 @@ public class Animal : MonoBehaviour {
 
     public int maxHealth;
     public double recoveryTime; // After being attacked, counts down until 0, after which the animal can continue on again
+    public List<GameObject> drops;
 
     private Rigidbody rb;
     private int health;
@@ -51,6 +52,10 @@ public class Animal : MonoBehaviour {
 
     private void die() {
         Destroy(gameObject);
+        foreach (var loot in drops) {
+            var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
+            Instantiate(loot, spawnPos, Quaternion.identity);
+        }
     }
     
     // Gets a random point in space on the navmesh within a certain radius of the given origin

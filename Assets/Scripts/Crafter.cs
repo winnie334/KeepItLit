@@ -8,7 +8,7 @@ using UnityEngine.Assertions;
 // and doing the actual crafting of the new item
 public class Crafter : MonoBehaviour {
     public List<Recipe> knownRecipes;
-    private float craftRadius = 6;
+    public float craftRadius = 6;
     private Dictionary<Item, List<GameObject>> availableItems;
     private CraftUI craftUI;
 
@@ -25,35 +25,40 @@ public class Crafter : MonoBehaviour {
 
         // We categorize all nearby objects by item. Basically a lookup table for each item to the GameObjects
         // e.g. 'wood' -> [GameObject3, GameObject4], 'stone' -> [GameObject2], etc
-        var availableItems = new Dictionary<Item, List<GameObject>>();
+        var items = new Dictionary<Item, List<GameObject>>();
         foreach (var obj in nearbyItems) {
             var item = obj.GetComponent<ItemAssociation>().item;
-            if (!availableItems.ContainsKey(item)) availableItems.Add(item, new List<GameObject> {obj.gameObject});
-            else availableItems[item].Add(obj.gameObject);
+            if (!items.ContainsKey(item)) items.Add(item, new List<GameObject> {obj.gameObject});
+            else items[item].Add(obj.gameObject);
         }
 
-        return availableItems;
+        return items;
     }
 
     // Gives a list of recipes the player has the necessary materials for
     public List<Recipe> getPossibleRecipes() {
         if (availableItems is null) availableItems = getAvailableItems();
-        return knownRecipes.Where(recipe => canMakeRecipe(recipe, availableItems)).ToList();
+        return knownRecipes.Where(recipe => canMakeRecipe(recipe)).ToList();
     }
 
     void destroyRequiredMaterials(List<Item> requiredMaterials) {
-        var availableItems = getAvailableItems();
-        // Assert.IsTrue(canMakeRecipe(recipe, availableItems)); //TODO put back on
         foreach (var requiredMaterial in requiredMaterials) {
             var bestObject = availableItems[requiredMaterial][0]; // If you want to do smart picking (closest first, direct raycast, ...) do it here
             availableItems[requiredMaterial].Remove(bestObject);
+            
+            if (bestObject.transform.parent) {
+                var player = bestObject.transform.parent.GetComponent<PlayerMovement>();
+                if (player != null) {
+                    player.removeObject(bestObject);
+                    player.releaseObjects();
+                }
+            }
             Destroy(bestObject);
         }
     }
 
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
     public void craftPlayerRecipe(Recipe recipe) {
-        // maybe save available items? Has some design consequences, todo discuss
         destroyRequiredMaterials(recipe.requiredItems);
         Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward,
             Quaternion.identity);
@@ -65,7 +70,7 @@ public class Crafter : MonoBehaviour {
     }
 
     // Returns true if the given recipe can be made with a given list of items
-    bool canMakeRecipe(Recipe recipe, Dictionary<Item, List<GameObject>> availableItems) {
+    public bool canMakeRecipe(Recipe recipe) {
         // We create a new copy (prevent pass-by-reference errors!!) and change the list of objects to a simple count
         var availableCount = availableItems.ToDictionary(entry => entry.Key, entry => entry.Value.Count);
         foreach (var requiredItem in recipe.requiredItems) {

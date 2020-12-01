@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CraftUI : MonoBehaviour {
-    public GameObject player;
+    public Transform playerBrain;
     private GameObject shipyard; //TODO what if there are multiple shipyards?
     private bool isPlayerCrafter = true; //TODO ugly
 
@@ -43,11 +43,11 @@ public class CraftUI : MonoBehaviour {
 
     // If we ever want to craft using workbenches or other special stations, this is where you should set them
     void setCrafter() {
-        if (shipyard && Vector3.Distance(player.transform.position, shipyard.transform.position) < 7) {
+        if (shipyard && Vector3.Distance(playerBrain.transform.position, shipyard.transform.position) < 7) {
             crafter = shipyard.GetComponent<Crafter>();
             isPlayerCrafter = false;
         } else {
-            crafter = player.GetComponent<Crafter>();
+            crafter = playerBrain.GetComponent<Crafter>();
             isPlayerCrafter = true;
         }
     }
@@ -101,6 +101,7 @@ public class CraftUI : MonoBehaviour {
     }
 
     void craftSelected() {
+        if (!crafter.canMakeRecipe(currentlySelected)) return;
         if (isPlayerCrafter) crafter.craftPlayerRecipe(currentlySelected);
         else {
             crafter.craftShipyardRecipe(currentlySelected, shipyard);

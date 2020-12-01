@@ -8,9 +8,10 @@ public class DayNightCycle : MonoBehaviour {
     public Transform SunTransform;
     public Light Sun;
     public Light Moon; // Will always be present, but simply intensity changed
-
+    
     public float maxIntensity;
 
+    public float startTime;
     public float dayTime;
     public float nightTime;
     private float time;
@@ -18,6 +19,7 @@ public class DayNightCycle : MonoBehaviour {
 
     private void Start() {
         originalSunRotation = SunTransform.eulerAngles;
+        time = startTime;
     }
 
     void Update() {
@@ -38,6 +40,10 @@ public class DayNightCycle : MonoBehaviour {
         intensity = Math.Min(maxIntensity, intensity);
         Sun.intensity = intensity;
         Moon.intensity = Math.Max(0.2f - intensity, 0);
+    }
+
+    public bool isDay() {
+        return time < dayTime;
     }
 
 }
