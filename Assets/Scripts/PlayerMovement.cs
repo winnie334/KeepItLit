@@ -7,12 +7,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour {
+    public Transform cam;
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
-    public float cameraSensitivity = 0.5f;
-    public float cameraDistance;
-    public float cameraHeight;
 
     public AudioSource audioSource;
     public AudioClip pickupSound;
@@ -33,10 +31,6 @@ public class PlayerMovement : MonoBehaviour {
     private float currentHealth;
     private GameObject toolOnBack; //the tool the player has on its back
 
-    private float
-        cameraAngleOnCircle =
-            180; //The camera follows a circular path, this angle tells us where the camera is located on the circle
-
     private void Start() {
         currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
@@ -51,14 +45,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
             handleItemAction(); //currentlyGrabbed condition is wonky xd
 
-        // Move the camera to a position above the player
-        // cameraAngleOnCircle += Input.GetAxis("Mouse X") * cameraSensitivity;
-        // var position = transform.position;
-        // mainCamera.transform.position = new Vector3(
-        //     position.x + cameraDistance * Mathf.Sin((cameraAngleOnCircle * Mathf.PI) / 180),
-        //     position.y + cameraHeight, position.z + cameraDistance * Mathf.Cos((cameraAngleOnCircle * Mathf.PI) / 180));
-        // mainCamera.rotation =
-        //     Quaternion.Euler(47.361f, -90 * Mathf.Sin((cameraAngleOnCircle * Mathf.PI) / 180), 0);
         mainCamera.transform.position = transform.position + cameraOffset;
     }
 
@@ -71,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
         var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (!(direction.magnitude >= 0.1f)) return;
-        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
             turnSmoothTime);
 
@@ -164,7 +150,8 @@ public class PlayerMovement : MonoBehaviour {
         if (currentHealth - damage > 0) {
             currentHealth = Math.Max(currentHealth - damage, 0);
             healthUI.SetHealth(currentHealth);
-        } else {
+        }
+        else {
             Game.EndGame(false, "You died from damage");
         }
     }
@@ -181,7 +168,8 @@ public class PlayerMovement : MonoBehaviour {
             if (!currentlyGrabbed[0] || !currentlyGrabbed[0].GetComponent<ItemAssociation>().item.isTool) return;
             putToolOnBack(currentlyGrabbed[0]);
             currentlyGrabbed = new List<GameObject>();
-        } else {
+        }
+        else {
             if (currentlyGrabbed.Count > 0) releaseObjects();
             grabObject(toolOnBack);
             toolOnBack = null;

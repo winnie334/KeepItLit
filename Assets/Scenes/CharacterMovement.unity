@@ -219,7 +219,7 @@ Transform:
   - {fileID: 1488974221}
   - {fileID: 132150041}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &13634001
 MonoBehaviour:
@@ -233,12 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ed5227a90bf6b47b45d762193645eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 686664199}
   controller: {fileID: 13634002}
   mainCamera: {fileID: 686664199}
   cameraOffset: {x: 0, y: 11, z: -10}
-  cameraSensitivity: 2
-  cameraDistance: 10
-  cameraHeight: 8
   audioSource: {fileID: 13634004}
   pickupSound: {fileID: 8300000, guid: 895c1c4d406709741875782ed9e01716, type: 3}
   dropSound: {fileID: 8300000, guid: bbffe3167cea49d49a006bca9811abf0, type: 3}
@@ -725,7 +723,7 @@ RectTransform:
   - {fileID: 2086281657}
   - {fileID: 1665752142}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1400,7 +1398,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &630725332 stripped
 Transform:
@@ -1538,6 +1536,7 @@ GameObject:
   - component: {fileID: 686664199}
   - component: {fileID: 686664198}
   - component: {fileID: 686664197}
+  - component: {fileID: 686664200}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1576,9 +1575,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1603,13 +1602,29 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686664196}
-  m_LocalRotation: {x: 0.40163276, y: -0, z: -0, w: 0.91580087}
-  m_LocalPosition: {x: 1.84, y: 12.67, z: -25.51}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 110.7, y: 6.48, z: 60.449997}
+  m_LocalScale: {x: 1.8518999, y: 3.689726, z: 1.8518999}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 47.361, y: 0, z: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 57.527, z: 0}
+--- !u!114 &686664200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686664196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0720f25889ef82c488ac3dd0cb3fe604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraOffset: {x: 0, y: 12, z: -15}
+  objectToFollow: {fileID: 13633999}
+  rotateSensitivity: 5
+  RotationSmoothFactor: 5
 --- !u!4 &753125989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5257806503321550939, guid: 792d86a0b135f4444b9ebfe8d3600c63, type: 3}
@@ -2006,7 +2021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8971350458147252438, guid: bb45e1b887ce2204298ab51fb7734338, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8971350458147252438, guid: bb45e1b887ce2204298ab51fb7734338, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2097,7 +2112,7 @@ Transform:
   - {fileID: 1992230798}
   - {fileID: 1237171801}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1063323014 stripped
 Transform:
@@ -2231,7 +2246,7 @@ Transform:
   - {fileID: 1401363556}
   - {fileID: 117796206}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1214109340 stripped
 Transform:
@@ -3611,7 +3626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6530272949616095683, guid: cf0d916ca8c5ce0448d0871a3a47838a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6530272949616095683, guid: cf0d916ca8c5ce0448d0871a3a47838a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

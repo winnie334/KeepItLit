@@ -37,6 +37,7 @@
             <e p="Pickaxe.cs" t="Include" />
           </e>
           <e p="Animal.cs" t="Include" />
+          <e p="CameraRotator.cs" t="Include" />
           <e p="ChickenAI.cs" t="Include" />
           <e p="Crafter.cs" t="Include" />
           <e p="CraftUI.cs" t="Include" />
