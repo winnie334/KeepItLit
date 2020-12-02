@@ -26,38 +26,38 @@ public class Fire : MonoBehaviour {
         sh = part.shape;
         em = part.emission;
         sh.scale = Vector3.one * scaleFire;
-        em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(scaleFire, 3) * densityFire);
+        em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(scaleFire, 3) * densityFire);
     }
 
     void Update() {
         if (!part.isStopped) {
-
             if (sh.scale.magnitude < minScale) {
                 part.Stop();
                 lightFire.intensity = 0;
-                GetComponent<NavMeshObstacle>().enabled = false; // Todo verify this works
+                GetComponent<NavMeshObstacle>().enabled = false;
             } else if (!part.isStopped) {
-                col.transform.localScale -= Vector3.one * speedDecreasing * 100 * Time.deltaTime;
+                // TODO collider size doesn't match up with fire
+                col.transform.localScale -= Vector3.one * (speedDecreasing * 100 * Time.deltaTime);
                 lightFire.range = col.transform.localScale.magnitude;
-                sh.scale -= Vector3.one * speedDecreasing * Time.deltaTime;
+                sh.scale -= Vector3.one * (speedDecreasing * Time.deltaTime);
 
-                em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3) * densityFire);
+                em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
             }
         }
     }
 
-    void OnTriggerEnter(Collider collider) {
-        if (collider.gameObject.CompareTag("Item")) {
-            var item = collider.gameObject.GetComponent<ItemAssociation>().item;
+    void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Item")) {
+            var item = other.gameObject.GetComponent<ItemAssociation>().item;
             if (item.fuelSize > 0) {
                 col.transform.localScale += Vector3.one * item.fuelSize * 100;
 
                 sh.scale += Vector3.one * item.fuelSize;
-                em.rateOverTime = (ParticleSystem.MinMaxCurve)(System.Math.Pow(sh.scale.magnitude, 3));
-                player.removeObject(collider.gameObject);
-                Destroy(collider.gameObject);
-            } else if (collider.gameObject.GetComponent<Food>() != null) {
-                var foodToCook = collider.gameObject.GetComponent<Food>();
+                em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3));
+                player.removeObject(other.gameObject);
+                Destroy(other.gameObject);
+            } else if (other.gameObject.GetComponent<Food>() != null) {
+                var foodToCook = other.gameObject.GetComponent<Food>();
                 foodToCook.cookFood();
             }
         }

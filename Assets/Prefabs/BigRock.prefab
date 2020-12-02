@@ -113,6 +113,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}
   loots:
   - resource: {fileID: 132408523772158365, guid: 243c35a440cb30f4d8680855ab776dd8, type: 3}
-    number: 10
+    number: 5
   maxHealth: 100
-  stepNumber: 9
+  stepNumber: 3

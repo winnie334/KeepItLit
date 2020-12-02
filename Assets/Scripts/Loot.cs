@@ -37,7 +37,7 @@ public class Loot : MonoBehaviour {
         }
 
         health -= damage;
-        Debug.Log("Aie");
+        Debug.Log(health);
 
         if (health <= 0) {
             foreach (var loot in loots) {
@@ -45,7 +45,7 @@ public class Loot : MonoBehaviour {
                     var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
                     Instantiate(loot.resource, spawnPos, Quaternion.identity);
                 }
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
         } else {
             while (nextStep >= health) {
