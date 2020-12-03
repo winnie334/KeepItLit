@@ -108,7 +108,7 @@ public class CraftUI : MonoBehaviour {
             craftUI.SetActive(false);
         }
 
-        audioSource.PlayOneShot(craftSound); // todo - currently always plays regardless of success
+        audioSource.PlayOneShot(craftSound);
         StartCoroutine(nameof(delayedUpdate));
     }
 

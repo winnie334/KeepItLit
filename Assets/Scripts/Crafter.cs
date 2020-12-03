@@ -90,7 +90,7 @@ public class Crafter : MonoBehaviour {
     }
 
     public void resetAvailableItems() {
-        availableItems = new Dictionary<Item, List<GameObject>>();
+        availableItems = null;
     }
 
     private void OnTriggerEnter(Collider hit) {

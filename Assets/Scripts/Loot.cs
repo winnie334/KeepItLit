@@ -13,6 +13,7 @@ public class Loot : MonoBehaviour {
     public List<Loots> loots;
     public int maxHealth;
     public int stepNumber;
+    public AudioClip extractSound;
 
     private int health;
     private int step;
@@ -37,7 +38,7 @@ public class Loot : MonoBehaviour {
         }
 
         health -= damage;
-        Debug.Log(health);
+        AudioSource.PlayClipAtPoint(extractSound, transform.position);
 
         if (health <= 0) {
             foreach (var loot in loots) {
