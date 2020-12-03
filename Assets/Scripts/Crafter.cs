@@ -18,9 +18,9 @@ public class Crafter : MonoBehaviour {
 
     // Returns all available items nearby for crafting, along with their corresponding GameObjects 
     // (So we can remove the objects from the world if needed)
-    Dictionary<Item, List<GameObject>> getAvailableItems() {
+    public void setAvailableItems() {
         Collider[] nearbyItems = Physics.OverlapSphere(transform.position, craftRadius) // Look for objects in a radius
-            .Where(hit => hit.GetComponent<ItemAssociation>() != null)
+            .Where(hit => hit.CompareTag("Item"))
             .ToArray(); // If it doesn't have item script, it isn't an item
 
         // We categorize all nearby objects by item. Basically a lookup table for each item to the GameObjects
@@ -32,13 +32,13 @@ public class Crafter : MonoBehaviour {
             else items[item].Add(obj.gameObject);
         }
 
-        return items;
+        availableItems = items;
     }
 
     // Gives a list of recipes the player has the necessary materials for
     public List<Recipe> getPossibleRecipes() {
-        if (availableItems is null) availableItems = getAvailableItems();
-        return knownRecipes.Where(recipe => canMakeRecipe(recipe)).ToList();
+        if (availableItems is null) setAvailableItems();
+        return knownRecipes.Where(canMakeRecipe).ToList();
     }
 
     void destroyRequiredMaterials(List<Item> requiredMaterials) {
