@@ -79,14 +79,17 @@ public class CraftUI : MonoBehaviour {
             if (!possibleRecipes.Contains(recipe)) continue; // We can't craft this recipe
             newButton.GetComponent<Image>().color = canCraftColor;
         }
-        
+
         if (currentlySelected) selectRecipe(currentlySelected);
     }
 
     public GameObject detailPanel;
+    public RawImage icon;
     public Text detailTitle;
     public Text detailDescription;
     public Text detailIngredients;
+    public GameObject ingredients;
+    public GameObject ingredient;
     private Recipe currentlySelected;
 
     void selectRecipe(Recipe recipe) {
@@ -95,9 +98,15 @@ public class CraftUI : MonoBehaviour {
         detailDescription.text = recipe.description;
         currentlySelected = recipe;
         var neededItems = crafter.getNeededItems(recipe);
+
+        foreach (var item in neededItems) {
+            var ingr = Instantiate(ingredient);
+            ingr.SetActive(true);
+            ingr.transform.parent = ingredients.transform;
+        }
         // TODO replace string display with icons
-        detailIngredients.text = neededItems.Keys.Aggregate("", (current, item) =>
-            current + (item.name + ": " + neededItems[item].Item1 + "/" + neededItems[item].Item2 + "\n"));
+        //detailIngredients.text = neededItems.Keys.Aggregate("", (current, item) =>
+        // current + (item.name + ": " + neededItems[item].Item1 + "/" + neededItems[item].Item2 + "\n"));
     }
 
     void craftSelected() {
