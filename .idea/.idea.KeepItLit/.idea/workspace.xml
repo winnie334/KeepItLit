@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feature" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/CharacterMovement.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/CharacterMovement.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -22,13 +47,14 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Loot.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Crafter.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Recipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Recipe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ItemAssociation.cs" root0="FORCE_HIGHLIGHTING" />
@@ -43,24 +69,21 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/IAction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pick..cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loot.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Fire.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" />
       </list>
     </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="276" />
-    <option name="width" value="1401" />
-    <option name="height" value="1002" />
   </component>
   <component name="ProjectId" id="1kLH338wGlScBHjG8eKppdHh4yw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -75,7 +98,7 @@
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -119,7 +142,12 @@
       <workItem from="1603741902396" duration="7449000" />
       <workItem from="1605472782731" duration="7642000" />
       <workItem from="1605518703597" duration="2403000" />
-      <workItem from="1606139867207" duration="3609000" />
+      <workItem from="1606139867207" duration="4287000" />
+      <workItem from="1606455062552" duration="1384000" />
+      <workItem from="1606577376975" duration="3808000" />
+      <workItem from="1606628352525" duration="10009000" />
+      <workItem from="1606836099701" duration="946000" />
+      <workItem from="1606922961252" duration="6020000" />
     </task>
     <servers />
   </component>
@@ -128,6 +156,17 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -135,10 +174,10 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="254" y="147" key="SettingsEditor" timestamp="1605474815605">
+    <state x="254" y="147" key="SettingsEditor" timestamp="1606836846727">
       <screen x="0" y="0" width="1504" height="1003" />
     </state>
-    <state x="254" y="147" key="SettingsEditor/0.0.1504.1003@0.0.1504.1003" timestamp="1605474815605" />
+    <state x="254" y="147" key="SettingsEditor/0.0.1504.1003@0.0.1504.1003" timestamp="1606836846727" />
     <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog" timestamp="1606142900521">
       <screen x="0" y="0" width="1504" height="1003" />
     </state>

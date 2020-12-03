@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 4943853070157161937}
   - component: {fileID: 2056510156171638201}
   - component: {fileID: 5659809443514898477}
+  - component: {fileID: -4356723042361440418}
   m_Layer: 0
   m_Name: RawChicken
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,3 +128,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: dad35b3b24bfbba4da0b0900712394e1, type: 2}
+--- !u!114 &-4356723042361440418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503415072969503526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f06f757f6ee4b14ca37ac44f0be5abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthFill: 5
+  cookedVersion: {fileID: 3503415072969503526, guid: fd873559b092dda4fb9980db2f585b24, type: 3}

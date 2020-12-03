@@ -9,14 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3547917653334220902}
-  - component: {fileID: 1237981863001877360}
   - component: {fileID: 3031034844999971541}
   - component: {fileID: 454008538186963982}
   - component: {fileID: 7012687354441508724}
   - component: {fileID: 8910852216105633516}
+  - component: {fileID: -1021118321564925412}
   m_Layer: 0
   m_Name: Tree
-  m_TagString: Tree
+  m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,20 +30,11 @@ Transform:
   m_GameObject: {fileID: 9049688788502194999}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!193 &1237981863001877360
-Tree:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9049688788502194999}
-  m_SpeedTreeWindAsset: {fileID: 0}
-  m_TreeData: {fileID: -8028484603257991698}
 --- !u!33 &3031034844999971541
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -51,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9049688788502194999}
-  m_Mesh: {fileID: 3394050654687636128}
+  m_Mesh: {fileID: -8081317734454312985, guid: d4e68bad0da2b3048a671fd05bdbba0a, type: 3}
 --- !u!23 &454008538186963982
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71,8 +62,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8183897741430970523}
-  - {fileID: -3820899551218034833}
+  - {fileID: -5369845576128210254, guid: d4e68bad0da2b3048a671fd05bdbba0a, type: 3}
+  - {fileID: -2301431270110527363, guid: d4e68bad0da2b3048a671fd05bdbba0a, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,10 +95,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 12
+  m_Radius: 0.02
+  m_Height: 0.3
   m_Direction: 1
-  m_Center: {x: 0, y: 6, z: 0}
+  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!114 &8910852216105633516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +111,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931fcf4b0233d2542a91ae9a02c5a274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loot:
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
-  - {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
+  tools:
+  - {fileID: 11400000, guid: 4aec522cfcab57c49a24f28e95986739, type: 2}
+  loots:
+  - resource: {fileID: 7532815761107935912, guid: 2c8d903f4b3d50c45a44850087a750d6, type: 3}
+    number: 3
+  maxHealth: 90
+  stepNumber: 2
+  extractSound: {fileID: 8300000, guid: 45ed9d3d706704e41bc00a47287b6161, type: 3}
+--- !u!82 &-1021118321564925412
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049688788502194999}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 45ed9d3d706704e41bc00a47287b6161, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.559
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &-8028484603257991698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4095,19 +4186,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 171a9a69741d76d439dc870b204d030c, type: 3}
+        m_Texture: {fileID: 2800000, guid: e9d4e06e87d81294da75b37354c40651, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 81f0963eaa6d1134db6e60756c6a8b6e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 53236ceddfe26bf43b5397c7845720b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowTex:
-        m_Texture: {fileID: 2800000, guid: 9549ec0df18017e43a1c0ec72891e50a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6aa02c09e86f5374d9212d002a61aab8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: 7e67562adbde0444596b3f933c97cd59, type: 3}
+        m_Texture: {fileID: 2800000, guid: 272d9433e3f37c345941aaab25820354, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -4316,15 +4407,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpSpecMap:
-        m_Texture: {fileID: 2800000, guid: 171a9a69741d76d439dc870b204d030c, type: 3}
+        m_Texture: {fileID: 2800000, guid: e9d4e06e87d81294da75b37354c40651, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 81f0963eaa6d1134db6e60756c6a8b6e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 53236ceddfe26bf43b5397c7845720b1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TranslucencyMap:
-        m_Texture: {fileID: 2800000, guid: 7e67562adbde0444596b3f933c97cd59, type: 3}
+        m_Texture: {fileID: 2800000, guid: 272d9433e3f37c345941aaab25820354, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:

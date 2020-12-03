@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4098528197349631605}
   - component: {fileID: 5194915693506557318}
   - component: {fileID: 598088631}
-  - component: {fileID: 7372903870086118559}
   - component: {fileID: 598088632}
   - component: {fileID: 1778515017569982092}
   m_Layer: 0
@@ -133,22 +132,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 15
   recoveryTime: 1
+  drops:
+  - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
   wanderRadius: 12.79
   wanderTimer: {x: 3, y: 7}
---- !u!114 &7372903870086118559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282684478635323752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931fcf4b0233d2542a91ae9a02c5a274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loot:
-  - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
 --- !u!195 &598088632
 NavMeshAgent:
   m_ObjectHideFlags: 0

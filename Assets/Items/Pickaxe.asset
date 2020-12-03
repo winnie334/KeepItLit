@@ -15,3 +15,4 @@ MonoBehaviour:
   title: Pickaxe
   description: Strong Item
   fuelSize: 0
+  isTool: 1

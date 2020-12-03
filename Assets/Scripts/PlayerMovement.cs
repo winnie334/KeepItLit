@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour {
+    public Transform cam;
     public CharacterController controller;
     public Transform mainCamera;
     public Vector3 cameraOffset;
@@ -19,7 +20,6 @@ public class PlayerMovement : MonoBehaviour {
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
     public float maxHealth = 100;
-    public float actualHealth = 100;
 
     public HealthUI healthUI;
 
@@ -28,25 +28,27 @@ public class PlayerMovement : MonoBehaviour {
     private float turnSmoothVelocity;
     private float gravity;
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
+    private float currentHealth;
+    private GameObject toolOnBack; //the tool the player has on its back
 
     private void Start() {
+        currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
-        healthUI.SetHealth(actualHealth);
+        healthUI.SetHealth(currentHealth);
     }
 
     // Update is called once per frame
     void Update() {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
+        if (Input.GetKeyDown("v")) handleItemSwitch();
         if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
             handleItemAction(); //currentlyGrabbed condition is wonky xd
 
-        // Move the camera to a position above the player
-        mainCamera.transform.position = transform.position - cameraOffset;
+        mainCamera.transform.position = transform.position + cameraOffset;
     }
 
     void handleMovement() {
-
         var originalPos = transform.position; // We save this to revert to it in case we do illegal movement (e.g drown)
 
         // Now we read the inputs and move our character accordingly
@@ -55,7 +57,7 @@ public class PlayerMovement : MonoBehaviour {
         var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (!(direction.magnitude >= 0.1f)) return;
-        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
         var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
             turnSmoothTime);
 
@@ -69,7 +71,6 @@ public class PlayerMovement : MonoBehaviour {
         controller.Move(new Vector3(0, gravity, 0) * Time.deltaTime);
 
         if (outOfBounds(transform.position, -2.3f)) transform.position = originalPos;
-
     }
 
     // Raycast down from position to see if we would fall below the height parameter
@@ -82,21 +83,22 @@ public class PlayerMovement : MonoBehaviour {
         return true;
     }
 
-    GameObject lookForClosestGrabbableItem(GameObject itemToCompare) {
+    GameObject lookForClosestGrabbableItem(Item itemToCompare) {
         var curPos = transform.position;
         GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
             .Select(hit => hit.gameObject)
-            .Where(obj => obj.GetComponent<ItemAssociation>() != null
-                          && (itemToCompare is null || (!currentlyGrabbed.Contains(obj) &&
-                                                        obj.GetComponent<ItemAssociation>().item
-                                                        == itemToCompare.GetComponent<ItemAssociation>().item)))
+            .Where(obj => !(obj.GetComponent<ItemAssociation>() is null) && !currentlyGrabbed.Contains(obj)
+                                                                         && (itemToCompare is null ||
+                                                                             (itemToCompare.isTool ||
+                                                                              obj.GetComponent<ItemAssociation>()
+                                                                                  .item ==
+                                                                              itemToCompare)))
             .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
             .FirstOrDefault();
-        ;
         return objectToGrab;
     }
 
-    void grabObject(GameObject objectToGrab) {
+    public void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
@@ -108,7 +110,7 @@ public class PlayerMovement : MonoBehaviour {
         audioSource.PlayOneShot(pickupSound);
     }
 
-    void releaseObjects() {
+    public void releaseObjects() {
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
@@ -126,9 +128,13 @@ public class PlayerMovement : MonoBehaviour {
         else {
             if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
             else {
-                var objectToGrab = lookForClosestGrabbableItem(currentlyGrabbed[0]);
+                var carriedItem = currentlyGrabbed[0].GetComponent<ItemAssociation>().item;
+                var objectToGrab = lookForClosestGrabbableItem(carriedItem);
                 if (objectToGrab is null) releaseObjects();
-                else grabObject(objectToGrab);
+                else {
+                    if (carriedItem.isTool) putToolOnBack(currentlyGrabbed[0]);
+                    grabObject(objectToGrab);
+                }
             }
         }
     }
@@ -141,20 +147,41 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void TakeDamage(float damage) {
-        if (actualHealth - damage > 0) {
-            actualHealth = Math.Max(actualHealth - damage, 0);
-            healthUI.SetHealth(actualHealth);
-        } else {
-            Game.EndGame(false, "You died form damage");
+        if (currentHealth - damage > 0) {
+            currentHealth = Math.Max(currentHealth - damage, 0);
+            healthUI.SetHealth(currentHealth);
+        }
+        else {
+            Game.EndGame(false, "You died from damage");
+        }
+    }
+
+    void putToolOnBack(GameObject tool) {
+        currentlyGrabbed = new List<GameObject>();
+        toolOnBack = tool;
+        tool.transform.parent = transform; // One day we should make a better holding animation
+        tool.transform.localPosition = new Vector3(0, 0, -1f);
+    }
+
+    void handleItemSwitch() {
+        if (toolOnBack is null) {
+            if (!currentlyGrabbed[0] || !currentlyGrabbed[0].GetComponent<ItemAssociation>().item.isTool) return;
+            putToolOnBack(currentlyGrabbed[0]);
+            currentlyGrabbed = new List<GameObject>();
+        }
+        else {
+            if (currentlyGrabbed.Count > 0) releaseObjects();
+            grabObject(toolOnBack);
+            toolOnBack = null;
         }
     }
 
     public void Heal(float life) {
-        actualHealth = Math.Min(actualHealth + life, maxHealth);
-        healthUI.SetHealth(actualHealth);
+        currentHealth = Math.Min(currentHealth + life, maxHealth);
+        healthUI.SetHealth(currentHealth);
     }
 
-    // If we run up against something with a rigidbody, we move it
+// If we run up against something with a rigidbody, we move it
     void OnControllerColliderHit(ControllerColliderHit hit) {
         Rigidbody body = hit.collider.attachedRigidbody;
 

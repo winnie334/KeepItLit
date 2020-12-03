@@ -15,4 +15,4 @@ MonoBehaviour:
   description: 
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
-  resultingItem: {fileID: 6998676572395434083, guid: 4e6f4d51d1ebf92449086d1891f1b73b, type: 3}
+  resultingItem: {fileID: 8763693840704071234, guid: a204e7df8615fde40b80bedd92783664, type: 3}
