@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour {
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
         Vector3 localPosition = currentlyGrabbed.Count == 1
             ? new Vector3(0, 0, 1f)
-            : new Vector3(0, currentlyGrabbed.Count - 1, 1f);
+            : new Vector3(0, (currentlyGrabbed.Count - 1) * objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y * objectToGrab.transform.localScale.y, 1f);
         objectToGrab.transform.localPosition = localPosition;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
