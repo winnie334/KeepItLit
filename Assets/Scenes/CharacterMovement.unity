@@ -2114,6 +2114,14 @@ PrefabInstance:
       propertyPath: scaleFire
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8971350458147252439, guid: bb45e1b887ce2204298ab51fb7734338, type: 3}
+      propertyPath: maximalSizeFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971350458147252439, guid: bb45e1b887ce2204298ab51fb7734338, type: 3}
+      propertyPath: densityFire
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb45e1b887ce2204298ab51fb7734338, type: 3}
 --- !u!1 &1021557379
