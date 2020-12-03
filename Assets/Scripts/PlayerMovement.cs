@@ -132,7 +132,14 @@ public class PlayerMovement : MonoBehaviour {
                 var objectToGrab = lookForClosestGrabbableItem(carriedItem);
                 if (objectToGrab is null) releaseObjects();
                 else {
-                    if (carriedItem.isTool) putToolOnBack(currentlyGrabbed[0]);
+                    //TODO ugly code :((
+                    if (carriedItem.isTool) {
+                        if (toolOnBack is null) putToolOnBack(currentlyGrabbed[0]);
+                        else {
+                            releaseObjects();
+                            return;
+                        }
+                    }
                     grabObject(objectToGrab);
                 }
             }
