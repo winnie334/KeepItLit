@@ -106,6 +106,7 @@ public class TigerAI : Animal {
         return false;
     }
 
+    #if UNITY_EDITOR
     public void OnDrawGizmosSelected() {
         Handles.color = Color.red;
         Handles.DrawWireDisc(transform.position, transform.up, wanderRadius);
@@ -113,6 +114,7 @@ public class TigerAI : Animal {
         Handles.DrawWireDisc(transform.position, transform.up, viewDistance);
         if (Application.isPlaying) Gizmos.DrawLine(transform.position, agent.destination);
     }
+    #endif
 
     public void OnTriggerEnter(Collider other) {
         if (chaseTimer < attackDuration) return; // This is still the same attack

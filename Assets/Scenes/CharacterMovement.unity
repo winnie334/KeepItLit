@@ -4468,10 +4468,10 @@ RectTransform:
   m_Father: {fileID: 123565243}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -132.6, y: 0}
-  m_SizeDelta: {x: 265.26617, y: 620}
+  m_SizeDelta: {x: 265.26617, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1679932118
 PrefabInstance:
@@ -5522,10 +5522,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 13634000}
-    - target: {fileID: 598088632, guid: 1f353e63eb9874d4880fb4d91c19a889, type: 3}
-      propertyPath: m_AgentTypeID
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 282684478635323752, guid: 1f353e63eb9874d4880fb4d91c19a889, type: 3}
       propertyPath: m_Name
       value: Tiger

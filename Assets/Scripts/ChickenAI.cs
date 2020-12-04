@@ -36,9 +36,11 @@ public class ChickenAI : Animal {
         }    
     }
 
+    #if UNITY_EDITOR
     public void OnDrawGizmosSelected() {
         Handles.color = Color.red;
         Handles.DrawWireDisc(transform.position, transform.up, wanderRadius);
         if (Application.isPlaying) Gizmos.DrawLine(transform.position, agent.destination);
     }
+    #endif
 }
