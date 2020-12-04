@@ -6,12 +6,14 @@ using UnityEngine.AI;
 
 
 public class Fire : MonoBehaviour {
+    public float initalSizeFire;
     public float maximalSizeFire;
     public float speedDecreasing;
     public int densityFire;
 
     public float damageFire;
     public Light lightFire;
+    public GameObject damageCol;
     public GameObject col;
     public PlayerMovement player;
 
@@ -20,12 +22,13 @@ public class Fire : MonoBehaviour {
     private ParticleSystem.EmissionModule em;
 
     void Start() {
-        col.transform.localScale = Vector3.one * maximalSizeFire * 100;
+        damageCol.transform.localScale = Vector3.one * initalSizeFire * 100;
+        col.transform.localScale = Vector3.one * initalSizeFire * 150;
         part = GetComponent<ParticleSystem>();
         sh = part.shape;
         em = part.emission;
-        sh.scale = Vector3.one * maximalSizeFire;
-        em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(maximalSizeFire, 3) * densityFire);
+        sh.scale = Vector3.one * initalSizeFire;
+        em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(initalSizeFire, 3) * densityFire);
     }
 
     void Update() {
@@ -35,9 +38,10 @@ public class Fire : MonoBehaviour {
                 lightFire.intensity = 0;
                 GetComponent<NavMeshObstacle>().enabled = false;
             } else if (!part.isStopped) {
-                // TODO collider size doesn't match up with fire
-                col.transform.localScale -= Vector3.one * (speedDecreasing * 100 * Time.deltaTime);
-                lightFire.range = col.transform.localScale.magnitude;
+                // TODOdamageCollider size doesn't match up with fire
+                damageCol.transform.localScale -= Vector3.one * (speedDecreasing * 100 * Time.deltaTime);
+                col.transform.localScale -= Vector3.one * (speedDecreasing * 150 * Time.deltaTime);
+                lightFire.range = damageCol.transform.localScale.magnitude;
                 sh.scale -= Vector3.one * (speedDecreasing * Time.deltaTime);
 
                 em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
@@ -45,29 +49,35 @@ public class Fire : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.gameObject.CompareTag("Item")) {
-            var item = other.gameObject.GetComponent<ItemAssociation>().item;
-            if (item.fuelSize > 0 && sh.scale.magnitude < maximalSizeFire) {
-                col.transform.localScale += Vector3.one * item.fuelSize * 100;
+    public void OnChildTriggerStay(string type, Collider other) {
+        switch (type) {
+            case "damage":
+                if (other.bounds.size.x > 10) return; //TODO this is a stupid hack to not trigger this function with thedamageCollider that is being used for automatic crafting ui
+                if (other.gameObject.CompareTag("Player") && !part.isStopped) {
+                    other.gameObject.GetComponent<PlayerMovement>().TakeDamage(damageFire * Time.deltaTime);
+                }
+                break;
 
-                sh.scale += Vector3.one * item.fuelSize;
-                em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3));
-                player.removeObject(other.gameObject);
-                Destroy(other.gameObject);
-            } else if (other.gameObject.GetComponent<Food>() != null) {
-                var foodToCook = other.gameObject.GetComponent<Food>();
-                foodToCook.cookFood();
-            }
+            default:
+                if (other.gameObject.CompareTag("Item")) {
+                    var item = other.gameObject.GetComponent<ItemAssociation>().item;
+                    if (item.fuelSize > 0 && sh.scale.x < maximalSizeFire) {
+                        damageCol.transform.localScale += Vector3.one * item.fuelSize * 100;
+                        col.transform.localScale += Vector3.one * item.fuelSize * 150;
+
+                        sh.scale += Vector3.one * item.fuelSize;
+                        em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3));
+                        player.removeObject(other.gameObject);
+                        Destroy(other.gameObject);
+                    } else if (other.gameObject.GetComponent<Food>() != null) {
+                        var foodToCook = other.gameObject.GetComponent<Food>();
+                        foodToCook.cookFood();
+                    }
+                }
+                break;
+
         }
-    }
 
-
-    private void OnTriggerStay(Collider other) {
-        if (other.bounds.size.x > 10) return; //TODO this is a stupid hack to not trigger this function with the collider that is being used for automatic crafting ui
-        if (other.gameObject.CompareTag("Player") && !part.isStopped) {
-            other.gameObject.GetComponent<PlayerMovement>().TakeDamage(damageFire * Time.deltaTime);
-        }
     }
 
 }
