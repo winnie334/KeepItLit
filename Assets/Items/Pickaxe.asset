@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pickaxe
   m_EditorClassIdentifier: 
   title: Pickaxe
+  icon: {fileID: 21300000, guid: 394d32cab222e0c4089d9ff2287181da, type: 3}
   description: Strong Item
   fuelSize: 0
   isTool: 1

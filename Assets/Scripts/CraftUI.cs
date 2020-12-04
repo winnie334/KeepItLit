@@ -13,7 +13,8 @@ public class CraftUI : MonoBehaviour {
     public AudioClip craftSound;
 
     public GameObject craftUI;
-    public GameObject optionsPanel;
+    public GameObject recipiesPanel;
+    public GameObject recipe;
     public GameObject craftOption;
     public Button craftButton;
     public Color canCraftColor;
@@ -65,28 +66,34 @@ public class CraftUI : MonoBehaviour {
         if (!craftUI.activeInHierarchy) return;
         if (optionsList != null) Destroy(optionsList); // Destroy any options we created earlier
         optionsList = new GameObject("OptionsList"); // Empty GameObject to easily contain all recipe options
-        optionsList.transform.SetParent(optionsPanel.transform, false);
 
         var possibleRecipes = crafter.getPossibleRecipes();
 
-        var xOffset = 0;
-        foreach (var recipe in crafter.knownRecipes) {
-            var newButton = Instantiate(craftOption, optionsList.transform, false);
-            newButton.transform.localPosition += new Vector3(xOffset % 360, -(xOffset / 360) * 120, 0);
-            xOffset += 120; // TODO make actual craft UI
-            newButton.GetComponentInChildren<Text>().text = recipe.name;
-            newButton.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(recipe); });
-            if (!possibleRecipes.Contains(recipe)) continue; // We can't craft this recipe
-            newButton.GetComponent<Image>().color = canCraftColor;
+        foreach (Transform child in recipiesPanel.transform) {
+            Destroy(child.gameObject);
         }
-        
+
+        foreach (var item in crafter.knownRecipes) {
+            var rcp = Instantiate(recipe);
+            rcp.SetActive(true);
+            rcp.transform.SetParent(recipiesPanel.transform);
+            rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(item); });
+            rcp.GetComponentInChildren<Text>().text = item.name;
+            rcp.GetComponentsInChildren<Image>()[1].sprite = item.resultingItem.GetComponent<ItemAssociation>().item.icon;
+            if (!possibleRecipes.Contains(item)) continue; // We can't craft this recipe
+            rcp.GetComponent<Image>().color = canCraftColor;
+
+        }
+
         if (currentlySelected) selectRecipe(currentlySelected);
     }
 
     public GameObject detailPanel;
+    public RawImage icon;
     public Text detailTitle;
     public Text detailDescription;
-    public Text detailIngredients;
+    public GameObject ingredients;
+    public GameObject ingredient;
     private Recipe currentlySelected;
 
     void selectRecipe(Recipe recipe) {
@@ -95,9 +102,19 @@ public class CraftUI : MonoBehaviour {
         detailDescription.text = recipe.description;
         currentlySelected = recipe;
         var neededItems = crafter.getNeededItems(recipe);
-        // TODO replace string display with icons
-        detailIngredients.text = neededItems.Keys.Aggregate("", (current, item) =>
-            current + (item.name + ": " + neededItems[item].Item1 + "/" + neededItems[item].Item2 + "\n"));
+
+        foreach (Transform child in ingredients.transform) {
+            Destroy(child.gameObject);
+        }
+
+        foreach (var item in neededItems) {
+            var ingr = Instantiate(ingredient);
+            ingr.SetActive(true);
+            ingr.transform.SetParent(ingredients.transform);
+            ingr.GetComponentInChildren<Image>().sprite = item.Key.icon;
+            ingr.GetComponentInChildren<Text>().text = item.Value.Item1 + "/" + item.Value.Item2;
+
+        }
     }
 
     void craftSelected() {

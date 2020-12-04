@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   title: Stone
+  icon: {fileID: 21300000, guid: 8e891b5662c50284f9f3e7e464b6aa8f, type: 3}
   description: 
   fuelSize: 0
+  isTool: 0
