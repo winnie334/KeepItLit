@@ -12,29 +12,25 @@ public class Shipyard : MonoBehaviour
     private GameObject prevBoat;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         crafter = GetComponent<Crafter>();
         setCraftingRecipe();
         GameObject.Find("Canvas").GetComponent<CraftUI>().setShipyard(gameObject);
     }
 
-    bool isBoatFinished()
-    {
+    bool isBoatFinished() {
         return currRecipeIndex == boatComponents.Count;
     }
 
-    void setCraftingRecipe()
-    {
+    void setCraftingRecipe() {
         crafter.knownRecipes = new List<Recipe>() {boatComponents[currRecipeIndex++]};
     }
 
     //TODO use an array with all the recipes and a index, as soon as we reach the last state the game should be over
-    public void handleCreateRecipe(Recipe recipe)
-    {
+    public void handleCreateRecipe(Recipe recipe) {
         if (prevBoat) Destroy(prevBoat.gameObject);
         prevBoat = Instantiate(recipe.resultingItem, transform);
-        if (isBoatFinished()) Debug.Log("game should end");
+        if (isBoatFinished()) Game.EndGame(true, "");
         else setCraftingRecipe();
     }
 }

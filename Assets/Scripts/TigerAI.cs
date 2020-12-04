@@ -72,7 +72,7 @@ public class TigerAI : Animal {
                 }
                 idleTimer += Time.deltaTime;
                 if (!(idleTimer >= nextWanderTimer)) return;
-                agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius, -1));
+                agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius * (dayNightCycle.isDay() ? 1 : 2), -1));
                 idleTimer = 0;
                 nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
                 break;

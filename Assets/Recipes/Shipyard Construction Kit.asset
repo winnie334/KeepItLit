@@ -15,4 +15,5 @@ MonoBehaviour:
   description: Use in the water to build a shipyard
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
+  - {fileID: 11400000, guid: d1709d74070cc1f4b89bdc1bb8de5c0b, type: 2}
   resultingItem: {fileID: 6530272949616095705, guid: cf0d916ca8c5ce0448d0871a3a47838a, type: 3}

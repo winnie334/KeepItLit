@@ -12,10 +12,10 @@ public class CraftUI : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip craftSound;
 
+    public GameObject tutorial;
     public GameObject craftUI;
     public GameObject recipiesPanel;
     public GameObject recipe;
-    public GameObject craftOption;
     public Button craftButton;
     public Color canCraftColor;
 
@@ -33,10 +33,12 @@ public class CraftUI : MonoBehaviour {
     void toggleUI() {
         if (craftUI.activeInHierarchy) {
             craftUI.SetActive(false);
+            tutorial.SetActive(true);
             crafter.resetAvailableItems();
         } else {
             setCrafter();
             craftUI.SetActive(true);
+            tutorial.SetActive(false);
             detailPanel.SetActive(false);
             refreshUI();
         }
