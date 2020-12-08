@@ -27,7 +27,7 @@ public class Grid : MonoBehaviour {
 
 	private void Start () {
 		Generate();
-		// SpawnTrees();
+		SpawnTrees();
 		bakeNavMesh();
 	}
 
@@ -102,7 +102,7 @@ public class Grid : MonoBehaviour {
 
 	private void bakeNavMesh() {
 		var navMeshSurface = GetComponent<NavMeshSurface>();
-		navMeshSurface.BuildNavMesh();
+		if (navMeshSurface) navMeshSurface.BuildNavMesh();
 	}
 
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
