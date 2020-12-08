@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 988aa8a270a464c45acc1af27c34172e, type: 3}
-  m_Name: Rock
+  m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
+  m_Name: Screw
   m_EditorClassIdentifier: 
-  title: Rock
-  icon: {fileID: 21300000, guid: 8e891b5662c50284f9f3e7e464b6aa8f, type: 3}
   description: 
-  fuelSize: 0
-  isTool: 0
+  requiredItems:
+  - {fileID: 11400000, guid: 4a2e33785be68ba4c983908fe034988d, type: 2}
+  resultingItem: {fileID: 3276549332607866401, guid: cb6c0702f3cb31640918d2223d5c4230, type: 3}

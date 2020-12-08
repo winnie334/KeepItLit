@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 988aa8a270a464c45acc1af27c34172e, type: 3}
-  m_Name: Rock
+  m_Name: Metal
   m_EditorClassIdentifier: 
-  title: Rock
-  icon: {fileID: 21300000, guid: 8e891b5662c50284f9f3e7e464b6aa8f, type: 3}
-  description: 
+  title: Metal
+  icon: {fileID: 21300000, guid: d536bff29449c3442920eba47f902d88, type: 3}
+  description: Used to craft advanced items
   fuelSize: 0
   isTool: 0

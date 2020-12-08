@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
+  m_Name: Machete
+  m_EditorClassIdentifier: 
+  description: Defend yourself!
+  requiredItems:
+  - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
+  - {fileID: 11400000, guid: 4a2e33785be68ba4c983908fe034988d, type: 2}
+  - {fileID: 11400000, guid: 4a2e33785be68ba4c983908fe034988d, type: 2}
+  resultingItem: {fileID: 8586874645996418599, guid: f94fa937a9156ff4f86f6720e10fcc87, type: 3}

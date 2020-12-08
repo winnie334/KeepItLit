@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
             handleItemAction(); //currentlyGrabbed condition is wonky xd
 
-        mainCamera.transform.position = transform.position + cameraOffset;
+        // mainCamera.transform.position = transform.position + cameraOffset;
     }
 
     void handleMovement() {

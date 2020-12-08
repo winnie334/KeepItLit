@@ -27,7 +27,7 @@ public class Grid : MonoBehaviour {
 
 	private void Start () {
 		Generate();
-		SpawnTrees();
+		// SpawnTrees();
 		bakeNavMesh();
 	}
 
