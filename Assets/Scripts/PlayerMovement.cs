@@ -178,8 +178,8 @@ public class PlayerMovement : MonoBehaviour {
             if (toolsOnBack.Count > 0) {
                 var toolOnBack = toolsOnBack[indexOfTool];
                 toolsOnBack.RemoveAt(indexOfTool);
-                if (indexOfTool == 0) resetToolsOnBackPositions();
-                putToolOnBack(currentlyGrabbed[0]);
+                toolsOnBack.Insert(isForwardScroll ? toolsOnBack.Count : 0, currentlyGrabbed[0]);
+                resetToolsOnBackPositions();
                 currentlyGrabbed[0] = toolOnBack;
                 currentlyGrabbed[0].transform.localPosition = new Vector3(0, 0, 1f);
             }
