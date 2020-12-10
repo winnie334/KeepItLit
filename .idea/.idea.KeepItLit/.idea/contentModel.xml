@@ -33,6 +33,7 @@
             <e p="Chop.cs" t="Include" />
             <e p="CreateShipyard.cs" t="Include" />
             <e p="Destroyer.cs" t="Include" />
+            <e p="Fish.cs" t="Include" />
             <e p="Food.cs" t="Include" />
             <e p="Pickaxe.cs" t="Include" />
           </e>
@@ -45,6 +46,10 @@
           <e p="DayNightCycle.cs" t="Include" />
           <e p="EndUi.cs" t="Include" />
           <e p="Fire.cs" t="Include" />
+          <e p="FireInteractions" t="Include">
+            <e p="IFireInteraction.cs" t="Include" />
+            <e p="Replace.cs" t="Include" />
+          </e>
           <e p="Game.cs" t="Include" />
           <e p="Grid.cs" t="Include" />
           <e p="HealthUI.cs" t="Include" />

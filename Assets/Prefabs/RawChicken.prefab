@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2056510156171638201}
   - component: {fileID: 5659809443514898477}
   - component: {fileID: -4356723042361440418}
+  - component: {fileID: 5493540795668682735}
   m_Layer: 0
   m_Name: RawChicken
   m_TagString: Item
@@ -141,4 +142,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthFill: 5
-  cookedVersion: {fileID: 3503415072969503526, guid: fd873559b092dda4fb9980db2f585b24, type: 3}
+--- !u!114 &5493540795668682735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3503415072969503526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c89108626e76645944df9b7b7f5939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newObject: {fileID: 3503415072969503526, guid: fd873559b092dda4fb9980db2f585b24, type: 3}

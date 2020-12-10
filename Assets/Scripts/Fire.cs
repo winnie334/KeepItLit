@@ -69,9 +69,9 @@ public class Fire : MonoBehaviour {
                         em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3));
                         player.removeObject(other.gameObject);
                         Destroy(other.gameObject);
-                    } else if (other.gameObject.GetComponent<Food>() != null) {
-                        var foodToCook = other.gameObject.GetComponent<Food>();
-                        foodToCook.cookFood();
+                    } else if (other.gameObject.GetComponent<IFireInteraction>() != null) {
+                        var interactableItem = other.gameObject.GetComponent<IFireInteraction>();
+                        interactableItem.onFireInteraction();
                     }
                 }
                 break;

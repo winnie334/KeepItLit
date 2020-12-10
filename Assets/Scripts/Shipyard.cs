@@ -26,7 +26,6 @@ public class Shipyard : MonoBehaviour
         crafter.knownRecipes = new List<Recipe>() {boatComponents[currRecipeIndex++]};
     }
 
-    //TODO use an array with all the recipes and a index, as soon as we reach the last state the game should be over
     public void handleCreateRecipe(Recipe recipe) {
         if (prevBoat) Destroy(prevBoat.gameObject);
         prevBoat = Instantiate(recipe.resultingItem, transform);
