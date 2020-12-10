@@ -16,4 +16,4 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 8e3781b2eced1e0469127e6a5de051de, type: 3}
   description: 
   fuelSize: 0
-  isTool: 0
+  isTool: 1
