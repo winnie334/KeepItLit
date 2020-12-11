@@ -13,6 +13,7 @@ public class Fire : MonoBehaviour {
 
     public float damageFire;
     public Light lightFire;
+    public float lightRange;
     public GameObject damageCol;
     public GameObject col;
     public PlayerMovement player;
@@ -44,7 +45,7 @@ public class Fire : MonoBehaviour {
     void updateParts() {
         damageCol.transform.localScale = Vector3.one * (fireSize * damageColliderSize);
         col.transform.localScale = Vector3.one * (fireSize * fireColliderSize);
-        lightFire.range = damageCol.transform.localScale.magnitude;
+        lightFire.range = Math.Min(fireSize, maximalSizeFire) * lightRange;
         sh.scale = Vector3.one * fireSize;
         em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
     }
