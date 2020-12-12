@@ -32,21 +32,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BigRock.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BigRock.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Fishing Pole.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Fishing Pole.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/LittleRock.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/LittleRock.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Metal.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Metal.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Ore.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Ore.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Plant.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Plant.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/RawChicken.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/RawChicken.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/String.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/String.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Fire.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Fire.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Loot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Loot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,11 +84,12 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Loot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action - Copy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/IFireInteraction.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Fire.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FireInteractions/Replace.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" />
       </list>
     </option>
   </component>
