@@ -17,6 +17,7 @@ public class Grid : MonoBehaviour {
 	public float dropOff;
 
 	public int seed;
+	public Material[] grassLevels;
 
 	[Tooltip("Min and max amount of trees on the island")]
 	public Vector2 treeRange;
@@ -103,6 +104,12 @@ public class Grid : MonoBehaviour {
 	private void bakeNavMesh() {
 		var navMeshSurface = GetComponent<NavMeshSurface>();
 		if (navMeshSurface) navMeshSurface.BuildNavMesh();
+	}
+
+	public void setGrassQuality(int index) {
+		var mats = GetComponent<Renderer>().materials;
+		mats[1] = grassLevels[index];
+		GetComponent<Renderer>().materials = mats;
 	}
 
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
