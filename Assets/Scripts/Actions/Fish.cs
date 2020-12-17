@@ -7,10 +7,24 @@ namespace Actions {
 
         public GameObject FishObject;
         public GameObject Bobber;
+        public Transform top;
         
         public int durability = 3;
         private GameObject currBobber;
-        
+        private LineRenderer lr;
+
+
+        private void Start() {
+            lr = GetComponent<LineRenderer>();
+        }
+
+        private void Update() {
+            if (currBobber) {
+                lr.SetPosition(0, top.position);
+                lr.SetPosition(1, currBobber.transform.position);
+            }
+        }
+
         public void execute(PlayerMovement playerMovement) {
             if (currBobber) {
                 if (currBobber.GetComponent<Bobber>().hasFish()) {
@@ -25,17 +39,18 @@ namespace Actions {
                     }
                     Destroy(currBobber);
                 }
-                else {
-                    Destroy(currBobber);
-                    throwBobber(playerMovement.transform.forward);
-                }
+                else Destroy(currBobber);
+                lr.enabled = false;
             }
-            else throwBobber(playerMovement.transform.forward);
+            else {
+                throwBobber(playerMovement.transform.forward);
+                lr.enabled = true;
+            }
         }
 
         void throwBobber(Vector3 dir) {
             var pos = transform.position;
-            currBobber = Instantiate(Bobber, new Vector3(pos.x, pos.y + 0.2f, pos.z), Quaternion.identity);
+            currBobber = Instantiate(Bobber, top.position, Quaternion.identity);
             currBobber.GetComponent<Rigidbody>().AddForce(dir*1000);
         }
     }

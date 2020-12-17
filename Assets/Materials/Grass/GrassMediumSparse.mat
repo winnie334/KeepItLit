@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
+  m_Name: GrassMediumSparse
   m_Shader: {fileID: 4800000, guid: 1902925be899f6c4794040c4a1c39b50, type: 3}
   m_ShaderKeywords: GRASS_CALC_GLOBAL_WIND GRASS_HEIGHT_SMOOTHING GRASS_UNSHADED_LIGHTING
     SIMPLE_GRASS_DENSITY UNIFORM_DENSITY
@@ -92,20 +92,20 @@ Material:
     - _DetailNormalMapScale: 1
     - _Disorder: 0.8
     - _DstBlend: 0
-    - _EdgeLength: 13.4
+    - _EdgeLength: 10
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GrassFadeEnd: 100
     - _GrassFadeStart: 50
     - _LODEnd: 100
-    - _LODMax: 4
-    - _LODStart: 20
-    - _MaxHeight00: 1.35
+    - _LODMax: 2
+    - _LODStart: 90
+    - _MaxHeight00: 0.8
     - _MaxHeight01: 1.5
     - _MaxHeight02: 1.5
     - _MaxHeight03: 1.5
-    - _MaxTessellation: 5
+    - _MaxTessellation: 3
     - _Metallic: 0
     - _MinHeight00: 0.31
     - _MinHeight01: 0.2
@@ -152,10 +152,10 @@ Material:
     - _Color01: {r: 0.5, g: 0.7, b: 0.3, a: 1}
     - _Color02: {r: 0.5, g: 0.7, b: 0.3, a: 1}
     - _Color03: {r: 0.5, g: 0.7, b: 0.3, a: 1}
-    - _DensityValues: {r: 2, g: 0.07, b: 0.2, a: 0.2}
+    - _DensityValues: {r: 0.22, g: 0.07, b: 0.2, a: 0.2}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GrassBottomColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
-    - _SecColor00: {r: 0.21598436, g: 0.6792453, b: 0.13777146, a: 1}
+    - _SecColor00: {r: 0.3635216, g: 0.745283, b: 0.2988163, a: 1}
     - _SecColor01: {r: 0.2, g: 0.5, b: 0.15, a: 1}
     - _SecColor02: {r: 0.2, g: 0.5, b: 0.15, a: 1}
     - _SecColor03: {r: 0.2, g: 0.5, b: 0.15, a: 1}
@@ -163,5 +163,5 @@ Material:
     - _SpecColor01: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecColor02: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpecColor03: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _WindParams: {r: 0.3, g: 1.2, b: 0.15, a: 1.3}
+    - _WindParams: {r: 0.4, g: 0.8, b: 0.15, a: 1.3}
   m_BuildTextureStacks: []

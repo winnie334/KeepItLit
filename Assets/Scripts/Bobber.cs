@@ -14,6 +14,7 @@ public class Bobber : MonoBehaviour {
 
     private bool shouldDrop = true;
     private bool isDropped;
+    private bool shouldDropFish;
 
     private Transform seaTransform;
     private Rigidbody rb;
@@ -26,20 +27,21 @@ public class Bobber : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (inSea) {
-            var pos = transform.position;
-            if (!isDropped) transform.position = new Vector3(pos.x, seaTransform.position.y, pos.z);
+            var t = transform;
+            var pos = t.position;
+            t.rotation = Quaternion.identity;
+            if (!isDropped || t.position.y >= seaTransform.position.y) transform.position = new Vector3(pos.x, seaTransform.position.y, pos.z);
             if (shouldDrop) StartCoroutine(dropDobber());
         }
         else if (transform.position.y <= seaTransform.position.y) {
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
-            transform.rotation = Quaternion.identity;
             inSea = true;
         }
     }
 
     public bool hasFish() {
-        return isDropped;
+        return shouldDropFish;
     }
 
     IEnumerator dropDobber() {
@@ -47,12 +49,18 @@ public class Bobber : MonoBehaviour {
         float waitTime = Random.Range (minWaitTime, maxWaitTime);
         yield return new WaitForSeconds (waitTime);
         isDropped = true;
-        rb.AddForce(new Vector3(0, -50f, 0));
+        rb.velocity = Vector3.zero;
+        rb.AddForce(new Vector3(0, -100f, 0));
+        shouldDropFish = true;
         StartCoroutine(liftDobber());
     }
     
     IEnumerator liftDobber() {
         yield return new WaitForSeconds (1);
+        rb.velocity = Vector3.zero;
+        rb.AddForce(new Vector3(0, 50f, 0));
+        shouldDropFish = false;
+        yield return new WaitForSeconds (2);
         shouldDrop = true;
         isDropped = false;
     }
