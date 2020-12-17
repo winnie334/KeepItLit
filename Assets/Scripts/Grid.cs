@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using EzySlice;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +19,14 @@ public class Grid : MonoBehaviour {
 	public float dropOff;
 
 	public int seed;
+	public float beachSize;
+	public float grassLessSize;
 	public Material[] grassLevels;
+	public Material[] sparseGrassLevels;
+	public Material mainMaterial;
+	public Material sandMaterial;
+	private GameObject sparseGrassArea;
+	private GameObject denseGrassArea;
 
 	[Tooltip("Min and max amount of trees on the island")]
 	public Vector2 treeRange;
@@ -30,6 +39,7 @@ public class Grid : MonoBehaviour {
 		Generate();
 		SpawnTrees();
 		bakeNavMesh();
+		cutMesh();
 	}
 
 	private void Generate () {
@@ -106,10 +116,29 @@ public class Grid : MonoBehaviour {
 		if (navMeshSurface) navMeshSurface.BuildNavMesh();
 	}
 
+	private void cutMesh() {
+		// Cut into beach and non-beach area
+		var sandGrassPieces = gameObject.SliceInstantiate(new Vector3(0, beachSize, 0), new Vector3(0, 1, 0));
+		sandGrassPieces[1].GetComponent<Renderer>().sharedMaterials = new [] {sandMaterial};
+		
+		// Cut main area into dense and sparse grass areas
+		var greenGrassPieces = sandGrassPieces[0].SliceInstantiate(new Vector3(0, grassLessSize, 0), new Vector3(0, 1, 0));
+		Destroy(sandGrassPieces[0]);
+		greenGrassPieces[0].GetComponent<Renderer>().sharedMaterials = new [] {mainMaterial};
+		greenGrassPieces[1].GetComponent<Renderer>().sharedMaterials = new [] {mainMaterial};
+		
+		// Create a clones of the grass area so we can add a new material to them, the grass shader
+		denseGrassArea = Instantiate(greenGrassPieces[0], greenGrassPieces[0].transform.position, Quaternion.identity);
+		sparseGrassArea = Instantiate(greenGrassPieces[1], greenGrassPieces[1].transform.position, Quaternion.identity);
+		setGrassQuality(QualitySettings.GetQualityLevel()); // Update the grass materials with current quality settings
+
+		// Disable the rendering of the original island, but keep it, for colliders, children, navmesh, etc
+		gameObject.GetComponent<MeshRenderer>().enabled = false;
+	}
+
 	public void setGrassQuality(int index) {
-		var mats = GetComponent<Renderer>().materials;
-		mats[1] = grassLevels[index];
-		GetComponent<Renderer>().materials = mats;
+		denseGrassArea.GetComponent<Renderer>().sharedMaterials = new [] {grassLevels[index]};
+		sparseGrassArea.GetComponent<Renderer>().sharedMaterials = new [] {sparseGrassLevels[index]};
 	}
 
 	// Very useful function, enable this to automatically see the terrain update in unity as you're changing variables!
