@@ -31,12 +31,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/coconut.obj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Fishing Pole.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Fishing Pole.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Shipyard Construction Kit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Shipyard Construction Kit.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,53 +54,27 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Loot.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FireInteractions/Replace.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelperFunctions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Crafter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Recipe.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Loot.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Recipe.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ItemAssociation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HelperFunctions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/ItemPickup.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Recipe.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ItemAssociation.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/IAction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pick..cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Item.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CameraRotator.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Grid.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Pickaxe.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Destroyer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Chop.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerCarry.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Loot.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Action - Copy.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/IFireInteraction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Fire.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/FireInteractions/Replace.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Food.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Fish.cs" />
-      </list>
-    </option>
+    <changedPaths>
+      <option value="$PROJECT_DIR$/Assets/Scripts/onEquip.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+    </changedPaths>
   </component>
   <component name="ProjectId" id="1kLH338wGlScBHjG8eKppdHh4yw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -108,6 +89,8 @@
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -118,7 +101,7 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
@@ -127,7 +110,7 @@
       <option name="listenPortForConnections" value="false" />
       <option name="pid" />
       <option name="selectedOptions">
-        <set />
+        <list />
       </option>
       <method v="2" />
     </configuration>
@@ -166,6 +149,7 @@
       <workItem from="1607619969571" duration="600000" />
       <workItem from="1607632143818" duration="5823000" />
       <workItem from="1607906995271" duration="1809000" />
+      <workItem from="1608220505119" duration="4370000" />
     </task>
     <servers />
   </component>
@@ -191,88 +175,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1461" height="219" key="GridCell.Tab.0.bottom" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.0.bottom/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.0.center" timestamp="1607618611940">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.0.center/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611940" />
-    <state width="1461" height="219" key="GridCell.Tab.0.left" timestamp="1607618611940">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.0.left/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611940" />
-    <state width="1461" height="219" key="GridCell.Tab.0.right" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.0.right/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.1.bottom" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.1.bottom/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.1.center" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.1.center/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.1.left" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.1.left/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.1.right" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.1.right/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.2.bottom" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.2.bottom/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.2.center" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.2.center/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.2.left" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.2.left/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.2.right" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.2.right/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.3.bottom" timestamp="1607618611942">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.3.bottom/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611942" />
-    <state width="1461" height="219" key="GridCell.Tab.3.center" timestamp="1607618611942">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.3.center/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611942" />
-    <state width="1461" height="219" key="GridCell.Tab.3.left" timestamp="1607618611941">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.3.left/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611941" />
-    <state width="1461" height="219" key="GridCell.Tab.3.right" timestamp="1607618611942">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="1461" height="219" key="GridCell.Tab.3.right/0.0.1504.1003@0.0.1504.1003" timestamp="1607618611942" />
-    <state x="254" y="147" key="SettingsEditor" timestamp="1606836846727">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state x="254" y="147" key="SettingsEditor/0.0.1504.1003@0.0.1504.1003" timestamp="1606836846727" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1607617595435">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1504.1003@0.0.1504.1003" timestamp="1607617595435" />
-    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog" timestamp="1606142900521">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state x="93" y="93" width="1319" height="817" key="VCS.FileHistoryDialog/0.0.1504.1003@0.0.1504.1003" timestamp="1606142900521" />
-    <state x="415" y="216" width="672" height="678" key="search.everywhere.popup" timestamp="1605473671954">
-      <screen x="0" y="0" width="1504" height="1003" />
-    </state>
-    <state x="415" y="216" width="672" height="678" key="search.everywhere.popup/0.0.1504.1003@0.0.1504.1003" timestamp="1605473671954" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

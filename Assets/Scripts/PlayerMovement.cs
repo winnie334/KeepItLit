@@ -108,18 +108,21 @@ public class PlayerMovement : MonoBehaviour {
         objectToGrab.transform.localPosition = localPosition;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
+        objectToGrab.GetComponent<IOnEquip>()?.onEquip();
     }
 
     public void releaseObjects() {
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
+            grabbedItem.GetComponent<IOnEquip>()?.onUnEquip();
         });
         currentlyGrabbed = new List<GameObject>();
         audioSource.PlayOneShot(dropSound);
     }
 
     public void removeObject(GameObject obj) {
+        obj.GetComponent<IOnEquip>()?.onEquip();
         currentlyGrabbed.Remove(obj);
     }
 

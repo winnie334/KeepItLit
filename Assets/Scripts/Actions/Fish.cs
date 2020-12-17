@@ -25,7 +25,7 @@ namespace Actions {
             }
         }
 
-        public void execute(PlayerMovement playerMovement) {
+        public void execute(PlayerMovement playerMov) {
             if (currBobber) {
                 if (currBobber.GetComponent<Bobber>().hasFish()) {
                     var boberPos = currBobber.transform.position;
@@ -34,7 +34,7 @@ namespace Actions {
                     fish.GetComponent<Rigidbody>().AddForce(new Vector3(targetDir.x * 1000, targetDir.y*2000, targetDir.z * 1000));
                     durability--;
                     if (durability == 0) {
-                        playerMovement.releaseObjects();
+                        playerMov.releaseObjects();
                         Destroy(gameObject);
                     }
                     Destroy(currBobber);
@@ -43,7 +43,7 @@ namespace Actions {
                 lr.enabled = false;
             }
             else {
-                throwBobber(playerMovement.transform.forward);
+                throwBobber(playerMov.transform.forward);
                 lr.enabled = true;
             }
         }

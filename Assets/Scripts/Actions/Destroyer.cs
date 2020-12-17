@@ -5,7 +5,7 @@ namespace Actions
 {
     public class Destroyer : MonoBehaviour, IAction
     {
-        public void execute(PlayerMovement playerMovement)
+        public void execute(PlayerMovement playerMov)
         {
             //TODO we should check if we face the tree or not, and look at multiple collision instead of only the first one...
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, 4);
