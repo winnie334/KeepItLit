@@ -32,6 +32,8 @@ public class TigerAI : Animal {
     private float idleTimer;
     public float boredTimer; // Time until tiger gets bored of chasing the player
     private float chaseTimer; // Time we have been chasing the player
+    public float playerLostTimer; // How long the tiger has to not see the player to forget him
+    private float lostTimer;
     public float cooldownThreshold; // Time the tiger ignores the player after having chased for a while
     private float cooldownTimer;
     public float attackDuration; // Time the tiger will stand still after attacking
@@ -61,7 +63,7 @@ public class TigerAI : Animal {
         if (canSeePlayer()) {
             lastPlayerPos = player.position;
         }
-        
+
         switch (state) {
             case tigerState.IDLE:
                 cooldownTimer += Time.deltaTime;
@@ -81,13 +83,16 @@ public class TigerAI : Animal {
                     attackTimer += Time.deltaTime;
                     return;
                 }
-                
+
+                if (!canSeePlayer()) lostTimer += Time.deltaTime;
+
                 // Chase until bored threshold is reached (twice as long at night)
                 chaseTimer += Time.deltaTime;
-                if (chaseTimer > (dayNightCycle.isDay() ? boredTimer : boredTimer * 2)) {
+                if (chaseTimer > (dayNightCycle.isDay() ? boredTimer : boredTimer * 2) || lostTimer > playerLostTimer) {
                     state = tigerState.IDLE;
                     idleTimer = nextWanderTimer; // Immediately repath to idle location
                     cooldownTimer = 0;
+                    lostTimer = 0;
                     return;
                 }
 
@@ -98,9 +103,12 @@ public class TigerAI : Animal {
 
     private bool canSeePlayer() {
         RaycastHit hit;
-        var rayDirection = player.position - transform.position;
-        if (Physics.Raycast(transform.position, rayDirection, out hit, viewDistance)) {
-            return hit.transform == player;
+        // Multiply by 2 since limiting rayCast distance in the cast itself doesn't seem to work properly
+        var rayDirection = (player.position - transform.position) * 2;
+        if (Physics.Raycast(transform.position, rayDirection, out hit)) {
+            var hitPos = hit.transform.position;
+            return Vector3.Distance(hitPos, player.position) < 0.3f && 
+                   Vector3.Distance(transform.position, hitPos) < viewDistance; // We check here if it was actually in range
         }
 
         return false;

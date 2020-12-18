@@ -143,11 +143,12 @@ MonoBehaviour:
   attackDamage: 35
   daySpeed: 4.5
   nightSpeed: 8
-  viewDistanceDay: 13
+  viewDistanceDay: 12
   viewDistanceNight: 21
   wanderTimer: {x: 7, y: 15}
   boredTimer: 8
-  cooldownThreshold: 3
+  playerLostTimer: 3
+  cooldownThreshold: 1.5
   attackDuration: 1
 --- !u!195 &598088632
 NavMeshAgent:
