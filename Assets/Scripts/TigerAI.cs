@@ -15,7 +15,7 @@ public class TigerAI : Animal {
     
     public float wanderRadius;
     
-    public Transform player;
+    private Transform player;
     public float attackDamage;
 
     public float daySpeed;
@@ -50,6 +50,7 @@ public class TigerAI : Animal {
         cooldownTimer = cooldownThreshold;
         attackTimer = attackDuration;
         dayNightCycle = GameObject.Find("Sun").GetComponent<DayNightCycle>();
+        player = GameObject.Find("Player").transform;
     }
 
     new void Update () {

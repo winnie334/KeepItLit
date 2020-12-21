@@ -19,6 +19,7 @@ public class Grid : MonoBehaviour {
 	public float dropOff;
 
 	public int seed;
+	public bool generateRandom;
 	public float beachSize;
 	public float grassLessSize;
 	public Material[] grassLevels;
@@ -28,22 +29,29 @@ public class Grid : MonoBehaviour {
 	private GameObject sparseGrassArea;
 	private GameObject denseGrassArea;
 
-	[Tooltip("Min and max amount of trees on the island")]
-	public Vector2 treeRange;
-	public GameObject tree;
+	[Serializable]
+	public struct SpawnOption {
+		public GameObject obj;
+		public int minAmount;
+		public int maxAmount;
+	}
+	public SpawnOption[] spawns;
+	private List<int> chosenLocations; // Saves the vertices indices on which we already spawned an object
 
 	private Mesh mesh;
 	private Vector3[] vertices;
 
 	private void Start () {
 		Generate();
-		SpawnTrees();
+		spawnObjects();
+		if (generateRandom) spawnPlayer(); // This island is random, meaning the player and the fire need to be spawned as well
 		bakeNavMesh();
 		cutMesh();
 	}
 
 	private void Generate () {
 		if (mesh != null) mesh.Clear();
+		if (generateRandom) seed = Random.Range(0, 100000);
 		GetComponent<MeshFilter>().mesh = mesh = new Mesh();
 		mesh.name = "Procedural Grid";
 
@@ -68,7 +76,7 @@ public class Grid : MonoBehaviour {
 		}
 		
 		mesh.vertices = vertices;
-		 mesh.uv = uv;
+		mesh.uv = uv;
 		mesh.tangents = tangents;
 
 		// Now we have our vertices, we create triangles between them to have a visible mesh
@@ -87,28 +95,55 @@ public class Grid : MonoBehaviour {
 	}
 
 	// Spawns a random amount of trees on the island at the correct heights
-	private void SpawnTrees() {
-		var treeAmount = Random.Range(treeRange.x, treeRange.y);
-		var chosenLocations = new List<int>(); // Saves the vertices indices on which we already spawned a tree
-		var waterHeight = -gameObject.transform.position.y;
-		
-		for (var i = 0; i < treeAmount; i++) {
-			var pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
-			var vertexIndex = (int) pos.y * xSize + (int) pos.x;
-			// Keep re-rolling a new position until it is above the water and not selected before
-			var rolls = 0; // We keep track to prevent theoretical infinite loop, although normally impossible
-			while ((chosenLocations.Contains(vertexIndex) || vertices[vertexIndex].y < waterHeight) && rolls++ < 100) {
-				pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
-				vertexIndex = (int) pos.y * xSize + (int) pos.x;
+	private void spawnObjects() {
+		chosenLocations = new List<int>(); // Make sure the current list of chosen locations is empty
+		foreach (var objectToSpawn in spawns) {
+			var amount = Random.Range(objectToSpawn.minAmount, objectToSpawn.maxAmount);
+			// If it is an item, we should spawn it slightly higher to ensure it doesn't clip through the ground
+			var spawnHigher = objectToSpawn.obj.GetComponent<Rigidbody>() != null;
+			for (var i = 0; i < amount; i++) {
+				var spawnPos = getRandomSpawnLocation() + (spawnHigher ? Vector3.up : Vector3.zero);
+				Instantiate(objectToSpawn.obj, spawnPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
 			}
-			chosenLocations.Add(vertexIndex);
-			// Eventually we can later use Normals instead of Quaternion.identity to spawn trees angled to their ground
-			var localScale = transform.localScale;
-			var vertexPos = vertices[vertexIndex];
-			var posOffset = new Vector3(vertexPos.x * localScale.x, vertexPos.y * localScale.y, vertexPos.z * localScale.z);
-			var newTree = Instantiate(tree, posOffset + transform.position, Quaternion.identity);
-			newTree.transform.parent = gameObject.transform;
 		}
+	}
+
+	// Returns a vector location on which no object has been spawned before
+	private Vector3 getRandomSpawnLocation() {
+		var waterHeight = -gameObject.transform.position.y + beachSize;
+
+		var pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
+		var vertexIndex = (int) pos.y * xSize + (int) pos.x;
+		// Keep re-rolling a new position until it is above the water and not selected before
+		var rolls = 0; // We keep track to prevent theoretical infinite loop, although normally impossible
+		while ((chosenLocations.Contains(vertexIndex) || vertices[vertexIndex].y < waterHeight) && rolls++ < 100) {
+			pos = new Vector2(Random.Range(0, xSize), Random.Range(0, ySize));
+			vertexIndex = (int) pos.y * xSize + (int) pos.x;
+		}
+		chosenLocations.Add(vertexIndex); // We save this index to make sure we don't spawn anything else here
+		var localScale = transform.localScale;
+		var vertexPos = vertices[vertexIndex];
+		var posOffset = new Vector3(vertexPos.x * localScale.x, vertexPos.y * localScale.y, vertexPos.z * localScale.z);
+		return posOffset + transform.position;
+	}
+
+	// Spawns the player and the fire near a beach
+	private void spawnPlayer() {
+		var player = GameObject.Find("Player");
+		// We find the locations by getting random points (this ruins the chosenLocations list, but not more relevant
+		// at this point) and then getting the one with the lowest y position. We do the same for the fire, but this
+		// time we choose the location which is closest to the player. This doesn't guarantee that the fire or player
+		// will have great positions, but it is statistically unlikely they are far away from the beach/player
+		var spawnPositions = new List<Vector3>();
+		for(var i = 0; i < 30; i++) spawnPositions.Add(getRandomSpawnLocation());
+		var spawnPos = spawnPositions.OrderBy(pos => pos.y).First();
+		player.transform.position = spawnPos + Vector3.up;
+
+		var fire = GameObject.Find("Fire");
+		spawnPositions = new List<Vector3>();
+		for(var i = 0; i < 50; i++) spawnPositions.Add(getRandomSpawnLocation());
+		spawnPos = spawnPositions.OrderBy(pos => Vector3.Distance(spawnPos, pos)).First();
+		fire.transform.position = spawnPos;
 	}
 
 	private void bakeNavMesh() {
