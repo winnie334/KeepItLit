@@ -69,14 +69,13 @@ public class CraftUI : MonoBehaviour {
         }
 
         foreach (var i in crafter.knownRecipes) {
-            var rcp = Instantiate(recipe);
+            var rcp = Instantiate(recipe, recipiesPanel.transform, true);
             rcp.SetActive(true);
-            rcp.transform.SetParent(recipiesPanel.transform);
             rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
-
+            
             var item = i.resultingItem.GetComponent<ItemAssociation>().item;
             rcp.GetComponentInChildren<Text>().text = item.title;
-            rcp.GetComponentsInChildren<Image>()[1].sprite = item.icon;
+            rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
             if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;
 

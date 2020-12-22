@@ -44,7 +44,7 @@ public class Fire : MonoBehaviour {
     // Updates the particle system and the colliders
     void updateParts() {
         damageCol.transform.localScale = Vector3.one * (fireSize * damageColliderSize);
-        col.transform.localScale = Vector3.one * (fireSize * fireColliderSize);
+        col.transform.localScale = Vector3.one * (Math.Max(fireSize, 0.5f) * fireColliderSize);
         lightFire.range = Math.Min(fireSize, maximalSizeFire) * lightRange;
         sh.scale = Vector3.one * fireSize;
         em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
