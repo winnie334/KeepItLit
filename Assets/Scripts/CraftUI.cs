@@ -74,11 +74,9 @@ public class CraftUI : MonoBehaviour {
             rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
             
             var item = i.resultingItem.GetComponent<ItemAssociation>().item;
-            rcp.GetComponentInChildren<Text>().text = item.title;
             rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
             if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;
-
         }
 
         if (currentlySelected) selectRecipe(currentlySelected);
