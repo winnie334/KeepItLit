@@ -31,13 +31,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Machete.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Machete.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiger.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiger.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_4.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_4.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_4.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Boats/Boat_4.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Shipyard.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Shipyard.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Settings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Settings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,12 +71,16 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Animal.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FireInteractions/Torch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Settings.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Crafter.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Shipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CraftUI.cs" />
       </list>
     </option>
   </component>
@@ -149,7 +158,7 @@
       <workItem from="1607632143818" duration="5823000" />
       <workItem from="1607906995271" duration="1809000" />
       <workItem from="1608220505119" duration="4370000" />
-      <workItem from="1608629885574" duration="7026000" />
+      <workItem from="1608629885574" duration="19242000" />
     </task>
     <servers />
   </component>

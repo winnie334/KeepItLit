@@ -8,7 +8,6 @@ using UnityEngine.Assertions;
 // and doing the actual crafting of the new item
 public class Crafter : MonoBehaviour {
     public List<Recipe> knownRecipes;
-    public float craftRadius = 6;
     private Dictionary<Item, List<GameObject>> availableItems;
     private CraftUI craftUI;
 
@@ -19,7 +18,9 @@ public class Crafter : MonoBehaviour {
     // Returns all available items nearby for crafting, along with their corresponding GameObjects 
     // (So we can remove the objects from the world if needed)
     public void setAvailableItems() {
-        Collider[] nearbyItems = Physics.OverlapSphere(transform.position, craftRadius) // Look for objects in a radius
+        SphereCollider objCollider = GetComponent<SphereCollider>();
+        Bounds bounds;
+        Collider[] nearbyItems = Physics.OverlapSphere((bounds = objCollider.bounds).center, bounds.size.y/2) // Look for objects in a radius
             .Where(hit => hit.CompareTag("Item"))
             .ToArray(); // If it doesn't have item script, it isn't an item
 
@@ -58,15 +59,23 @@ public class Crafter : MonoBehaviour {
     }
 
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
-    public void craftPlayerRecipe(Recipe recipe) {
+    private void craftPlayerRecipe(Recipe recipe) {
         destroyRequiredMaterials(recipe.requiredItems);
         Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward,
             Quaternion.identity);
     }
 
-    public void craftShipyardRecipe(Recipe recipe, GameObject shipyard) {
+    private void craftShipyardRecipe(Recipe recipe, Shipyard shipyard) {
+        availableItems[recipe.resultingItem.GetComponent<ItemAssociation>().item] =
+            new List<GameObject>(new[] {Instantiate(recipe.resultingItem, shipyard.transform)});
         destroyRequiredMaterials(recipe.requiredItems);
-        shipyard.GetComponent<Shipyard>().handleCreateRecipe(recipe);
+        shipyard.handleBoatPartCreated();
+    }
+
+    public void craftRecipe(Recipe recipe) {
+        var shipyard = GetComponent<Shipyard>();
+        if (shipyard is null) craftPlayerRecipe(recipe);
+        else craftShipyardRecipe(recipe, shipyard);
     }
 
     // Returns true if the given recipe can be made with a given list of items
