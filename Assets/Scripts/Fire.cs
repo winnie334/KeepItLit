@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 public class Fire : MonoBehaviour {
@@ -18,6 +19,8 @@ public class Fire : MonoBehaviour {
     public GameObject col;
     public PlayerMovement player;
 
+    public Slider slider;
+
     private ParticleSystem part;
     private ParticleSystem.ShapeModule sh;
     private ParticleSystem.EmissionModule em;
@@ -26,6 +29,7 @@ public class Fire : MonoBehaviour {
         part = GetComponent<ParticleSystem>();
         sh = part.shape;
         em = part.emission;
+        slider.maxValue = maximalSizeFire;
         updateParts();
     }
 
@@ -48,6 +52,7 @@ public class Fire : MonoBehaviour {
         lightFire.range = Math.Min(fireSize, maximalSizeFire) * lightRange;
         sh.scale = Vector3.one * fireSize;
         em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
+        updateUI();
     }
 
     public void OnChildTriggerStay(string type, Collider other) {
@@ -62,8 +67,8 @@ public class Fire : MonoBehaviour {
             default:
                 if (other.gameObject.CompareTag("Item")) {
                     var item = other.gameObject.GetComponent<ItemAssociation>().item;
-                    if (item.fuelSize > 0 && fireSize < maximalSizeFire) {
-                        fireSize += item.fuelSize;
+                    if (item.fuelSize > 0) {
+                        fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
                         player.removeObject(other.gameObject);
                         updateParts();
                         Destroy(other.gameObject);
@@ -75,7 +80,10 @@ public class Fire : MonoBehaviour {
                 break;
 
         }
-
     }
 
+    // Updates the display indicating how much fuel is left in the fire
+    private void updateUI() {
+        slider.value = fireSize;
+    }
 }
