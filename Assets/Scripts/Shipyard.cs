@@ -9,27 +9,41 @@ public class Shipyard : MonoBehaviour
     public List<Recipe> boatComponents;
     private Crafter crafter;
     private int currRecipeIndex = 0;
-    private GameObject prevBoat;
+
+    private CraftUI ui;
+    private bool shouldSkip = true;
 
     // Start is called before the first frame update
     void Start() {
         crafter = GetComponent<Crafter>();
-        setCraftingRecipe();
-        GameObject.Find("Canvas").GetComponent<CraftUI>().setShipyard(gameObject);
+        crafter.knownRecipes = boatComponents;
+        ui = GameObject.Find("Canvas").GetComponent<CraftUI>();
+        ui.setCrafter(crafter);
     }
 
     bool isBoatFinished() {
         return currRecipeIndex == boatComponents.Count;
     }
 
-    void setCraftingRecipe() {
-        crafter.knownRecipes = new List<Recipe>() {boatComponents[currRecipeIndex++]};
+    void removeRecipe() {
+        boatComponents.RemoveAt(0);
+        crafter.knownRecipes = boatComponents;
     }
 
-    public void handleCreateRecipe(Recipe recipe) {
-        if (prevBoat) Destroy(prevBoat.gameObject);
-        prevBoat = Instantiate(recipe.resultingItem, transform);
+    public void handleBoatPartCreated() {
         if (isBoatFinished()) Game.EndGame(true, "");
-        else setCraftingRecipe();
+        else removeRecipe();
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            ui.setCrafter(crafter);
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            ui.setCrafter(null);
+        }
     }
 }

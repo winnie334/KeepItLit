@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Boat_1
   m_EditorClassIdentifier: 
-  description: 
+  description: The start of your very own boat!
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
+  - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
+  - {fileID: 11400000, guid: ad940b804e14b5b42a79de95afb5efa6, type: 2}
   resultingItem: {fileID: 5575323238953696919, guid: eecdaf3700d4318468d9d5c3ab04317c, type: 3}

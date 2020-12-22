@@ -33,8 +33,12 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         projectedShipyard.SetActive(false);
         
         renderers.Add(projectedShipyard.GetComponent<MeshRenderer>());
-        foreach (Transform child in projectedShipyard.transform)
+        foreach (Transform child in projectedShipyard.transform) {
             renderers.Add(child.GetComponent<MeshRenderer>());
+            var script = child.GetComponent<Shipyard>();
+            if (script) Destroy(script);
+        }
+
     }
 
     private void Update() {
