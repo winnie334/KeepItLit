@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Projects\KeepItLit" t="IncludeRecursive">
+    <e p="C:\Users\damia\AppData\local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\damia\AppData\local\JetBrains\Rider2020.2\resharper-host\local\Transient\Rider\v202\SolutionCaches\_KeepItLit.-1919193093.00" t="ExcludeRecursive" />
+    <e p="C:\Users\damia\Documents\KeepItLit" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Island" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="FixedTiling.cs" t="Include" />
+            <e p="WaterScroller.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Models" t="Include">
+          <e p="3D" t="Include">
+            <e p="PBRRiggedSkeletonandBoneCollection" t="Include">
+              <e p="Demo" t="Include">
+                <e p="Scripts" t="Include">
+                  <e p="SimpleCameraController.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
         <e p="Plugins" t="Include">
           <e p="ezy-slice" t="Include">
             <e p="EzySlice" t="Include">
@@ -138,7 +157,5 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="C:\Users\henky001\AppData\local\JetBrains\Rider2020.3\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\henky001\AppData\local\JetBrains\Rider2020.3\resharper-host\local\Transient\Rider\v203\SolutionCaches\_KeepItLit.1071159977.00" t="ExcludeRecursive" />
   </component>
 </project>
