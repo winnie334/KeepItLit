@@ -32,23 +32,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5c763fad-ef3b-47c1-8f4d-81467225c02f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KeepItLit/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Island/Standard/Island_2019.3.15_Standard.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/Pickaxe_LOD0.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/3D/Pickaxe_LOD0.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/PointyGemsVar1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/3D/PointyGemsVar1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/PointyGemsVar2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/3D/PointyGemsVar2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/SimpleNaturePack/SimpleNaturePack_HDRP_2018.3.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/SimpleNaturePack/SimpleNaturePack_LWRP_2018.3.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/SimpleNaturePack/SimpleNaturePack_URP_2019.3.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/SquareGemsVar1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/3D/SquareGemsVar1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/3D/SquareGemsVar2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/3D/SquareGemsVar2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Shipyard Construction Kit.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Shipyard Construction Kit.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/badShipyard.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/badShipyard.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/goodShipyard.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/goodShipyard.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Machete.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Machete.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tiger.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tiger.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Torch.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +67,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Actions/CreateShipyard.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Animal.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Actions/Attack.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/PlayerMovement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TigerAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/FireInteractions/Torch.cs" />
       </list>
     </option>
   </component>
@@ -155,7 +149,7 @@
       <workItem from="1607632143818" duration="5823000" />
       <workItem from="1607906995271" duration="1809000" />
       <workItem from="1608220505119" duration="4370000" />
-      <workItem from="1608629885574" duration="2203000" />
+      <workItem from="1608629885574" duration="7026000" />
     </task>
     <servers />
   </component>

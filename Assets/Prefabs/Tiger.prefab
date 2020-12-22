@@ -139,8 +139,7 @@ MonoBehaviour:
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
   wanderRadius: 8
-  player: {fileID: 0}
-  attackDamage: 35
+  attackDamage: 10
   daySpeed: 4.5
   nightSpeed: 8
   viewDistanceDay: 12

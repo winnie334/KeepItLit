@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     private List<GameObject> currentlyGrabbed = new List<GameObject>();
     private float currentHealth;
     private List<GameObject> toolsOnBack = new List<GameObject>(); //the tool the player has on its back
+    private Vector3 impact = Vector3.zero;
 
     private void Start() {
         currentHealth = maxHealth;
@@ -56,14 +57,18 @@ public class PlayerMovement : MonoBehaviour {
         var vertical = Input.GetAxisRaw("Vertical");
         var direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (!(direction.magnitude >= 0.1f)) return;
-        var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-        var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
-            turnSmoothTime);
+        if (impact.magnitude > 0.2) controller.Move(impact * Time.deltaTime);
+        else if (direction.magnitude >= 0.1f) {
+            var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
+                turnSmoothTime);
 
-        transform.rotation = Quaternion.Euler(0f, angle, 0);
-        var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        controller.Move(moveDir.normalized * (speed * Time.deltaTime));
+            transform.rotation = Quaternion.Euler(0f, angle, 0);
+            var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * (speed * Time.deltaTime));
+        }
+
+        impact = Vector3.Lerp(impact, Vector3.zero, 5*Time.deltaTime);
 
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
@@ -167,6 +172,13 @@ public class PlayerMovement : MonoBehaviour {
         else {
             Game.EndGame(false, "You died from damage");
         }
+    }
+
+    public void takeDamageWithImpact(Vector3 dir, float force, float damage) {
+        TakeDamage(damage);
+        dir.Normalize();
+        if (dir.y < 0) dir.y = -dir.y; // reflect down force on the ground
+        impact += dir.normalized * force / 1;
     }
 
     void putToolOnBack(GameObject tool) {

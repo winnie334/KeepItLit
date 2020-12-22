@@ -129,7 +129,8 @@ public class TigerAI : Animal {
         if (chaseTimer < attackDuration) return; // This is still the same attack
         if (other.gameObject.CompareTag("Player")) {
             var playerScript = other.gameObject.GetComponent<PlayerMovement>();
-            playerScript.TakeDamage(attackDamage);
+            var forward = Vector3.forward;
+            playerScript.takeDamageWithImpact(new Vector3(forward.x, 0.4f, forward.z), 50, attackDamage);
             chaseTimer = 0;
             // Todo play some attack animation and sound
         }

@@ -133,6 +133,7 @@
           <e p="FireInteractions" t="Include">
             <e p="IFireInteraction.cs" t="Include" />
             <e p="Replace.cs" t="Include" />
+            <e p="Torch.cs" t="Include" />
           </e>
           <e p="Game.cs" t="Include" />
           <e p="Grid.cs" t="Include" />
