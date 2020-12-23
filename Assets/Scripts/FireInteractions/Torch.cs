@@ -16,23 +16,22 @@ public class Torch : MonoBehaviour, IFireInteraction {
     void Start() {
         ps = GetComponentInChildren<ParticleSystem>();
         light = GetComponentInChildren<Light>();
-        ps.Stop();
-        light.enabled = false;
+        reset();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!isOn) return;
         var shapeModule = ps.shape;
         timeLeft -= Time.deltaTime;
-        if (shapeModule.radius > 0.5f) {
-            shapeModule.radius = timeLeft / Duration;
-            light.range = timeLeft / Duration * lightRadius;
+        if (timeLeft / Duration <= 0.3f) { // Torch is in last 30%, start dying out
+            var percentageAlive = HelperFunctions.p5Map(timeLeft / Duration, 0, 0.3f, 0, 1);
+            shapeModule.radius = percentageAlive;
+            light.range = percentageAlive * lightRadius;
         }
 
         if (timeLeft <= 0) reset();
-        }
+    }
 
     void reset() {
         isOn = false;
