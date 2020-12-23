@@ -16,6 +16,6 @@ MonoBehaviour:
   requiredItems:
   - {fileID: 11400000, guid: 4bae051ffda8e314c9863c8c439911c0, type: 2}
   - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
-  - {fileID: 11400000, guid: 2d378e81deb305b47bc791b386101256, type: 2}
-  - {fileID: 11400000, guid: 2d378e81deb305b47bc791b386101256, type: 2}
+  - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
+  - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
   resultingItem: {fileID: 498134761452179595, guid: d831ad4656a87af43b363313819567e1, type: 3}

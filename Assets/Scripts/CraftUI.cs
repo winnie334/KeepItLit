@@ -7,8 +7,7 @@ using UnityEngine.UI;
 public class CraftUI : MonoBehaviour {
     public Transform playerBrain;
     private GameObject shipyard; //TODO what if there are multiple shipyards?
-    private bool isPlayerCrafter = true; //TODO ugly
-
+    
     public AudioSource audioSource;
     public AudioClip craftSound;
 

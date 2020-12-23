@@ -258,6 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8274578925456309496}
   - component: {fileID: -3768146069408404244}
+  - component: {fileID: 2924417910099564622}
   m_Layer: 0
   m_Name: Boat_2
   m_TagString: Item
@@ -295,3 +296,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: baa5f78185209b94aa2bac18dd8c7e2a, type: 2}
+--- !u!65 &2924417910099564622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763693840704071234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

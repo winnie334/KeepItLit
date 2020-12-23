@@ -8,10 +8,7 @@ public class Shipyard : MonoBehaviour
 {
     public List<Recipe> boatComponents;
     private Crafter crafter;
-    private int currRecipeIndex = 0;
-
     private CraftUI ui;
-    private bool shouldSkip = true;
 
     // Start is called before the first frame update
     void Start() {
@@ -22,7 +19,7 @@ public class Shipyard : MonoBehaviour
     }
 
     bool isBoatFinished() {
-        return currRecipeIndex == boatComponents.Count;
+        return boatComponents.Count == 1;
     }
 
     void removeRecipe() {
