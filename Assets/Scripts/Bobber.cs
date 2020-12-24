@@ -6,8 +6,9 @@ using Random = UnityEngine.Random;
 
 public class Bobber : MonoBehaviour {
 
-    public int minWaitTime = 1;
-    public int maxWaitTime = 6;
+    public int minWaitTime = 6;
+    public int maxWaitTime = 12;
+    public AudioClip bobberSubmergeSound;
 
     private bool triggerDisabled;
     private bool inSea;
@@ -18,10 +19,14 @@ public class Bobber : MonoBehaviour {
 
     private Transform seaTransform;
     private Rigidbody rb;
+
+    private AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
         seaTransform = GameObject.Find("Sea").transform;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,6 +57,7 @@ public class Bobber : MonoBehaviour {
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, -100f, 0));
         shouldDropFish = true;
+        audioSource.PlayOneShot(bobberSubmergeSound); // TODO is this correct place? I don't understand this code
         StartCoroutine(liftDobber());
     }
     

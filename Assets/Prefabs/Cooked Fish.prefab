@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthFill: 25
+  eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}
 --- !u!1 &4008259654950464286
 GameObject:
   m_ObjectHideFlags: 0

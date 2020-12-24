@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8463098141256663058}
   - component: {fileID: 2527192647095941284}
   - component: {fileID: 1901122660616133044}
+  - component: {fileID: -934344823843188684}
   m_Layer: 0
   m_Name: BigRock
   m_TagString: Resource
@@ -162,7 +163,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -216,3 +217,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 1f7ea190015695c4b8c8090ea7c75fda, type: 3}
+--- !u!208 &-934344823843188684
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8769527972452078077}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.01, y: 0.0075, z: 0.008}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.001, z: 0.002}
+  m_TimeToStationary: 0.5

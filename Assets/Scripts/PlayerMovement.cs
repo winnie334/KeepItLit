@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void removeObject(GameObject obj) {
-        obj.GetComponent<IOnEquip>()?.onEquip();
+        obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
     }
 
@@ -222,6 +222,10 @@ public class PlayerMovement : MonoBehaviour {
     public void Heal(float life) {
         currentHealth = Math.Min(currentHealth + life, maxHealth);
         healthUI.SetHealth(currentHealth);
+    }
+
+    public void playSound(AudioClip clip) {
+        audioSource.PlayOneShot(clip);
     }
 
 // If we run up against something with a rigidbody, we move it

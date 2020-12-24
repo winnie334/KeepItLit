@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1140708345324109864}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 131.35986, y: 9.957, z: 73.28023}
-  m_LocalScale: {x: 0.2, y: 3, z: 0.2}
+  m_LocalScale: {x: 0.2, y: 3, z: 0.20000002}
   m_Children:
   - {fileID: 993439858165961103}
   m_Father: {fileID: 0}
@@ -145,6 +145,9 @@ MonoBehaviour:
   FishObject: {fileID: 458266356485576368, guid: 224c7d2565a78554f964b6c2006a3d11, type: 3}
   Bobber: {fileID: 5017190788321237983, guid: a6b395400e92a5440a1c6fb412079f46, type: 3}
   top: {fileID: 993439858165961103}
+  fishCatchSound: {fileID: 8300000, guid: 9ee958299c02bd64a9804d0b83dc7c64, type: 3}
+  throwBobberSound: {fileID: 8300000, guid: 52c977f767d1274449cef39eb8822123, type: 3}
+  cancelFishingSound: {fileID: 8300000, guid: 4a165e165ca7d6d4f8a3ecbccccbae1b, type: 3}
   durability: 3
 --- !u!120 &6256298298295775496
 LineRenderer:

@@ -11,6 +11,7 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
     public Material badLocationMaterial;
     public float shipyardSpawnDistance = 5;
     public float maxShipyardSpawnHeight = 2;
+    public AudioClip buildSound;
 
     private GameObject player;
     private GameObject projectedShipyard;
@@ -23,6 +24,7 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         
         Instantiate(shipyard, targetPos, Quaternion.identity);
         playerMov.removeObject(gameObject);
+        playerMov.playSound(buildSound);
         Destroy(gameObject);
     }
 

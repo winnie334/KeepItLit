@@ -38,6 +38,11 @@ public class TigerAI : Animal {
     private float cooldownTimer;
     public float attackDuration; // Time the tiger will stand still after attacking
     private float attackTimer; // If this is below the attackDuration the tiger will stand still
+    public float growlTimer; // Time between growls
+    private float growlWait;
+
+    public AudioClip attackSound;
+    public List<AudioClip> growlSounds;
 
     private float nextWanderTimer; // The threshold we need to pass for our next wander
     private Vector3 lastPlayerPos; // The position the player was last seen from the point of view of the tiger
@@ -47,6 +52,7 @@ public class TigerAI : Animal {
     // Use this for initialization
     void OnEnable () {
         nextWanderTimer = 0;
+        growlWait = Random.Range(0, growlTimer); // Initialize randomly to make sure not all tigers growl at once
         cooldownTimer = cooldownThreshold;
         attackTimer = attackDuration;
         dayNightCycle = GameObject.Find("Sun").GetComponent<DayNightCycle>();
@@ -67,39 +73,54 @@ public class TigerAI : Animal {
 
         switch (state) {
             case tigerState.IDLE:
-                cooldownTimer += Time.deltaTime;
-                if (canSeePlayer() && cooldownTimer > cooldownThreshold) {
-                    state = tigerState.CHASING;
-                    chaseTimer = 0;
-                    return;
-                }
-                idleTimer += Time.deltaTime;
-                if (!(idleTimer >= nextWanderTimer)) return;
-                agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius * (dayNightCycle.isDay() ? 1 : 2), -1));
-                idleTimer = 0;
-                nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
+                handleIdle();
                 break;
             case tigerState.CHASING:
-                if (attackTimer < attackDuration) {
-                    attackTimer += Time.deltaTime;
-                    return;
-                }
-
-                if (!canSeePlayer()) lostTimer += Time.deltaTime;
-
-                // Chase until bored threshold is reached (twice as long at night)
-                chaseTimer += Time.deltaTime;
-                if (chaseTimer > (dayNightCycle.isDay() ? boredTimer : boredTimer * 2) || lostTimer > playerLostTimer) {
-                    state = tigerState.IDLE;
-                    idleTimer = nextWanderTimer; // Immediately repath to idle location
-                    cooldownTimer = 0;
-                    lostTimer = 0;
-                    return;
-                }
-
-                agent.SetDestination(lastPlayerPos);
+                handleChase();
                 break;
         }
+    }
+
+    private void handleIdle() {
+        cooldownTimer += Time.deltaTime;
+        growlWait += Time.deltaTime;
+        if (canSeePlayer() && cooldownTimer > cooldownThreshold) {
+            state = tigerState.CHASING;
+            chaseTimer = 0;
+            return;
+        }
+
+        if (growlWait > growlTimer) {
+            growlWait = 0;
+            audioSource.PlayOneShot(growlSounds[Random.Range (0, growlSounds.Count)]);
+        }
+
+        idleTimer += Time.deltaTime;
+        if (!(idleTimer >= nextWanderTimer)) return;
+        agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius * (dayNightCycle.isDay() ? 1 : 2), -1));
+        idleTimer = 0;
+        nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
+    }
+
+    private void handleChase() {
+        if (attackTimer < attackDuration) {
+            attackTimer += Time.deltaTime;
+            return;
+        }
+
+        if (!canSeePlayer()) lostTimer += Time.deltaTime;
+
+        // Chase until bored threshold is reached (twice as long at night)
+        chaseTimer += Time.deltaTime;
+        if (chaseTimer > (dayNightCycle.isDay() ? boredTimer : boredTimer * 2) || lostTimer > playerLostTimer) {
+            state = tigerState.IDLE;
+            idleTimer = nextWanderTimer; // Immediately repath to idle location
+            cooldownTimer = 0;
+            lostTimer = 0;
+            return;
+        }
+
+        agent.SetDestination(lastPlayerPos);
     }
 
     private bool canSeePlayer() {
@@ -132,7 +153,8 @@ public class TigerAI : Animal {
             var forward = Vector3.forward;
             playerScript.takeDamageWithImpact(new Vector3(forward.x, 0.4f, forward.z), 50, attackDamage);
             chaseTimer = 0;
-            // Todo play some attack animation and sound
+            audioSource.PlayOneShot(attackSound);
+            // Todo play some attack animation
         }
     }
 }

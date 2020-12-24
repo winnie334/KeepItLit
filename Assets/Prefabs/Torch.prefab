@@ -5016,7 +5016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710e944586711914fbaa006eaf8a4d9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 20
+  Duration: 35
   lightRadius: 100
 --- !u!1 &3755935345643627944
 GameObject:

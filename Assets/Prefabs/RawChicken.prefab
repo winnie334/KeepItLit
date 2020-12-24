@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthFill: 5
+  eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}
 --- !u!114 &5493540795668682735
 MonoBehaviour:
   m_ObjectHideFlags: 0

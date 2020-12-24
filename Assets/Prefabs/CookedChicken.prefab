@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthFill: 25
-  cookedVersion: {fileID: 0}
+  eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}

@@ -149,6 +149,13 @@ MonoBehaviour:
   playerLostTimer: 3
   cooldownThreshold: 1.5
   attackDuration: 1
+  growlTimer: 15
+  attackSound: {fileID: 8300000, guid: 00598e24c73dc6b46b82e725ab6512d6, type: 3}
+  growlSounds:
+  - {fileID: 8300000, guid: ad29e8186071b024f9bcecac983a979a, type: 3}
+  - {fileID: 8300000, guid: 701a57d0f11796d4d825d96ab77808d3, type: 3}
+  - {fileID: 8300000, guid: 486282afcb5c599448e72482a4b57c96, type: 3}
+  - {fileID: 8300000, guid: 34782269a35785245bed8a9b3c816c5f, type: 3}
 --- !u!195 &598088632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -183,7 +190,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 89881a11ace18d4418b22fbf2865529b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.235
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -227,7 +234,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
