@@ -3,7 +3,12 @@ guid: 2eaf5f7d1f0190a49bf32b25db5c9f19
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: low_poly_tigerMat
+    second: {fileID: 445366935871381228, guid: 2eaf5f7d1f0190a49bf32b25db5c9f19, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
