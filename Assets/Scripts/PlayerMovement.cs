@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 public class PlayerMovement : MonoBehaviour {
     public Transform cam;
     public CharacterController controller;
+    public Animator anim;
 
     public AudioSource audioSource;
     public AudioClip pickupSound;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
         currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
         healthUI.SetHealth(currentHealth);
+        Hints.displayHint("You can pick up things with space");
     }
 
     // Update is called once per frame
@@ -59,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (impact.magnitude > 0.2) controller.Move(impact * Time.deltaTime);
         else if (direction.magnitude >= 0.1f) {
+            anim.SetBool("Walk", true);
             var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
                 turnSmoothTime);
@@ -66,9 +69,11 @@ public class PlayerMovement : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0f, angle, 0);
             var moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * (speed * Time.deltaTime));
+        } else {
+            anim.SetBool("Walk", false);
         }
 
-        impact = Vector3.Lerp(impact, Vector3.zero, 5*Time.deltaTime);
+        impact = Vector3.Lerp(impact, Vector3.zero, 5 * Time.deltaTime);
 
         // First we move the controller down with gravity
         gravity -= 9.81f * Time.deltaTime;
@@ -92,7 +97,7 @@ public class PlayerMovement : MonoBehaviour {
         var curPos = transform.position;
         GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
             .Select(hit => hit.gameObject)
-            .Where(obj => !(obj.GetComponent<ItemAssociation>() is null) && !currentlyGrabbed.Contains(obj) 
+            .Where(obj => !(obj.GetComponent<ItemAssociation>() is null) && !currentlyGrabbed.Contains(obj)
                                                                          && (itemToCompare is null || (itemToCompare.isTool ||
                                                                               obj.GetComponent<ItemAssociation>()
                                                                                   .item == itemToCompare)))
@@ -103,6 +108,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
+        anim.Play("metarig|Grab");
+
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
         Vector3 localPosition = currentlyGrabbed.Count == 1
@@ -114,9 +121,11 @@ public class PlayerMovement : MonoBehaviour {
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
         objectToGrab.GetComponent<IOnEquip>()?.onEquip();
+
     }
 
     public void releaseObjects() {
+        anim.Play("metarig|StandBy");
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
@@ -127,11 +136,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void removeObject(GameObject obj) {
+        anim.Play("metarig|StandBy");
         obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
     }
 
     void handleGrab() {
+        Hints.displayHint("Congrats, you picked up something");
         if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
         else {
             if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
@@ -144,8 +155,7 @@ public class PlayerMovement : MonoBehaviour {
                         if (toolsOnBack.Count < maxToolsOnBack) {
                             putToolOnBack(currentlyGrabbed[0]);
                             currentlyGrabbed = new List<GameObject>();
-                        }
-                        else {
+                        } else {
                             releaseObjects();
                             return;
                         }
@@ -168,8 +178,7 @@ public class PlayerMovement : MonoBehaviour {
         if (currentHealth - damage > 0) {
             currentHealth = Math.Max(currentHealth - damage, 0);
             healthUI.SetHealth(currentHealth);
-        }
-        else {
+        } else {
             Game.EndGame(false, "You died from damage");
         }
     }
@@ -197,13 +206,11 @@ public class PlayerMovement : MonoBehaviour {
                 resetToolsOnBackPositions();
                 currentlyGrabbed[0] = toolOnBack;
                 currentlyGrabbed[0].transform.localPosition = new Vector3(0, 0, 1f);
-            }
-            else {
+            } else {
                 putToolOnBack(currentlyGrabbed[0]);
                 currentlyGrabbed = new List<GameObject>();
             }
-        }
-        else {
+        } else {
             if (toolsOnBack.Count == 0) return;
             releaseObjects();
             currentlyGrabbed.Add(toolsOnBack[indexOfTool]);
@@ -215,7 +222,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void resetToolsOnBackPositions() {
         for (int i = 0; i < toolsOnBack.Count; i++) {
-            toolsOnBack[i].transform.localPosition = new Vector3(0, i*0.5f, -1f);
+            toolsOnBack[i].transform.localPosition = new Vector3(0, i * 0.5f, -1f);
         }
     }
 
@@ -228,7 +235,7 @@ public class PlayerMovement : MonoBehaviour {
         audioSource.PlayOneShot(clip);
     }
 
-// If we run up against something with a rigidbody, we move it
+    // If we run up against something with a rigidbody, we move it
     void OnControllerColliderHit(ControllerColliderHit hit) {
         Rigidbody body = hit.collider.attachedRigidbody;
 
