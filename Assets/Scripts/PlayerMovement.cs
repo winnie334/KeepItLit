@@ -107,7 +107,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
-        anim.Play("Grab");
+        anim.Play("metarig|Grab");
 
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void releaseObjects() {
-        anim.Play("StandBy");
+        anim.Play("metarig|StandBy");
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void removeObject(GameObject obj) {
-        anim.Play("StandBy");
+        anim.Play("metarig|StandBy");
         obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
     }
