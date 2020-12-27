@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour {
     public Transform cam;
+    public Transform hand;
     public CharacterController controller;
     public Animator anim;
 
@@ -45,8 +46,9 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKeyDown("space")) handleGrab();
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) handleItemSwitch(true);
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) handleItemSwitch(false);
-        if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1)
-            handleItemAction(); //currentlyGrabbed.Count condition is wonky xd
+        if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1 && currentlyGrabbed[0].GetComponents<IAction>().Length > 0) {
+            anim.SetBool("Extract", true);
+        }
 
         // mainCamera.transform.position = transform.position + cameraOffset;
     }
@@ -106,18 +108,18 @@ public class PlayerMovement : MonoBehaviour {
         return objectToGrab;
     }
 
-    public void grabObject(GameObject objectToGrab) {
+    public void grabObject() {
+        var objectToGrab = currentlyGrabbed[currentlyGrabbed.Count - 1];
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
         anim.Play("metarig|Grab");
         Hints.displayHintOnGrab(objectToGrab.GetComponent<ItemAssociation>().item.title);
 
-        currentlyGrabbed.Add(objectToGrab);
-        objectToGrab.transform.parent = transform; // One day we should make a better holding animation
+        objectToGrab.transform.SetParent(hand); // One day we should make a better holding animation
         Vector3 localPosition = currentlyGrabbed.Count == 1
-            ? new Vector3(0, 0, 1f)
+            ? new Vector3(0, 0, 0)
             : new Vector3(0,
                 (currentlyGrabbed.Count - 1) * objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y *
-                objectToGrab.transform.localScale.y, 1f);
+                objectToGrab.transform.localScale.y, 0);
         objectToGrab.transform.localPosition = localPosition;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
@@ -125,7 +127,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void releaseObjects() {
-        anim.Play("metarig|StandBy");
+        anim.SetBool("Grab", false);
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
@@ -136,14 +138,21 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void removeObject(GameObject obj) {
-        anim.Play("metarig|StandBy");
+        anim.SetBool("Grab", false);
         obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
     }
 
-    void handleGrab() {
-        if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
-        else {
+    public void handleGrab() {
+        if (currentlyGrabbed.Count == 0) {
+            var objectToGrab = lookForClosestGrabbableItem(null);
+            if (objectToGrab is null) {
+                return;
+            }
+            currentlyGrabbed.Add(objectToGrab);
+            anim.SetBool("Grab", true);
+
+        } else {
             if (currentlyGrabbed.Count >= carryLimit) releaseObjects();
             else {
                 var carriedItem = currentlyGrabbed[0].GetComponent<ItemAssociation>().item;
@@ -160,13 +169,15 @@ public class PlayerMovement : MonoBehaviour {
                         }
                     }
 
-                    grabObject(objectToGrab);
+                    currentlyGrabbed.Add(objectToGrab);
+                    anim.Play("metarig|Grab");
                 }
             }
         }
     }
 
     void handleItemAction() {
+        anim.SetBool("Extract", false);
         var actions = currentlyGrabbed[0].GetComponents<IAction>();
         foreach (var action in actions) {
             action.execute(this);
