@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 4668131004351922643}
   - component: {fileID: 1378158061393507485}
   - component: {fileID: 8771930814165648036}
-  - component: {fileID: 4646142795729861233}
   - component: {fileID: 5153319918948350219}
+  - component: {fileID: -5973185603351883483}
   m_Layer: 0
   m_Name: The Destroyer
   m_TagString: Untagged
@@ -210,18 +210,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4646142795729861233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8555958157196855866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da55ece433f4bd1bba76e1951b9d58f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5153319918948350219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,3 +223,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 18a95020d98473f40934dfa7b9b91443, type: 2}
+--- !u!114 &-5973185603351883483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555958157196855866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210b6afad64bb1a4aa7eaff5599bd65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  force: 3000

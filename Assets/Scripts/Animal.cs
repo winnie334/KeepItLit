@@ -43,6 +43,7 @@ public class Animal : MonoBehaviour {
         if (origin == Vector3.zero) return;
         var dir = transform.position - origin;
         dir = dir.normalized;
+        dir = new Vector3(dir.x, 0.5f, dir.z);
 
         fallenOverTime = recoveryTime;
         rb.isKinematic = false;
