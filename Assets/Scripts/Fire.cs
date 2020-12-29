@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -8,6 +9,8 @@ public class Fire : MonoBehaviour {
     public float fireSize; // The current size of the fire, also used for initial value
     public float maximalSizeFire;
     public float speedDecreasing;
+    public float warningSize; // Threshold after which a warning plays when fire level is below this size
+    public float speedDecreasingWarning; // Speed at which fire decreases after warning (for helping player)
     public int densityFire;
     public int damageColliderSize = 100;
     public int fireColliderSize = 150;
@@ -20,6 +23,8 @@ public class Fire : MonoBehaviour {
     public PlayerMovement player;
 
     public Slider slider;
+    public GameObject warningSymbol;
+    public AudioClip warningSound;
 
     private ParticleSystem part;
     private ParticleSystem.ShapeModule sh;
@@ -39,8 +44,9 @@ public class Fire : MonoBehaviour {
             part.Stop();
             lightFire.intensity = 0;
             GetComponent<NavMeshObstacle>().enabled = false;
+            Game.EndGame(false, "The fire died out...");
         } else {
-            fireSize -= speedDecreasing * Time.deltaTime;
+            fireSize -= (fireSize > warningSize ? speedDecreasing : speedDecreasingWarning) * Time.deltaTime;
             updateParts();
         }
     }
@@ -84,6 +90,12 @@ public class Fire : MonoBehaviour {
 
     // Updates the display indicating how much fuel is left in the fire
     private void updateUI() {
+        if (fireSize < warningSize && !warningSymbol.activeInHierarchy) {
+            warningSymbol.SetActive(true);
+            player.playSound(warningSound);
+            Hints.displayHint("My fire is almost out, \n I should add fuel soon !");
+        }
+        else if (warningSymbol.activeInHierarchy && fireSize > warningSize) warningSymbol.SetActive(false);
         slider.value = fireSize;
     }
 }

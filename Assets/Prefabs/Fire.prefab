@@ -5057,7 +5057,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireSize: 1
   maximalSizeFire: 1
-  speedDecreasing: 0.015
+  speedDecreasing: 0.01
+  warningSize: 0.2
+  speedDecreasingWarning: 0.006
   densityFire: 300
   damageColliderSize: 100
   fireColliderSize: 150
@@ -5067,6 +5069,7 @@ MonoBehaviour:
   damageCol: {fileID: 1165505357}
   col: {fileID: 1183574036}
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!208 &82441722
 NavMeshObstacle:
   m_ObjectHideFlags: 0

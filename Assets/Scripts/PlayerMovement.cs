@@ -232,6 +232,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void playSound(AudioClip clip) {
+        if (clip == null) {
+            Debug.Log("Empty clip passed!");
+            return;
+        }
         audioSource.PlayOneShot(clip);
     }
 
