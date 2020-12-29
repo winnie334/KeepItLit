@@ -16,19 +16,22 @@ public class CutsceneController : MonoBehaviour {
     public AudioClip thunder;
     public AudioClip seaShore;
     public AudioClip fire;
-    
+
     private AudioSource soundEffect;
     private AudioSource backgroundMusic;
 
     private TextRevealer textRevealer;
     private float timer = 0;
-    
+
     private float[] volumeChangeSettings = {0.3f, 1f, 4}; // [starting volume, end volume, duration to reach end volume]
     private bool shouldChangeVolume;
-    private Action volumeChangeEndFunction; //A function that is called as soon as the volume has been completely changed
+
+    private Action
+        volumeChangeEndFunction; //A function that is called as soon as the volume has been completely changed
+
     private Action paragraphEndFunction; //A function that is called after the end of a paragraph
     private bool shouldChangeBackgroundVolume = true; //determines which audioSource volume we should change
-    
+
     private int currParagraph;
     private int currFrame;
 
@@ -45,7 +48,7 @@ public class CutsceneController : MonoBehaviour {
         };
         textRevealer = GetComponent<TextRevealer>();
     }
-    
+
     private void OnGUI() {
         if (Time.time < initialDelayTime) return;
         playParagraph();
@@ -55,7 +58,7 @@ public class CutsceneController : MonoBehaviour {
         timer += Time.deltaTime;
         if (shouldChangeVolume) changeVolumeGradually();
     }
-    
+
     private void playParagraph() {
         if (currFrame == 0) playLineOfParagraph(paragraphs[currParagraph].list[currFrame++]);
         else {
@@ -68,23 +71,24 @@ public class CutsceneController : MonoBehaviour {
             playLineOfParagraph(paragraphs[currParagraph].list[currFrame++]);
         }
     }
-    
+
     private void playNextParagraph(Action newEndFunction) {
         currFrame = 0;
         paragraphEndFunction = newEndFunction;
         currParagraph++;
     }
-    
+
     private void playLineOfParagraph(string line) {
         textRevealer.play(line);
         timer = 0;
     }
-    
+
     // Should not be called since this happens in the Update function. Use the changeVolumeGraduallyPreparation function instead
     private void changeVolumeGradually() {
         var music = shouldChangeBackgroundVolume ? backgroundMusic : soundEffect;
-        if (timer < volumeChangeSettings[2]) music.volume = Mathf.Lerp(volumeChangeSettings[0],
-            volumeChangeSettings[1], timer / volumeChangeSettings[2]);
+        if (timer < volumeChangeSettings[2])
+            music.volume = Mathf.Lerp(volumeChangeSettings[0],
+                volumeChangeSettings[1], timer / volumeChangeSettings[2]);
         else {
             shouldChangeVolume = false;
             music.volume = volumeChangeSettings[1];
@@ -104,15 +108,15 @@ public class CutsceneController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         textRevealer.clearText();
         soundEffect.Play();
-        changeVolumeGraduallyPreparation(new[] {1f, 0.1f, 5f}, 
+        changeVolumeGraduallyPreparation(new[] {1f, 0.1f, 5f},
             () => { StartCoroutine(playShoreSounds()); });
     }
-    
+
     IEnumerator playShoreSounds() {
         yield return new WaitForSeconds(1);
         backgroundMusic.clip = seaShore;
         backgroundMusic.Play();
-        changeVolumeGraduallyPreparation(new[] {0f, 0.5f, 6f}, 
+        changeVolumeGraduallyPreparation(new[] {0f, 0.35f, 6f},
             () => { playNextParagraph(() => StartCoroutine(playThunder())); });
     }
 
@@ -122,8 +126,8 @@ public class CutsceneController : MonoBehaviour {
         shouldChangeBackgroundVolume = false;
         soundEffect.clip = thunder;
         soundEffect.Play();
-        changeVolumeGraduallyPreparation(new[] {1f, 0f, 4f}, () => { StartCoroutine(playFire());});
-        
+        changeVolumeGraduallyPreparation(new[] {1f, 0f, 4f}, () => { StartCoroutine(playFire()); });
+
         yield return new WaitForSeconds(1);
         background.color = Color.white;
         yield return new WaitForSeconds(0.05f);
@@ -135,7 +139,7 @@ public class CutsceneController : MonoBehaviour {
         soundEffect.volume = 0.8f;
         soundEffect.Play();
         yield return new WaitForSeconds(3);
-        playNextParagraph(() => { StartCoroutine(switchScene());});
+        playNextParagraph(() => { StartCoroutine(switchScene()); });
     }
 
     IEnumerator switchScene() {
@@ -146,7 +150,6 @@ public class CutsceneController : MonoBehaviour {
 
 //unity hack to make list of lists visible in inspector xd
 [Serializable]
-public class listWrapper
-{
+public class listWrapper {
     public List<string> list;
 }
