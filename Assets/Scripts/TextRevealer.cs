@@ -157,4 +157,8 @@ public class TextRevealer : MonoBehaviour
 		RevealNextParagraphAsync();
 	}
 
+	public void clearText() {
+		text.text = "";
+	}
+
 }
