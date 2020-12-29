@@ -12,23 +12,25 @@ public class CutsceneController : MonoBehaviour {
     public float initialDelayTime = 8;
 
     public List<listWrapper> paragraphs;
-    private int currParagraph;
-    private int currFrame = 0;
 
     public AudioClip thunder;
     public AudioClip seaShore;
     public AudioClip fire;
+    
     private AudioSource soundEffect;
     private AudioSource backgroundMusic;
 
     private TextRevealer textRevealer;
     private float timer = 0;
     
-    private float[] audioChangeSettings = {0.3f, 1f, 4};
-    private bool shouldChangeAudio;
-    private Action endAudioFunction;
-    private Action endFunction;
-    private bool changeAudioBackground = true;
+    private float[] volumeChangeSettings = {0.3f, 1f, 4}; // [starting volume, end volume, duration to reach end volume]
+    private bool shouldChangeVolume;
+    private Action volumeChangeEndFunction; //A function that is called as soon as the volume has been completely changed
+    private Action paragraphEndFunction; //A function that is called after the end of a paragraph
+    private bool shouldChangeBackgroundVolume = true; //determines which audioSource volume we should change
+    
+    private int currParagraph;
+    private int currFrame;
 
 
     // Start is called before the first frame update
@@ -37,77 +39,72 @@ public class CutsceneController : MonoBehaviour {
         backgroundMusic = audioSources[0];
         backgroundMusic.volume = 0.3f;
         soundEffect = audioSources[1];
-        endFunction = () => {
-            shouldChangeAudio = true;
-            endAudioFunction = () => { switchParagraph(() => { StartCoroutine(playBoatCrash()); }); };
+        paragraphEndFunction = () => {
+            shouldChangeVolume = true;
+            volumeChangeEndFunction = () => { playNextParagraph(() => { StartCoroutine(playBoatCrash()); }); };
         };
         textRevealer = GetComponent<TextRevealer>();
     }
-
-    private void Update() {
-        timer += Time.deltaTime;
-        if (shouldChangeAudio) changeAudio();
-    }
-
-    private void switchAudioClip(AudioClip clip) {
-        backgroundMusic.clip = clip;
-        backgroundMusic.Play();
-    }
-
-    private void playLine(String line) {
-        textRevealer.play(line);
-        timer = 0;
-    }
-
-    private void playParagraph() {
-        if (currFrame == 0) playLine(paragraphs[currParagraph].list[currFrame++]);
-        else {
-            if (currFrame >= paragraphs[currParagraph].list.Count) {
-                if (currFrame++ == paragraphs[currParagraph].list.Count) endFunction();
-                return;
-            }
-
-            if (!(timer >= nextFrameTime)) return;
-            playLine(paragraphs[currParagraph].list[currFrame++]);
-        }
-    }
-
-
-
-    private void changeAudio() {
-        var music = changeAudioBackground ? backgroundMusic : soundEffect;
-        if (timer < audioChangeSettings[2]) music.volume = Mathf.Lerp(audioChangeSettings[0],
-            audioChangeSettings[1], timer / audioChangeSettings[2]);
-        else {
-            shouldChangeAudio = false;
-            music.volume = audioChangeSettings[1];
-            endAudioFunction();
-        }
-    }
-
-    private void switchParagraph(Action newEndFunction) {
-        currFrame = 0;
-        endFunction = newEndFunction;
-        currParagraph++;
-    }
-
+    
     private void OnGUI() {
         if (Time.time < initialDelayTime) return;
         playParagraph();
     }
 
-    private void changeAudioPrep(float[] newAudioSettings, Action newEndAudioFunction) {
+    private void Update() {
+        timer += Time.deltaTime;
+        if (shouldChangeVolume) changeVolumeGradually();
+    }
+    
+    private void playParagraph() {
+        if (currFrame == 0) playLineOfParagraph(paragraphs[currParagraph].list[currFrame++]);
+        else {
+            if (currFrame >= paragraphs[currParagraph].list.Count) {
+                if (currFrame++ == paragraphs[currParagraph].list.Count) paragraphEndFunction();
+                return;
+            }
+
+            if (!(timer >= nextFrameTime)) return;
+            playLineOfParagraph(paragraphs[currParagraph].list[currFrame++]);
+        }
+    }
+    
+    private void playNextParagraph(Action newEndFunction) {
+        currFrame = 0;
+        paragraphEndFunction = newEndFunction;
+        currParagraph++;
+    }
+    
+    private void playLineOfParagraph(string line) {
+        textRevealer.play(line);
         timer = 0;
-        audioChangeSettings = newAudioSettings;
-        endAudioFunction = newEndAudioFunction;
-        shouldChangeAudio = true;
+    }
+    
+    // Should not be called since this happens in the Update function. Use the changeVolumeGraduallyPreparation function instead
+    private void changeVolumeGradually() {
+        var music = shouldChangeBackgroundVolume ? backgroundMusic : soundEffect;
+        if (timer < volumeChangeSettings[2]) music.volume = Mathf.Lerp(volumeChangeSettings[0],
+            volumeChangeSettings[1], timer / volumeChangeSettings[2]);
+        else {
+            shouldChangeVolume = false;
+            music.volume = volumeChangeSettings[1];
+            volumeChangeEndFunction();
+        }
+    }
+
+    // Call this when you want to change the volume gradually
+    private void changeVolumeGraduallyPreparation(float[] newAudioSettings, Action newEndAudioFunction) {
+        timer = 0;
+        volumeChangeSettings = newAudioSettings;
+        volumeChangeEndFunction = newEndAudioFunction;
+        shouldChangeVolume = true;
     }
 
     IEnumerator playBoatCrash() {
         yield return new WaitForSeconds(1);
         textRevealer.clearText();
         soundEffect.Play();
-        changeAudioPrep(new[] {1f, 0.1f, 5f}, 
+        changeVolumeGraduallyPreparation(new[] {1f, 0.1f, 5f}, 
             () => { StartCoroutine(playShoreSounds()); });
     }
     
@@ -115,17 +112,17 @@ public class CutsceneController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         backgroundMusic.clip = seaShore;
         backgroundMusic.Play();
-        changeAudioPrep(new[] {0f, 0.5f, 6f}, 
-            () => { switchParagraph(() => StartCoroutine(playThunder())); });
+        changeVolumeGraduallyPreparation(new[] {0f, 0.5f, 6f}, 
+            () => { playNextParagraph(() => StartCoroutine(playThunder())); });
     }
 
     IEnumerator playThunder() {
         yield return new WaitForSeconds(4);
         textRevealer.clearText();
-        changeAudioBackground = false;
+        shouldChangeBackgroundVolume = false;
         soundEffect.clip = thunder;
         soundEffect.Play();
-        changeAudioPrep(new[] {1f, 0f, 4f}, () => { StartCoroutine(playFire());});
+        changeVolumeGraduallyPreparation(new[] {1f, 0f, 4f}, () => { StartCoroutine(playFire());});
         
         yield return new WaitForSeconds(1);
         background.color = Color.white;
@@ -138,7 +135,7 @@ public class CutsceneController : MonoBehaviour {
         soundEffect.volume = 0.8f;
         soundEffect.Play();
         yield return new WaitForSeconds(3);
-        switchParagraph(() => { StartCoroutine(switchScene());});
+        playNextParagraph(() => { StartCoroutine(switchScene());});
     }
 
     IEnumerator switchScene() {
