@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour {
     public void grabObject(GameObject objectToGrab) {
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
         anim.Play("metarig|Grab");
+        Hints.displayHintOnGrab(objectToGrab.GetComponent<ItemAssociation>().item.title);
 
         currentlyGrabbed.Add(objectToGrab);
         objectToGrab.transform.parent = transform; // One day we should make a better holding animation
@@ -121,7 +122,6 @@ public class PlayerMovement : MonoBehaviour {
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
         objectToGrab.GetComponent<IOnEquip>()?.onEquip();
-
     }
 
     public void releaseObjects() {
@@ -142,7 +142,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void handleGrab() {
-        Hints.displayHint("Congrats, you picked up something");
         if (currentlyGrabbed.Count == 0) grabObject(lookForClosestGrabbableItem(null));
         else {
             if (currentlyGrabbed.Count >= carryLimit) releaseObjects();

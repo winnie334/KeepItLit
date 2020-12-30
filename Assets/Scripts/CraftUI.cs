@@ -14,7 +14,7 @@ public class CraftUI : MonoBehaviour {
     public GameObject tutorial;
     public GameObject craftUI;
     public GameObject recipiesPanel;
-    public GameObject recipe;
+    public GameObject recipeBox;
     public Button craftButton;
     public Color canCraftColor;
 
@@ -68,11 +68,10 @@ public class CraftUI : MonoBehaviour {
         }
 
         foreach (var i in crafter.knownRecipes) {
-            var rcp = Instantiate(recipe, recipiesPanel.transform, true);
+            var rcp = Instantiate(recipeBox, recipiesPanel.transform, true);
             rcp.SetActive(true);
             rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
             
-            var item = i.resultingItem.GetComponent<ItemAssociation>().item;
             rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
             if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;
@@ -82,7 +81,6 @@ public class CraftUI : MonoBehaviour {
     }
 
     public GameObject detailPanel;
-    public RawImage icon;
     public Text detailTitle;
     public Text detailDescription;
     public GameObject ingredients;
@@ -101,9 +99,8 @@ public class CraftUI : MonoBehaviour {
         }
 
         foreach (var item in neededItems) {
-            var ingr = Instantiate(ingredient);
+            var ingr = Instantiate(ingredient, ingredients.transform, true);
             ingr.SetActive(true);
-            ingr.transform.SetParent(ingredients.transform);
             ingr.GetComponentInChildren<Image>().sprite = item.Key.icon;
             ingr.GetComponentInChildren<Text>().text = item.Value.Item1 + "/" + item.Value.Item2;
 
