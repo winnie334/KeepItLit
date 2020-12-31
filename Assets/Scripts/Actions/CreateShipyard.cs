@@ -25,6 +25,7 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         Instantiate(shipyard, targetPos, Quaternion.identity);
         playerMov.removeObject(gameObject);
         playerMov.playSound(buildSound);
+        Hints.displayHint("Awesome, here I can craft my boat");
         Destroy(gameObject);
     }
 

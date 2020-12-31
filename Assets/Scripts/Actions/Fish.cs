@@ -40,6 +40,7 @@ namespace Actions {
                     if (durability == 0) {
                         playerMov.releaseObjects();
                         Destroy(gameObject);
+                        Hints.displayHint("Shoot, my fishing rod broke");
                     }
                     Destroy(currBobber);
                     playerMov.playSound(fishCatchSound);

@@ -150,10 +150,12 @@ public class TigerAI : Animal {
         if (chaseTimer < attackDuration) return; // This is still the same attack
         if (other.gameObject.CompareTag("Player")) {
             var playerScript = other.gameObject.GetComponent<PlayerMovement>();
-            var forward = Vector3.forward;
-            playerScript.takeDamageWithImpact(new Vector3(forward.x, 0.4f, forward.z), 50, attackDamage);
+            var dir = Vector3.Normalize(other.transform.position - transform.position);
+            playerScript.takeDamageWithImpact(new Vector3(dir.x, 0.3f, dir.z), 50, attackDamage);
             chaseTimer = 0;
+            attackTimer = 0;
             audioSource.PlayOneShot(attackSound);
+            Hints.displayHint("Argh, these tigers are dangerous. I should be careful at night");
             // Todo play some attack animation
         }
     }

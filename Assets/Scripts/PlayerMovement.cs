@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour {
             currentHealth = Math.Max(currentHealth - damage, 0);
             healthUI.SetHealth(currentHealth);
         } else {
-            Game.EndGame(false, "You died from damage");
+            Game.EndGame(false, "You died...");
         }
     }
 
