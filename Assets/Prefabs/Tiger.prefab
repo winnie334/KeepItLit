@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 7371961024252273640}
   - component: {fileID: 2700298817036881601}
   - component: {fileID: 3820292889195075279}
-  - component: {fileID: 4098528197349631605}
   - component: {fileID: 5194915693506557318}
   - component: {fileID: -2613612905516115203}
   - component: {fileID: 598088632}
   - component: {fileID: -4205599967010982361}
+  - component: {fileID: 136295405765974234}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Animal
@@ -91,19 +91,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4098528197349631605
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282684478635323752}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5194915693506557318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -112,7 +99,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282684478635323752}
   serializedVersion: 2
-  m_Mass: 90
+  m_Mass: 10
   m_Drag: 0.7
   m_AngularDrag: 0.7
   m_UseGravity: 1
@@ -132,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225a3bf1c4e96ff40a6e60a8498b2af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 50
   recoveryTime: 0.2
   drops:
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
@@ -274,6 +261,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &136295405765974234
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282684478635323752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.41215375
+  m_Height: 0.9900962
+  m_Direction: 2
+  m_Center: {x: -0.022332273, y: 0, z: -0.00024497617}
 --- !u!1 &3277617412013494611
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +461,7 @@ BoxCollider:
   m_GameObject: {fileID: 3697435540691762088}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -555,7 +556,7 @@ BoxCollider:
   m_GameObject: {fileID: 6170182831755443984}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -650,7 +651,7 @@ BoxCollider:
   m_GameObject: {fileID: 6702271985168675204}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -745,7 +746,7 @@ BoxCollider:
   m_GameObject: {fileID: 8370452055993388483}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

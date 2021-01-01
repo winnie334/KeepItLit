@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Animal : MonoBehaviour {
 
@@ -10,6 +12,7 @@ public class Animal : MonoBehaviour {
     public List<GameObject> drops;
 
     private Rigidbody rb;
+    private float distToGround;
     private int health;
     protected NavMeshAgent agent;
 
@@ -20,6 +23,7 @@ public class Animal : MonoBehaviour {
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        distToGround = GetComponent<Collider>().bounds.extents.y;
         health = maxHealth;
         audioSource = GetComponent<AudioSource>();
     }
@@ -29,9 +33,10 @@ public class Animal : MonoBehaviour {
     public void Update() {
         if (fallenOverTime > 0) {
             fallenOverTime -= Time.deltaTime;
-        } else if (rb.velocity.magnitude <= 0.3f) {
+        } else if (!rb.isKinematic && isGrounded()) {
             rb.isKinematic = true;
             agent.enabled = true;
+            rb.constraints = RigidbodyConstraints.None;
         }
     }
 
@@ -41,12 +46,13 @@ public class Animal : MonoBehaviour {
         if (health <= 0) die();
 
         if (origin == Vector3.zero) return;
-        var dir = transform.position - origin;
-        dir = dir.normalized;
-        dir = new Vector3(dir.x, 0.5f, dir.z);
+        var dir = Vector3.Normalize(transform.position - origin);
+        dir = new Vector3(dir.x, 1.3f, dir.z);
 
         fallenOverTime = recoveryTime;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.isKinematic = false;
+        // transform.position += dir;
         agent.enabled = false;
         rb.AddForce(dir * force, ForceMode.Impulse);
     }
@@ -57,6 +63,10 @@ public class Animal : MonoBehaviour {
             var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
             Instantiate(loot, spawnPos, Quaternion.identity);
         }
+    }
+
+    private bool isGrounded() {
+        return Physics.Raycast(transform.position, Vector3.down, distToGround + 0.4f) && Math.Abs(rb.velocity.y) <= 0.1f;
     }
     
     // Gets a random point in space on the navmesh within a certain radius of the given origin
