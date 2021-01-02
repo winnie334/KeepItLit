@@ -236,6 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  clip: {fileID: 2218259129250965608, guid: dacdf5e3596e7f547bba6902b449f1ad, type: 3}
   damage: 10
 --- !u!114 &5845932339757663090
 MonoBehaviour:
