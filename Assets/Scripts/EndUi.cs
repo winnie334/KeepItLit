@@ -7,6 +7,6 @@ public class EndUi : MonoBehaviour {
     public Text text;
 
     private void Start() {
-        text.text += "\n" + Game.message;
+        text.text = Game.message;
     }
 }

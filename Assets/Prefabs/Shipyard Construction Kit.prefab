@@ -319,6 +319,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipyard: {fileID: 1404554446721245897, guid: ef3b4f79789c45148a17c295e5b3106f, type: 3}
+  goodLocationMaterial: {fileID: 2100000, guid: 389e051c47f09324ba4f43b3f71acaf8, type: 2}
+  badLocationMaterial: {fileID: 2100000, guid: e0748c022a8fc654fb0e9c533baad165, type: 2}
+  shipyardSpawnDistance: 5
+  maxShipyardSpawnHeight: 2
+  buildSound: {fileID: 8300000, guid: 684dd86ac3d15fe4bb0d63685a1821c7, type: 3}
 --- !u!114 &6530272949616095680
 MonoBehaviour:
   m_ObjectHideFlags: 0

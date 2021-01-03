@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5015928403502230498}
   - component: {fileID: 8581561654030849027}
   - component: {fileID: 2880302719166260234}
+  - component: {fileID: -7309149075341585798}
   m_Layer: 0
   m_Name: Ore
   m_TagString: Item
@@ -127,3 +128,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 3b7ba051244d4cd48a327117f2ebf67e, type: 2}
+--- !u!114 &-7309149075341585798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7402110537649807547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c89108626e76645944df9b7b7f5939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newObject: {fileID: 498962176800311068, guid: 0839c59e0bcd0ef4ea72bdd033003bbe, type: 3}

@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1237560214333556349}
   - component: {fileID: 5982630789533390002}
   - component: {fileID: 482383070977264057}
+  - component: {fileID: 5845932339757663090}
   m_Layer: 0
   m_Name: Pickaxe
   m_TagString: Item
@@ -235,5 +236,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  clip: {fileID: 2218259129250965608, guid: dacdf5e3596e7f547bba6902b449f1ad, type: 3}
   damage: 10
-  audioSource: {fileID: 0}
+--- !u!114 &5845932339757663090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7403314171369623301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210b6afad64bb1a4aa7eaff5599bd65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  force: 20

@@ -3,15 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour {
 
-    static public string message;
+    public static string message;
 
-    static public void EndGame(bool victory, string msg) {
+    public static void EndGame(bool victory, string msg) {
         message = msg;
-        if (victory) {
-            SceneManager.LoadScene("Victory");
-        } else {
-            SceneManager.LoadScene("Defeat");
-        }
+        SceneManager.LoadScene(victory ? "Victory" : "Defeat");
+    }
+
+    public void StartGame() {
+        SceneManager.LoadScene("CharacterMovement");
+    }
+
+    public void CloseGame() {
+        Application.Quit();
     }
 
 

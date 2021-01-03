@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6196219043453462761}
   - component: {fileID: 3503153372573312910}
   - component: {fileID: 3679770821119660091}
-  - component: {fileID: 1942332798232265828}
   m_Layer: 0
   m_Name: Pointy Part
   m_TagString: Untagged
@@ -96,19 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1942332798232265828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4037010573324384282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7016011e241d7a6488d236754948d884, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 6fe974f4ef4751d40b12b7f8d9b817e0, type: 2}
 --- !u!1 &8586874645996418599
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,9 +108,11 @@ GameObject:
   - component: {fileID: 1811030621161933281}
   - component: {fileID: 4997211633886166854}
   - component: {fileID: -1434393235108563733}
+  - component: {fileID: -1444173742433984805}
+  - component: {fileID: 1432682650346757305}
   m_Layer: 0
   m_Name: Machete
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,14 +124,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8586874645996418599}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 131.35986, y: 9.957, z: 73.28023}
   m_LocalScale: {x: 0.1, y: 1, z: 0.2}
   m_Children:
   - {fileID: 3594799482745410464}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &7431563262704445476
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -219,3 +207,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 6fe974f4ef4751d40b12b7f8d9b817e0, type: 2}
+--- !u!54 &-1444173742433984805
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586874645996418599}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1432682650346757305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586874645996418599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210b6afad64bb1a4aa7eaff5599bd65c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  force: 50

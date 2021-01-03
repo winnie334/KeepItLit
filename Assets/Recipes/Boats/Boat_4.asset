@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Boat_4
   m_EditorClassIdentifier: 
-  description: 
+  description: This should keep you alive for the coming days
   requiredItems:
-  - {fileID: 11400000, guid: 9ca14c4bcfbafac488546ad8a8194e58, type: 2}
-  resultingItem: {fileID: 4010732097271876108, guid: 35f6ff66ab9af804ea1810e24333d488, type: 3}
+  - {fileID: 11400000, guid: 4bae051ffda8e314c9863c8c439911c0, type: 2}
+  - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
+  - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
+  - {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
+  resultingItem: {fileID: 498134761452179595, guid: d831ad4656a87af43b363313819567e1, type: 3}

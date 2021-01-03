@@ -7,21 +7,21 @@ using UnityEngine.UI;
 public class CraftUI : MonoBehaviour {
     public Transform playerBrain;
     private GameObject shipyard; //TODO what if there are multiple shipyards?
-    private bool isPlayerCrafter = true; //TODO ugly
-
+    
     public AudioSource audioSource;
     public AudioClip craftSound;
 
     public GameObject tutorial;
     public GameObject craftUI;
     public GameObject recipiesPanel;
-    public GameObject recipe;
+    public GameObject recipeBox;
     public Button craftButton;
     public Color canCraftColor;
 
     private Crafter crafter; // The crafter which is using this menu (e.g. player or workbench)
 
     void Start() {
+        setCrafter(null);
         craftButton.onClick.AddListener(craftSelected);
     }
 
@@ -36,7 +36,6 @@ public class CraftUI : MonoBehaviour {
             tutorial.SetActive(true);
             crafter.resetAvailableItems();
         } else {
-            setCrafter();
             craftUI.SetActive(true);
             tutorial.SetActive(false);
             detailPanel.SetActive(false);
@@ -45,18 +44,11 @@ public class CraftUI : MonoBehaviour {
     }
 
     // If we ever want to craft using workbenches or other special stations, this is where you should set them
-    void setCrafter() {
-        if (shipyard && Vector3.Distance(playerBrain.transform.position, shipyard.transform.position) < 7) {
-            crafter = shipyard.GetComponent<Crafter>();
-            isPlayerCrafter = false;
-        } else {
-            crafter = playerBrain.GetComponent<Crafter>();
-            isPlayerCrafter = true;
+    public void setCrafter(Crafter newCrafter) {
+        crafter = newCrafter ? newCrafter : playerBrain.GetComponent<Crafter>();
+        if (craftUI.activeInHierarchy) {
+            refreshUI();
         }
-    }
-
-    public void setShipyard(GameObject newShipyard) {
-        shipyard = newShipyard;
     }
 
     // Fetches all the possible recipes again
@@ -75,23 +67,20 @@ public class CraftUI : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-        foreach (var item in crafter.knownRecipes) {
-            var rcp = Instantiate(recipe);
+        foreach (var i in crafter.knownRecipes) {
+            var rcp = Instantiate(recipeBox, recipiesPanel.transform, true);
             rcp.SetActive(true);
-            rcp.transform.SetParent(recipiesPanel.transform);
-            rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(item); });
-            rcp.GetComponentInChildren<Text>().text = item.name;
-            rcp.GetComponentsInChildren<Image>()[1].sprite = item.resultingItem.GetComponent<ItemAssociation>().item.icon;
-            if (!possibleRecipes.Contains(item)) continue; // We can't craft this recipe
+            rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
+            
+            rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
+            if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;
-
         }
 
         if (currentlySelected) selectRecipe(currentlySelected);
     }
 
     public GameObject detailPanel;
-    public RawImage icon;
     public Text detailTitle;
     public Text detailDescription;
     public GameObject ingredients;
@@ -100,7 +89,7 @@ public class CraftUI : MonoBehaviour {
 
     void selectRecipe(Recipe recipe) {
         if (!detailPanel.activeInHierarchy) detailPanel.SetActive(true);
-        detailTitle.text = recipe.name;
+        detailTitle.text = recipe.resultingItem.GetComponent<ItemAssociation>().item.title;
         detailDescription.text = recipe.description;
         currentlySelected = recipe;
         var neededItems = crafter.getNeededItems(recipe);
@@ -110,9 +99,8 @@ public class CraftUI : MonoBehaviour {
         }
 
         foreach (var item in neededItems) {
-            var ingr = Instantiate(ingredient);
+            var ingr = Instantiate(ingredient, ingredients.transform, true);
             ingr.SetActive(true);
-            ingr.transform.SetParent(ingredients.transform);
             ingr.GetComponentInChildren<Image>().sprite = item.Key.icon;
             ingr.GetComponentInChildren<Text>().text = item.Value.Item1 + "/" + item.Value.Item2;
 
@@ -121,12 +109,7 @@ public class CraftUI : MonoBehaviour {
 
     void craftSelected() {
         if (!crafter.canMakeRecipe(currentlySelected)) return;
-        if (isPlayerCrafter) crafter.craftPlayerRecipe(currentlySelected);
-        else {
-            crafter.craftShipyardRecipe(currentlySelected, shipyard);
-            craftUI.SetActive(false);
-        }
-
+        crafter.craftRecipe(currentlySelected);
         audioSource.PlayOneShot(craftSound);
         StartCoroutine(nameof(delayedUpdate));
     }

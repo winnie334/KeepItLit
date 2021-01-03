@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!135 &1122278986
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148918409030}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.012877119
-  m_Center: {x: 0.00038399873, y: 0, z: -0.005}
 --- !u!1 &1165505357
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +86,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1183574036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.16}
+  m_LocalPosition: {x: 0, y: 0, z: -0.277}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children: []
   m_Father: {fileID: 8971350458147252438}
@@ -133,6 +120,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 8971350458147252439}
   type: default
+--- !u!135 &1122278986
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148918409030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.012877119
+  m_Center: {x: 0.00038399873, y: 0, z: -0.005}
 --- !u!1 &1643275999685668566
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +176,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.990566, g: 0.580964, b: 0.22895159, a: 1}
-  m_Intensity: 1
-  m_Range: 100
+  m_Intensity: 2
+  m_Range: 30
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -5055,15 +5055,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001abee98ff6b9a45a59c0a9cf2f790d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalSizeFire: 1
+  fireSize: 1
   maximalSizeFire: 1
-  speedDecreasing: 0.015
+  speedDecreasing: 0.01
+  warningSize: 0.2
+  speedDecreasingWarning: 0.006
   densityFire: 300
+  damageColliderSize: 100
+  fireColliderSize: 150
   damageFire: 10
   lightFire: {fileID: 726676349731026176}
+  lightRange: 30
   damageCol: {fileID: 1165505357}
   col: {fileID: 1183574036}
   player: {fileID: 0}
+  slider: {fileID: 0}
 --- !u!208 &82441722
 NavMeshObstacle:
   m_ObjectHideFlags: 0
