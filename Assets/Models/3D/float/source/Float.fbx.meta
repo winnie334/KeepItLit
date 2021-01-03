@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:Assets/Models/3D/float/source/Float.fbx.meta
 guid: 7d62eb7345208cf459d87f392232a376
+=======
+guid: 9db5114b1c9048f42aeea96a417cb0ff
+>>>>>>> Stashed changes:Assets/Models/3D/animals/Dolphin.fbx.meta
+=======
+guid: 7d62eb7345208cf459d87f392232a376
+>>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []

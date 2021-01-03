@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:Assets/Models/3D/Rope_tut.blend.meta
 guid: 8cf89811a8eddc14ab83ccd9cdc04e13
+=======
+guid: 362f959b327685f419733f4ae74ed85f
+>>>>>>> Stashed changes:Assets/Models/3D/game items/Damaged_Well.fbx.meta
+=======
+guid: 8cf89811a8eddc14ab83ccd9cdc04e13
+>>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
