@@ -40,7 +40,7 @@ public class Loot : MonoBehaviour {
         health -= damage;
         var o = gameObject;
         var size = o.transform.localScale;
-        o.transform.localScale = new Vector3(size.x*0.99f, size.y*0.99f, size.z*0.99f);
+        o.transform.localScale = new Vector3(size.x * 0.99f, size.y * 0.99f, size.z * 0.99f);
         AudioSource.PlayClipAtPoint(extractSound, transform.position);
 
         if (health <= 0) {
