@@ -11,9 +11,15 @@ public class Torch : MonoBehaviour, IFireInteraction {
     private ParticleSystem ps;
     private new Light light;
     private bool isOn;
+
+    private AudioSource fireSource;
+    private AudioSource fireLitSfx;
     
     // Start is called before the first frame update
     void Start() {
+        var audioSources = GetComponents<AudioSource>();
+        fireSource = audioSources[0];
+        fireLitSfx = audioSources[1];
         ps = GetComponentInChildren<ParticleSystem>();
         light = GetComponentInChildren<Light>();
         reset();
@@ -37,6 +43,7 @@ public class Torch : MonoBehaviour, IFireInteraction {
         isOn = false;
         ps.Stop();
         light.enabled = false;
+        fireSource.Stop();
         
         var shapeModule = ps.shape;
         shapeModule.radius = 1;
@@ -44,6 +51,8 @@ public class Torch : MonoBehaviour, IFireInteraction {
     }
 
     public void onFireInteraction() {
+        fireSource.Play();
+        fireLitSfx.Play();
         isOn = true;
         light.enabled = true;
         timeLeft = Duration;

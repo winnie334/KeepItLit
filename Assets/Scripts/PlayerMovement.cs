@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip pickupSound;
     public AudioClip dropSound;
+    public AudioClip damageSound;
 
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
@@ -184,6 +185,8 @@ public class PlayerMovement : MonoBehaviour {
     public void TakeDamage(float damage) {
         if (currentHealth - damage > 0) {
             currentHealth = Math.Max(currentHealth - damage, 0);
+            audioSource.clip = damageSound;
+            audioSource.Play();
             healthUI.SetHealth(currentHealth);
         } else {
             Game.EndGame(false, "You died...");

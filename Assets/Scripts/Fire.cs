@@ -30,7 +30,10 @@ public class Fire : MonoBehaviour {
     private ParticleSystem.ShapeModule sh;
     private ParticleSystem.EmissionModule em;
 
+    private AudioSource fireSfxSource;
+
     void Start() {
+        fireSfxSource = GetComponents<AudioSource>()[1];
         part = GetComponent<ParticleSystem>();
         sh = part.shape;
         em = part.emission;
@@ -74,6 +77,7 @@ public class Fire : MonoBehaviour {
                 if (other.gameObject.CompareTag("Item")) {
                     var item = other.gameObject.GetComponent<ItemAssociation>().item;
                     if (item.fuelSize > 0) {
+                        fireSfxSource.Play();
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
                         player.removeObject(other.gameObject);
                         updateParts();
