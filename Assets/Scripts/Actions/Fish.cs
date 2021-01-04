@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Actions {
     public class Fish : MonoBehaviour, IAction {
 
+        public Animator anim;
         public GameObject FishObject;
         public GameObject Bobber;
         public Transform top;
@@ -12,7 +13,7 @@ namespace Actions {
         public AudioClip fishCatchSound;
         public AudioClip throwBobberSound;
         public AudioClip cancelFishingSound;
-        
+
         public int durability = 3;
         private GameObject currBobber;
         private LineRenderer lr;
@@ -30,12 +31,15 @@ namespace Actions {
         }
 
         public void execute(PlayerMovement playerMov) {
-            if (currBobber) {
+            if (currBobber && anim.GetBool("IsFishing")) {
+                anim.SetBool("IsFishing", false);
                 if (currBobber.GetComponent<Bobber>().hasFish()) {
+                    Debug.Log("has fish");
                     var bobberPos = currBobber.transform.position;
                     var fish = Instantiate(FishObject, bobberPos, Quaternion.identity);
+                    Debug.Log("Fish instanciated");
                     var targetDir = (transform.position - bobberPos).normalized;
-                    fish.GetComponent<Rigidbody>().AddForce(new Vector3(targetDir.x * 1000, targetDir.y*2000, targetDir.z * 1000));
+                    fish.GetComponent<Rigidbody>().AddForce(new Vector3(targetDir.x * 1000, targetDir.y * 2000, targetDir.z * 1000));
                     durability--;
                     if (durability == 0) {
                         playerMov.releaseObjects();
@@ -44,12 +48,11 @@ namespace Actions {
                     }
                     Destroy(currBobber);
                     playerMov.playSound(fishCatchSound);
-                }
-                else Destroy(currBobber);
+                } else Destroy(currBobber);
                 playerMov.playSound(cancelFishingSound);
                 lr.enabled = false;
-            }
-            else {
+            } else if (!anim.GetBool("IsFishing")) {
+                anim.SetBool("IsFishing", true);
                 throwBobber(playerMov.transform.forward);
                 playerMov.playSound(throwBobberSound);
                 lr.enabled = true;
@@ -58,7 +61,7 @@ namespace Actions {
 
         void throwBobber(Vector3 dir) {
             currBobber = Instantiate(Bobber, top.position, Quaternion.identity);
-            currBobber.GetComponent<Rigidbody>().AddForce(dir*1000);
+            currBobber.GetComponent<Rigidbody>().AddForce(dir * 1000);
         }
     }
 }
