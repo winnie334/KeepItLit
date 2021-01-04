@@ -33,10 +33,6 @@ public class Settings : MonoBehaviour {
         Time.timeScale = paused ? 0 : 1;
         settingsUI.SetActive(paused);
     }
-    
-    public void changeMusicVolume(float vol) {
-        // TODO once we have music
-    }
 
     public void changeSFXVolume(float vol) {
         AudioListener.volume = vol;

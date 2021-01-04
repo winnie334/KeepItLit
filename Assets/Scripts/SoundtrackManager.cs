@@ -10,14 +10,18 @@ public class SoundtrackManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         source = GetComponent<AudioSource>();
+        source.ignoreListenerVolume = true; // Music volume is controlled separately from all other sounds
         source.clip = soundtrack[0];
         source.Play();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (!source.isPlaying) changeSong();
+    }
+
+    public void setMusicVolume(float volume) {
+        source.volume = volume;
     }
 
     void changeSong() {
