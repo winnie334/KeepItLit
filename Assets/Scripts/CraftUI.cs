@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class CraftUI : MonoBehaviour {
     public Transform playerBrain;
     private GameObject shipyard; //TODO what if there are multiple shipyards?
-    
+
+    public Cinemachine.CinemachineFreeLook cam;
     public AudioSource audioSource;
     public AudioClip craftSound;
 
@@ -21,6 +22,7 @@ public class CraftUI : MonoBehaviour {
     private Crafter crafter; // The crafter which is using this menu (e.g. player or workbench)
 
     void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
         setCrafter(null);
         craftButton.onClick.AddListener(craftSelected);
     }
@@ -33,10 +35,18 @@ public class CraftUI : MonoBehaviour {
     void toggleUI() {
         if (craftUI.activeInHierarchy) {
             craftUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            cam.m_XAxis.m_InputAxisName = "Mouse X";
+            cam.m_YAxis.m_InputAxisName = "Mouse Y";
             tutorial.SetActive(true);
             crafter.resetAvailableItems();
         } else {
             craftUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            cam.m_XAxis.m_InputAxisValue = 0;
+            cam.m_YAxis.m_InputAxisValue = 0;
+            cam.m_XAxis.m_InputAxisName = "";
+            cam.m_YAxis.m_InputAxisName = "";
             tutorial.SetActive(false);
             detailPanel.SetActive(false);
             refreshUI();
@@ -71,7 +81,7 @@ public class CraftUI : MonoBehaviour {
             var rcp = Instantiate(recipeBox, recipiesPanel.transform, true);
             rcp.SetActive(true);
             rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
-            
+
             rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
             if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;
