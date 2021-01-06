@@ -12,6 +12,7 @@ public class Torch : MonoBehaviour, IFireInteraction {
     private new Light light;
     private bool isOn;
 
+    private float initialPsSize;
     private AudioSource fireSource;
     private AudioSource fireLitSfx;
     
@@ -21,6 +22,7 @@ public class Torch : MonoBehaviour, IFireInteraction {
         fireSource = audioSources[0];
         fireLitSfx = audioSources[1];
         ps = GetComponentInChildren<ParticleSystem>();
+        initialPsSize = ps.shape.radius;
         light = GetComponentInChildren<Light>();
         reset();
     }
@@ -31,7 +33,7 @@ public class Torch : MonoBehaviour, IFireInteraction {
         var shapeModule = ps.shape;
         timeLeft -= Time.deltaTime;
         if (timeLeft / Duration <= 0.3f) { // Torch is in last 30%, start dying out
-            var percentageAlive = HelperFunctions.p5Map(timeLeft / Duration, 0, 0.3f, 0, 1);
+            var percentageAlive = HelperFunctions.p5Map(timeLeft / Duration, 0, 0.3f, 0, initialPsSize);
             shapeModule.radius = percentageAlive;
             light.range = percentageAlive * lightRadius;
         }
@@ -46,7 +48,7 @@ public class Torch : MonoBehaviour, IFireInteraction {
         fireSource.Stop();
         
         var shapeModule = ps.shape;
-        shapeModule.radius = 1;
+        shapeModule.radius = initialPsSize;
         light.range = lightRadius;
     }
 
