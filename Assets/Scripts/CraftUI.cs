@@ -11,7 +11,6 @@ public class CraftUI : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip craftSound;
 
-    public GameObject tutorial;
     public GameObject craftUI;
     public GameObject recipiesPanel;
     public GameObject recipeBox;
@@ -33,11 +32,9 @@ public class CraftUI : MonoBehaviour {
     void toggleUI() {
         if (craftUI.activeInHierarchy) {
             craftUI.SetActive(false);
-            tutorial.SetActive(true);
             crafter.resetAvailableItems();
         } else {
             craftUI.SetActive(true);
-            tutorial.SetActive(false);
             detailPanel.SetActive(false);
             refreshUI();
         }
