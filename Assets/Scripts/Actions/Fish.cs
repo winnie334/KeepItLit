@@ -20,6 +20,7 @@ namespace Actions {
 
 
         private void Start() {
+            anim = GameObject.Find("Player").GetComponent<Animator>();
             lr = GetComponent<LineRenderer>();
         }
 
