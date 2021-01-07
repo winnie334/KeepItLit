@@ -789,8 +789,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0dbf259e39b42618e8f35af30ab47a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FishObject: {fileID: 458266356485576368, guid: 224c7d2565a78554f964b6c2006a3d11, type: 3}
-  Bobber: {fileID: 5017190788321237983, guid: a6b395400e92a5440a1c6fb412079f46, type: 3}
+  anim: {fileID: 7900026481426236018, guid: 4db6cf41d224c484a810b5f4926ea172, type: 3}
+  FishObject: {fileID: 3503415072969503526, guid: 43c18990bf2a4df488509197b5998fdf, type: 3}
+  Bobber: {fileID: 7223743730913312087, guid: 7a7f06c1e9fc91a449fcf78823a76607, type: 3}
   top: {fileID: 4204460626103341919}
   fishCatchSound: {fileID: 8300000, guid: 9ee958299c02bd64a9804d0b83dc7c64, type: 3}
   throwBobberSound: {fileID: 8300000, guid: 52c977f767d1274449cef39eb8822123, type: 3}

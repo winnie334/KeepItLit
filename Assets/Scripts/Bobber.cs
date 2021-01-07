@@ -21,7 +21,7 @@ public class Bobber : MonoBehaviour {
     private Rigidbody rb;
 
     private AudioSource audioSource;
-    
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -37,8 +37,7 @@ public class Bobber : MonoBehaviour {
             t.rotation = Quaternion.identity;
             if (!isDropped || t.position.y >= seaTransform.position.y) transform.position = new Vector3(pos.x, seaTransform.position.y, pos.z);
             if (shouldDrop) StartCoroutine(dropDobber());
-        }
-        else if (transform.position.y <= seaTransform.position.y) {
+        } else if (transform.position.y <= seaTransform.position.y) {
             rb.useGravity = false;
             rb.velocity = Vector3.zero;
             inSea = true;
@@ -51,26 +50,28 @@ public class Bobber : MonoBehaviour {
 
     IEnumerator dropDobber() {
         shouldDrop = false;
-        float waitTime = Random.Range (minWaitTime, maxWaitTime);
-        yield return new WaitForSeconds (waitTime);
+        float waitTime = Random.Range(minWaitTime, maxWaitTime);
+        yield return new WaitForSeconds(waitTime);
         isDropped = true;
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, -100f, 0));
+        Debug.Log("Should have fish");
         shouldDropFish = true;
         audioSource.PlayOneShot(bobberSubmergeSound); // TODO is this correct place? I don't understand this code
         StartCoroutine(liftDobber());
     }
-    
+
     IEnumerator liftDobber() {
-        yield return new WaitForSeconds (1);
+        yield return new WaitForSeconds(3);
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, 50f, 0));
+        Debug.Log("Fish escaped");
         shouldDropFish = false;
-        yield return new WaitForSeconds (2);
+        yield return new WaitForSeconds(2);
         shouldDrop = true;
         isDropped = false;
     }
-    
+
 
     private void OnTriggerExit(Collider other) {
         if (triggerDisabled) return;
