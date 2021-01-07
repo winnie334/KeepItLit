@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Axe
   m_EditorClassIdentifier: 
   title: Axe
-  icon: {fileID: 21300000, guid: 80e0ef2e628fc0140848e63ff4907576, type: 3}
-  description: Cut some trees
+  icon: {fileID: 21300000, guid: 25b0b4b6f16145b419af769d7a244109, type: 3}
   fuelSize: 0
   isTool: 1

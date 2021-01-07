@@ -64,7 +64,7 @@ public class Crafter : MonoBehaviour {
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
     private void craftPlayerRecipe(Recipe recipe) {
         destroyRequiredMaterials(recipe.requiredItems);
-        Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward,
+        Instantiate(recipe.resultingItem, transform.position + Vector3.up + transform.rotation * Vector3.forward,
             Quaternion.identity);
     }
 

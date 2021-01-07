@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Rope
   m_EditorClassIdentifier: 
   title: Rope
-  icon: {fileID: 21300000, guid: ac8a37aeef7936e47884371293c9cf71, type: 3}
-  description: 
+  icon: {fileID: 21300000, guid: 52a40accc6d5f2a41b3c3e738d176388, type: 3}
   fuelSize: 0
   isTool: 0

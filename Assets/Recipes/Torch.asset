@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Torch
   m_EditorClassIdentifier: 
-  description: Portable light
+  description: A portable light source
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   - {fileID: 11400000, guid: 8baa27bdcc0860145805f991a2f02031, type: 2}

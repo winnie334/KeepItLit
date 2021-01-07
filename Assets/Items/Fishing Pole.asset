@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Fishing Pole
   m_EditorClassIdentifier: 
   title: Fishing Pole
-  icon: {fileID: 21300000, guid: 47f9e2f3030e5254fb7050b93b7223be, type: 3}
-  description: 
+  icon: {fileID: 21300000, guid: dbf30b51b7a36d84c838033b4d34eb1c, type: 3}
   fuelSize: 0
   isTool: 1

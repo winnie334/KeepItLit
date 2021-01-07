@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Metal
   m_EditorClassIdentifier: 
   title: Metal
-  icon: {fileID: 21300000, guid: d536bff29449c3442920eba47f902d88, type: 3}
-  description: Used to craft advanced items
+  icon: {fileID: 21300000, guid: bacf22779b44b414d86bf4e00e522677, type: 3}
   fuelSize: 0
   isTool: 0
