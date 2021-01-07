@@ -10,6 +10,7 @@ public class CraftUI : MonoBehaviour {
 
     public AudioSource audioSource;
     public AudioClip craftSound;
+    public Cinemachine.CinemachineFreeLook cam;
 
     public GameObject craftUI;
     public GameObject recipiesPanel;
@@ -20,6 +21,7 @@ public class CraftUI : MonoBehaviour {
     private Crafter crafter; // The crafter which is using this menu (e.g. player or workbench)
 
     void Start() {
+        Cursor.lockState = CursorLockMode.Locked;
         setCrafter(null);
         craftButton.onClick.AddListener(craftSelected);
     }
@@ -32,9 +34,17 @@ public class CraftUI : MonoBehaviour {
     void toggleUI() {
         if (craftUI.activeInHierarchy) {
             craftUI.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            cam.m_XAxis.m_InputAxisName = "Mouse X";
+            cam.m_YAxis.m_InputAxisName = "Mouse Y";
             crafter.resetAvailableItems();
         } else {
             craftUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            cam.m_XAxis.m_InputAxisValue = 0;
+            cam.m_YAxis.m_InputAxisValue = 0;
+            cam.m_XAxis.m_InputAxisName = "";
+            cam.m_YAxis.m_InputAxisName = "";
             detailPanel.SetActive(false);
             refreshUI();
         }
