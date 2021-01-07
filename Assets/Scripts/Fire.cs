@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -80,9 +81,8 @@ public class Fire : MonoBehaviour {
                     if (item.fuelSize > 0) {
                         audioSource.PlayOneShot(addFireSound);
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
-                        player.removeObject(other.gameObject);
                         updateParts();
-                        Destroy(other.gameObject);
+                        StartCoroutine(DestroyItem(other.gameObject));
                     } else if (other.gameObject.GetComponent<IFireInteraction>() != null) {
                         var interactableItem = other.gameObject.GetComponent<IFireInteraction>();
                         interactableItem.onFireInteraction();
@@ -91,6 +91,15 @@ public class Fire : MonoBehaviour {
                 break;
 
         }
+    }
+
+    //TODO this is a last minute fix but is big dumb
+    IEnumerator DestroyItem(GameObject item)
+    {
+        item.transform.position = new Vector3(0,10000,0); //teleport the item into the abyss to call onTriggerExit of the crafters
+        player.removeObject(item);
+        yield return new WaitForSeconds(0.2f);
+        Destroy(item);
     }
 
     // Updates the display indicating how much fuel is left in the fire
