@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78bdabd9-c1ef-4e8b-a119-36c779863921" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Actions/CreateShipyard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Actions/CreateShipyard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Scripts.dir/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,12 +14,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Actions/CreateShipyard.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Grid.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ChildCollider.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/ChickenAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Actions/CreateShipyard.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Actions/CreateShipyard.cs" />
+      <option value="$PROJECT_DIR$/PlayerMovement.cs" />
+      <option value="$PROJECT_DIR$/ChildCollider.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1ln1trBHCkihpqDhVuKYnwLTDBf" />
@@ -43,6 +49,8 @@
       <updated>1608218258317</updated>
       <workItem from="1608218262673" duration="51000" />
       <workItem from="1608219116858" duration="829000" />
+      <workItem from="1610031546807" duration="216000" />
+      <workItem from="1610031816005" duration="102000" />
     </task>
     <servers />
   </component>
