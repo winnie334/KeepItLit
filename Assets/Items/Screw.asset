@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988aa8a270a464c45acc1af27c34172e, type: 3}
   m_Name: Screw
   m_EditorClassIdentifier: 
-  title: 
+  title: Screw
   icon: {fileID: 21300000, guid: c7c70fd09ac6b084a9fa83397626f7e4, type: 3}
-  description: screw you
   fuelSize: 0
   isTool: 0
