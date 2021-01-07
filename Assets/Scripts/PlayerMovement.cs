@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour {
     public float pushPower = 2f;
     public float maxHealth = 100;
     public int maxToolsOnBack = 2;
+    public Vector3 hache;
+
 
 
     public HealthUI healthUI;

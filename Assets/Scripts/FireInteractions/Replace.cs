@@ -13,7 +13,7 @@ public class Replace : MonoBehaviour, IFireInteraction {
             var obj = Instantiate(newObject, transform.position, Quaternion.identity);
             obj.GetComponent<Rigidbody>().isKinematic = true;
             player.addObject(obj);
-            // player.grabObject(obj);
+            player.grabObject();
         } else {
             Instantiate(newObject, transform.position, Quaternion.identity);
         }
