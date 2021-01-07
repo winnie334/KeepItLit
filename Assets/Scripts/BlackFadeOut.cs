@@ -6,7 +6,7 @@ using Image = UnityEngine.UI.Image;
 
 public class BlackFadeOut : MonoBehaviour {
 
-    private UnityEngine.UI.Image img;
+    private Image img;
     private float timer;
     public float fadeOutDuration;
 
