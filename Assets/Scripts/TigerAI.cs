@@ -9,25 +9,27 @@ using Random = UnityEngine.Random;
 public enum tigerState {
     IDLE,
     CHASING,
-} 
+}
 
 public class TigerAI : Animal {
-    
+    public Animator anim;
+
     public float wanderRadius;
-    
+
     private Transform player;
     public float attackDamage;
 
     public float daySpeed;
     public float nightSpeed;
+    public float jumpDistance;
 
     public float viewDistanceDay;
     public float viewDistanceNight;
     private float viewDistance; // distance the tiger can look around for the player
-    
+
     private Transform target;
     private tigerState state;
-    
+
     public Vector2 wanderTimer; // Min and max time for next wander
     private float idleTimer;
     public float boredTimer; // Time until tiger gets bored of chasing the player
@@ -50,7 +52,7 @@ public class TigerAI : Animal {
     private DayNightCycle dayNightCycle;
 
     // Use this for initialization
-    void OnEnable () {
+    void OnEnable() {
         nextWanderTimer = 0;
         growlWait = Random.Range(0, growlTimer); // Initialize randomly to make sure not all tigers growl at once
         cooldownTimer = cooldownThreshold;
@@ -59,23 +61,26 @@ public class TigerAI : Animal {
         player = GameObject.Find("Player").transform;
     }
 
-    new void Update () {
+    new void Update() {
+        Debug.Log(player);
         base.Update();
         if (!agent.enabled) return;
-        
+
         // Not the cleanest to set this every loop, but in event-based the sun would need a list of tigers... or something
-        agent.speed = dayNightCycle.isDay() ? daySpeed : nightSpeed; 
-        viewDistance = dayNightCycle.isDay() ? viewDistanceDay : viewDistanceNight; 
-        
+        agent.speed = dayNightCycle.isDay() ? daySpeed : nightSpeed;
+        viewDistance = dayNightCycle.isDay() ? viewDistanceDay : viewDistanceNight;
+
         if (canSeePlayer()) {
             lastPlayerPos = player.position;
         }
 
         switch (state) {
             case tigerState.IDLE:
+                anim.SetBool("Walk", false);
                 handleIdle();
                 break;
             case tigerState.CHASING:
+                anim.SetBool("Walk", true);
                 handleChase();
                 break;
         }
@@ -92,11 +97,12 @@ public class TigerAI : Animal {
 
         if (growlWait > growlTimer) {
             growlWait = 0;
-            audioSource.PlayOneShot(growlSounds[Random.Range (0, growlSounds.Count)]);
+            audioSource.PlayOneShot(growlSounds[Random.Range(0, growlSounds.Count)]);
         }
 
         idleTimer += Time.deltaTime;
         if (!(idleTimer >= nextWanderTimer)) return;
+        anim.SetBool("Walk", true);
         agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius * (dayNightCycle.isDay() ? 1 : 2), -1));
         idleTimer = 0;
         nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
@@ -120,6 +126,10 @@ public class TigerAI : Animal {
             return;
         }
 
+        if (Vector3.Distance(transform.position, player.position) < jumpDistance) {
+            anim.SetBool("Attack", true);
+        }
+
         agent.SetDestination(lastPlayerPos);
     }
 
@@ -129,14 +139,18 @@ public class TigerAI : Animal {
         var rayDirection = (player.position - transform.position) * 2;
         if (Physics.Raycast(transform.position, rayDirection, out hit)) {
             var hitPos = hit.transform.position;
-            return Vector3.Distance(hitPos, player.position) < 0.3f && 
+            return Vector3.Distance(hitPos, player.position) < 0.3f &&
                    Vector3.Distance(transform.position, hitPos) < viewDistance; // We check here if it was actually in range
         }
 
         return false;
     }
 
-    #if UNITY_EDITOR
+    public void resetAttack() {
+        anim.SetBool("Attack", false);
+    }
+
+#if UNITY_EDITOR
     public void OnDrawGizmosSelected() {
         Handles.color = Color.red;
         Handles.DrawWireDisc(transform.position, transform.up, wanderRadius);
@@ -144,19 +158,23 @@ public class TigerAI : Animal {
         Handles.DrawWireDisc(transform.position, transform.up, viewDistance);
         if (Application.isPlaying) Gizmos.DrawLine(transform.position, agent.destination);
     }
-    #endif
+#endif
 
     public void OnTriggerEnter(Collider other) {
-        if (chaseTimer < attackDuration) return; // This is still the same attack
-        if (other.gameObject.CompareTag("Player")) {
-            var playerScript = other.gameObject.GetComponent<PlayerMovement>();
-            var dir = Vector3.Normalize(other.transform.position - transform.position);
-            playerScript.takeDamageWithImpact(new Vector3(dir.x, 0.3f, dir.z), 50, attackDamage);
-            chaseTimer = 0;
-            attackTimer = 0;
-            audioSource.PlayOneShot(attackSound);
-            Hints.displayHint("Argh, these tigers are dangerous. I should be careful at night");
-            // Todo play some attack animation
+        if (anim.GetBool("Attack")) {
+            if (other.gameObject.CompareTag("Player")) {
+                var playerScript = other.gameObject.GetComponent<PlayerMovement>();
+                var dir = Vector3.Normalize(other.transform.position - transform.position);
+                playerScript.takeDamageWithImpact(new Vector3(dir.x, 0.3f, dir.z), 50, attackDamage);
+                chaseTimer = 0;
+                attackTimer = 0;
+                audioSource.PlayOneShot(attackSound);
+                Hints.displayHint("Argh, these tigers are dangerous. I should be careful at night");
+                anim.SetBool("Attack", false);
+                // Todo play some attack animation
+            }
+        } else {
+            return;
         }
     }
 }
