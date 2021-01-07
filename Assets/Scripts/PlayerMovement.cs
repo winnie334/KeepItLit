@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour {
     public float pushPower = 2f;
     public float maxHealth = 100;
     public int maxToolsOnBack = 2;
-    public Vector3 hache;
 
 
     public HealthUI healthUI;
@@ -136,7 +135,7 @@ public class PlayerMovement : MonoBehaviour {
                 (currentlyGrabbed.Count - 1) * objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y *
                 objectToGrab.transform.localScale.y, 0);
         objectToGrab.transform.localPosition = localPosition;
-        objectToGrab.transform.localRotation = hand.localRotation;
+        objectToGrab.transform.localRotation = Quaternion.identity;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
         objectToGrab.GetComponent<IOnEquip>()?.onEquip();
@@ -247,16 +246,16 @@ public class PlayerMovement : MonoBehaviour {
     void resetToolsOnBackPositions() {
         for (int i = 0; i < toolsOnBack.Count; i++) {
             toolsOnBack[i].transform.SetParent(back);
-            toolsOnBack[i].transform.localPosition = new Vector3(0, 0, 0);
-            toolsOnBack[i].transform.localRotation = back.transform.localRotation;
-            toolsOnBack[i].transform.Rotate(i * hache);
+            toolsOnBack[i].transform.localPosition = Vector3.zero;
+            toolsOnBack[i].transform.localRotation = Quaternion.identity;
+            toolsOnBack[i].transform.Rotate(-80 * i, 0, 180 * i);
         }
 
         if (currentlyGrabbed.Count > 0) {
             anim.SetBool("Hold", true);
             currentlyGrabbed[0].transform.SetParent(hand);
-            currentlyGrabbed[0].transform.localPosition = new Vector3(0, 0, 0);
-            currentlyGrabbed[0].transform.localRotation = hand.localRotation;
+            currentlyGrabbed[0].transform.localPosition = Vector3.zero;
+            currentlyGrabbed[0].transform.localRotation = Quaternion.identity;
         } else {
 
             anim.SetBool("Hold", false);
