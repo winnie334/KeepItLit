@@ -259,6 +259,7 @@ GameObject:
   - component: {fileID: 8274578925456309496}
   - component: {fileID: -3768146069408404244}
   - component: {fileID: 2924417910099564622}
+  - component: {fileID: -3552363372800637160}
   m_Layer: 0
   m_Name: Boat_2
   m_TagString: Item
@@ -274,8 +275,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8763693840704071234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalPosition: {x: 7.81, y: -1.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8230825893409151254}
   - {fileID: 7853101473574494504}
@@ -309,3 +310,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3552363372800637160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8763693840704071234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38f016d24f536b4a9c043002fb20b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
