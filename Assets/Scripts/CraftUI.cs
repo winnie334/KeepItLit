@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class CraftUI : MonoBehaviour {
     public Transform playerBrain;
     private GameObject shipyard; //TODO what if there are multiple shipyards?
-    
+
     public AudioSource audioSource;
     public AudioClip craftSound;
 
@@ -68,7 +68,7 @@ public class CraftUI : MonoBehaviour {
             var rcp = Instantiate(recipeBox, recipiesPanel.transform, true);
             rcp.SetActive(true);
             rcp.GetComponent<Button>().onClick.AddListener(delegate { selectRecipe(i); });
-            
+
             rcp.GetComponentsInChildren<Image>()[1].sprite = i.resultingItem.GetComponent<ItemAssociation>().item.icon;
             if (!possibleRecipes.Contains(i)) continue; // We can't craft this recipe
             rcp.GetComponent<Image>().color = canCraftColor;

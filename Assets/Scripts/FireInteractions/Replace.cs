@@ -8,10 +8,12 @@ public class Replace : MonoBehaviour, IFireInteraction {
     public void onFireInteraction() {
         if (newObject == null) return;
         if (transform.parent) { // This food is being carried
-            var player = transform.parent.GetComponent<PlayerMovement>();
+            var player = transform.GetComponentInParent<PlayerMovement>();
             player.removeObject(gameObject);
-            Instantiate(newObject, transform.position, Quaternion.identity);
-            player.handleGrab();
+            var obj = Instantiate(newObject, transform.position, Quaternion.identity);
+            obj.GetComponent<Rigidbody>().isKinematic = true;
+            player.addObject(obj);
+            player.grabObject();
         } else {
             Instantiate(newObject, transform.position, Quaternion.identity);
         }
