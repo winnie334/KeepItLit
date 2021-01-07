@@ -5019,6 +5019,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Duration: 35
   lightRadius: 100
+  fireActivatedSound: {fileID: 8300000, guid: 618da2c625ccbf74882aff332c12e53f, type: 3}
 --- !u!82 &1388232070959888366
 AudioSource:
   m_ObjectHideFlags: 0

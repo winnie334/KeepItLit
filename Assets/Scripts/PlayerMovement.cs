@@ -204,9 +204,10 @@ public class PlayerMovement : MonoBehaviour {
     public void TakeDamage(float damage) {
         if (currentHealth - damage > 0) {
             currentHealth = Math.Max(currentHealth - damage, 0);
+            healthUI.SetHealth(currentHealth);
+            if (audioSource.isPlaying) return;
             audioSource.clip = damageSound;
             audioSource.Play();
-            healthUI.SetHealth(currentHealth);
         } else {
             Game.EndGame(false, "You died...");
         }
