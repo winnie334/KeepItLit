@@ -156,9 +156,7 @@ public class PlayerMovement : MonoBehaviour {
     public void removeObject(GameObject obj) {
         obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
-        if (currentlyGrabbed.Count == 0) {
-            anim.SetBool("Hold", false);
-        }
+        if (currentlyGrabbed.Count == 0) anim.SetBool("Hold", false);
     }
     public void addObject(GameObject obj) {
         anim.SetBool("Hold", true);
@@ -171,9 +169,8 @@ public class PlayerMovement : MonoBehaviour {
         if (anim.GetBool("IsFishing")) return;
         if (currentlyGrabbed.Count == 0) {
             var objectToGrab = lookForClosestGrabbableItem(null);
-            if (objectToGrab is null) {
-                return;
-            }
+            if (objectToGrab is null) return;
+            
             currentlyGrabbed.Add(objectToGrab);
             anim.SetBool("Grab", true);
 

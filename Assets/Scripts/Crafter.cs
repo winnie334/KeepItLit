@@ -30,7 +30,11 @@ public class Crafter : MonoBehaviour {
         foreach (var obj in nearbyItems) {
             var item = obj.GetComponent<ItemAssociation>().item;
             if (!items.ContainsKey(item)) items.Add(item, new List<GameObject> { obj.gameObject });
-            else items[item].Add(obj.gameObject);
+            else
+            {
+                if (items[item].Contains(obj.gameObject)) continue;
+                items[item].Add(obj.gameObject);
+            }
         }
 
         availableItems = items;
@@ -107,7 +111,12 @@ public class Crafter : MonoBehaviour {
         if (itemAssociation is null) return;
         if (!availableItems.ContainsKey(itemAssociation.item))
             availableItems.Add(itemAssociation.item, new List<GameObject> { hit.gameObject });
-        else availableItems[itemAssociation.item].Add(hit.gameObject);
+
+        else {
+            var obj = hit.gameObject;
+            if (availableItems[itemAssociation.item].Contains(obj)) return; //obj has multiple colliders -_-
+            availableItems[itemAssociation.item].Add(obj);
+        }
         craftUI.refreshUI();
     }
 
