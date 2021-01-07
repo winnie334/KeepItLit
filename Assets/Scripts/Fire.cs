@@ -25,15 +25,16 @@ public class Fire : MonoBehaviour {
     public Slider slider;
     public GameObject warningSymbol;
     public AudioClip warningSound;
+    public AudioClip addFireSound;
 
     private ParticleSystem part;
     private ParticleSystem.ShapeModule sh;
     private ParticleSystem.EmissionModule em;
 
-    private AudioSource fireSfxSource;
+    private AudioSource audioSource;
 
     void Start() {
-        fireSfxSource = GetComponents<AudioSource>()[1];
+        audioSource = GetComponent<AudioSource>();
         part = GetComponent<ParticleSystem>();
         sh = part.shape;
         em = part.emission;
@@ -77,7 +78,7 @@ public class Fire : MonoBehaviour {
                 if (other.gameObject.CompareTag("Item")) {
                     var item = other.gameObject.GetComponent<ItemAssociation>().item;
                     if (item.fuelSize > 0) {
-                        fireSfxSource.Play();
+                        audioSource.PlayOneShot(addFireSound);
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
                         player.removeObject(other.gameObject);
                         updateParts();
