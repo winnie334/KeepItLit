@@ -116,9 +116,9 @@ public class PlayerMovement : MonoBehaviour {
         GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 2f, 2.5f)
             .Select(hit => hit.gameObject)
             .Where(obj => !(obj.GetComponent<ItemAssociation>() is null) && !currentlyGrabbed.Contains(obj) && !obj.name.Contains("Boat")
-                                                                         && (itemToCompare is null || (itemToCompare.isTool ||
-                                                                              obj.GetComponent<ItemAssociation>()
-                                                                                  .item == itemToCompare)))
+                          && !toolsOnBack.Contains(obj) && (itemToCompare is null || itemToCompare.isTool ||
+                                                            obj.GetComponent<ItemAssociation>()
+                                                                .item == itemToCompare))
             .OrderBy(o => (o.transform.position - curPos).sqrMagnitude)
             .FirstOrDefault();
         return objectToGrab;
