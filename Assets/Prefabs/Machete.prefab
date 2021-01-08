@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 273367599248396813}
   - component: {fileID: 273367599248396814}
   - component: {fileID: 273367599248396810}
+  - component: {fileID: 4126079205927224130}
   m_Layer: 0
   m_Name: machete
   m_TagString: Item
@@ -93,6 +94,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.007022677, y: 0.0020127865, z: 0.0050624856}
   m_Center: {x: -0.002178232, y: -0.015513133, z: -0.016095117}
+--- !u!114 &4126079205927224130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083779487226579757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &2420092582200985530
 GameObject:
   m_ObjectHideFlags: 0

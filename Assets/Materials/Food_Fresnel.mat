@@ -65,7 +65,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _Diffemissive: 0
     - _DstBlend: 0
-    - _FresnelIntensity: 0.9
+    - _FresnelIntensity: 0.1
     - _FresnelPower: 1.9
     - _FresnelSize: 1.79
     - _GlossMapScale: 1

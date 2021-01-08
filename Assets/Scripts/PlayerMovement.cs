@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour {
 
     GameObject lookForClosestGrabbableItem(Item itemToCompare) {
         var curPos = transform.position;
-        GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 3, 3)
+        GameObject objectToGrab = Physics.OverlapSphere(curPos + transform.rotation * Vector3.forward * 2f, 2.5f)
             .Select(hit => hit.gameObject)
             .Where(obj => !(obj.GetComponent<ItemAssociation>() is null) && !currentlyGrabbed.Contains(obj) && !obj.name.Contains("Boat")
                                                                          && (itemToCompare is null || (itemToCompare.isTool ||
@@ -296,6 +296,6 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnDrawGizmosSelected() {
         Gizmos.color = new Color(1, 1, 0, 0.75F);
-        Gizmos.DrawSphere(transform.position + transform.rotation * Vector3.forward * 2, 2);
+        Gizmos.DrawSphere(transform.position + transform.rotation * Vector3.forward * 2f, 2.5f);
     }
 }
