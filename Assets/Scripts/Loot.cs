@@ -49,6 +49,7 @@ public class Loot : MonoBehaviour {
                     var spawnPos = transform.position + (Vector3)Random.insideUnitCircle + new Vector3(0, 2, 0);
                     Instantiate(loot.resource, spawnPos, Quaternion.identity);
                 }
+                Hints.displayHint("[Scroll] - Put tool on back");
                 Destroy(gameObject);
             }
         } else {

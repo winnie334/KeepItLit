@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Screw
   m_EditorClassIdentifier: 
-  description: An important building tool
+  description: I could smash this iron into a shape...
   requiredItems:
   - {fileID: 11400000, guid: 4a2e33785be68ba4c983908fe034988d, type: 2}
+  - {fileID: 11400000, guid: 9ca14c4bcfbafac488546ad8a8194e58, type: 2}
   resultingItem: {fileID: 2075781466222662712, guid: 7b559ae11eedde54db5fdfa71730d9ae, type: 3}

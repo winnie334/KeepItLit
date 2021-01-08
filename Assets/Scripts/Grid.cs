@@ -141,7 +141,7 @@ public class Grid : MonoBehaviour {
 
 		var fire = GameObject.Find("Fire");
 		spawnPositions = new List<Vector3>();
-		for(var i = 0; i < 50; i++) spawnPositions.Add(getRandomSpawnLocation());
+		for(var i = 0; i < 100; i++) spawnPositions.Add(getRandomSpawnLocation());
 		spawnPos = spawnPositions.OrderBy(pos => Vector3.Distance(spawnPos, pos)).First();
 		fire.transform.position = spawnPos;
 	}

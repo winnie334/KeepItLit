@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Boat_4
   m_EditorClassIdentifier: 
-  description: You should think about this once your ship is complete
+  description: With this food, I can begin my journey
   requiredItems:
   - {fileID: 11400000, guid: 4bae051ffda8e314c9863c8c439911c0, type: 2}
   - {fileID: 11400000, guid: cd0cbd3561566d540ba69765ba30fbcd, type: 2}

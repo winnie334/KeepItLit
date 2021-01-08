@@ -55,9 +55,8 @@ public class Bobber : MonoBehaviour {
         isDropped = true;
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, -100f, 0));
-        Debug.Log("Should have fish");
         shouldDropFish = true;
-        audioSource.PlayOneShot(bobberSubmergeSound); // TODO is this correct place? I don't understand this code
+        audioSource.PlayOneShot(bobberSubmergeSound);
         StartCoroutine(liftDobber());
     }
 
@@ -65,7 +64,6 @@ public class Bobber : MonoBehaviour {
         yield return new WaitForSeconds(3);
         rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0, 50f, 0));
-        Debug.Log("Fish escaped");
         shouldDropFish = false;
         yield return new WaitForSeconds(2);
         shouldDrop = true;

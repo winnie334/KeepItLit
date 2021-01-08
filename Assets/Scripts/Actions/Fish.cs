@@ -32,7 +32,7 @@ namespace Actions {
         }
 
         public void execute(PlayerMovement playerMov) {
-            Hints.displayHint("Hold to throw, Release at the right time to reel in the fish");
+            Hints.displayHint("Hold to throw, release to reel");
             if (currBobber && anim.GetBool("IsFishing")) {
                 anim.SetBool("IsFishing", false);
                 if (currBobber.GetComponent<Bobber>().hasFish()) {

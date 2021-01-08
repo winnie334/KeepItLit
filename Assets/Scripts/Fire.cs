@@ -108,7 +108,7 @@ public class Fire : MonoBehaviour {
         if (fireSize < warningSize && !warningSymbol.activeInHierarchy) {
             warningSymbol.SetActive(true);
             player.playSound(warningSound);
-            Hints.displayHint("My fire is almost out, I should add fuel soon !");
+            Hints.displayHint("My fire is almost out, I should add fuel soon");
         }
         else if (warningSymbol.activeInHierarchy && fireSize > warningSize) warningSymbol.SetActive(false);
         slider.value = fireSize;

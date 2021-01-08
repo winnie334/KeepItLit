@@ -134,9 +134,9 @@ public class PlayerMovement : MonoBehaviour {
         objectToGrab.transform.SetParent(hand); // One day we should make a better holding animation
         Vector3 localPosition = currentlyGrabbed.Count == 1
             ? new Vector3(0, 0, 0)
-            : new Vector3(0,
-                (currentlyGrabbed.Count - 1) * objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y *
-                objectToGrab.transform.localScale.y, 0);
+            : new Vector3(0, (currentlyGrabbed.Count - 1) * 
+                             (objectToGrab.GetComponent<MeshFilter>() ? objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y : 0.5f) *
+                             objectToGrab.transform.localScale.y, 0);
         objectToGrab.transform.localPosition = localPosition;
         objectToGrab.transform.localRotation = Quaternion.identity;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
@@ -231,9 +231,8 @@ public class PlayerMovement : MonoBehaviour {
             if (toolsOnBack.Count < maxToolsOnBack) {
                 toolsOnBack.Insert(isForwardScroll ? toolsOnBack.Count : 0, currentlyGrabbed[0]);
                 currentlyGrabbed = new List<GameObject>();
+                Hints.displayHint("I can carry three of the same item at once.");
                 anim.SetBool("PutOnBack", true);
-            } else {
-                return;
             }
         } else if (toolsOnBack.Count > 0 && currentlyGrabbed.Count == 0) {
             currentlyGrabbed.Add(toolsOnBack[indexOfTool]);
