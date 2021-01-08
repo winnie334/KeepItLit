@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -25,12 +26,16 @@ public class Fire : MonoBehaviour {
     public Slider slider;
     public GameObject warningSymbol;
     public AudioClip warningSound;
+    public AudioClip addFireSound;
 
     private ParticleSystem part;
     private ParticleSystem.ShapeModule sh;
     private ParticleSystem.EmissionModule em;
 
+    private AudioSource audioSource;
+
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         part = GetComponent<ParticleSystem>();
         sh = part.shape;
         em = part.emission;
@@ -55,7 +60,7 @@ public class Fire : MonoBehaviour {
     void updateParts() {
         damageCol.transform.localScale = Vector3.one * (fireSize * damageColliderSize);
         col.transform.localScale = Vector3.one * (Math.Max(fireSize, 0.5f) * fireColliderSize);
-        lightFire.range = Math.Min(fireSize, maximalSizeFire) * lightRange;
+        lightFire.range = Math.Max(fireSize / maximalSizeFire, 0.5f) * lightRange;
         sh.scale = Vector3.one * fireSize;
         em.rateOverTime = (ParticleSystem.MinMaxCurve)(Math.Pow(sh.scale.magnitude, 3) * densityFire);
         updateUI();
@@ -74,10 +79,11 @@ public class Fire : MonoBehaviour {
                 if (other.gameObject.CompareTag("Item")) {
                     var item = other.gameObject.GetComponent<ItemAssociation>().item;
                     if (item.fuelSize > 0) {
+                        audioSource.PlayOneShot(addFireSound);
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
-                        player.removeObject(other.gameObject);
+                        Hints.displayHint("Good... maybe I can craft something. [C]");
                         updateParts();
-                        Destroy(other.gameObject);
+                        StartCoroutine(DestroyItem(other.gameObject));
                     } else if (other.gameObject.GetComponent<IFireInteraction>() != null) {
                         var interactableItem = other.gameObject.GetComponent<IFireInteraction>();
                         interactableItem.onFireInteraction();
@@ -88,12 +94,21 @@ public class Fire : MonoBehaviour {
         }
     }
 
+    //TODO this is a last minute fix but is big dumb
+    IEnumerator DestroyItem(GameObject item)
+    {
+        item.transform.position = new Vector3(0,10000,0); //teleport the item into the abyss to call onTriggerExit of the crafters
+        player.removeObject(item);
+        yield return new WaitForSeconds(0.2f);
+        Destroy(item);
+    }
+
     // Updates the display indicating how much fuel is left in the fire
     private void updateUI() {
         if (fireSize < warningSize && !warningSymbol.activeInHierarchy) {
             warningSymbol.SetActive(true);
             player.playSound(warningSound);
-            Hints.displayHint("My fire is almost out, \n I should add fuel soon !");
+            Hints.displayHint("My fire is almost out, I should add fuel soon !");
         }
         else if (warningSymbol.activeInHierarchy && fireSize > warningSize) warningSymbol.SetActive(false);
         slider.value = fireSize;

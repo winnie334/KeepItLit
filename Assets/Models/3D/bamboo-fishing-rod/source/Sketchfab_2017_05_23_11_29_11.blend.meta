@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:Assets/Models/3D/bamboo-fishing-rod/source/Sketchfab_2017_05_23_11_29_11.blend.meta
 guid: 362f959b327685f419733f4ae74ed85f
+=======
+guid: 7d62eb7345208cf459d87f392232a376
+>>>>>>> Stashed changes:Assets/Models/3D/tools/Axe.fbx.meta
+=======
+guid: 362f959b327685f419733f4ae74ed85f
+>>>>>>> Stashed changes
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []

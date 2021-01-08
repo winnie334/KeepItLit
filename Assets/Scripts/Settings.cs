@@ -6,6 +6,7 @@ public class Settings : MonoBehaviour {
 
     public GameObject settingsUI;
     public Grid island;
+    public GameObject helpUI;
     private bool paused;
 
     // Start is called before the first frame update
@@ -15,7 +16,8 @@ public class Settings : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) togglePause();
+        if (Input.GetKeyDown(KeyCode.Escape) && !helpUI.activeInHierarchy) togglePause();
+        if (Input.GetKeyDown(KeyCode.Escape) && helpUI.activeInHierarchy) toggleHelpUI();
     }
 
     // Options are 1280x720, 1920x1080, 2560x1440
@@ -32,13 +34,14 @@ public class Settings : MonoBehaviour {
         paused = !paused;
         Time.timeScale = paused ? 0 : 1;
         settingsUI.SetActive(paused);
-    }
-    
-    public void changeMusicVolume(float vol) {
-        // TODO once we have music
+        Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
     }
 
     public void changeSFXVolume(float vol) {
         AudioListener.volume = vol;
+    }
+    
+    public void toggleHelpUI() {
+        helpUI.SetActive(!helpUI.activeInHierarchy);
     }
 }

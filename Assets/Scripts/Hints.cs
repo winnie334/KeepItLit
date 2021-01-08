@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Hints : MonoBehaviour {
 
     public GameObject hintCard;
+    public AudioClip hintSound;
     public float timeToShow; // How long each hint should be shown on the screen
     private float timeShown;
     
@@ -36,6 +37,7 @@ public class Hints : MonoBehaviour {
         currentCard = Instantiate(hintCard, hintCard.transform.position, Quaternion.identity);
         currentCard.transform.SetParent(transform, false);
         currentCard.GetComponentInChildren<Text>().text = message;
+        currentCard.GetComponent<AudioSource>().PlayOneShot(hintSound);
         timeShown = 0;
     }
 

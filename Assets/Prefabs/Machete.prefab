@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: -1434393235108563733}
   - component: {fileID: -1444173742433984805}
   - component: {fileID: 1432682650346757305}
+  - component: {fileID: 8628964942070366173}
   m_Layer: 0
   m_Name: Machete
   m_TagString: Item
@@ -237,3 +238,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   force: 50
+--- !u!114 &8628964942070366173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8586874645996418599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: accbfbf645f98b4449eb0e9b01a4c284, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10

@@ -20,7 +20,7 @@ public class Crafter : MonoBehaviour {
     public void setAvailableItems() {
         SphereCollider objCollider = GetComponent<SphereCollider>();
         Bounds bounds;
-        Collider[] nearbyItems = Physics.OverlapSphere((bounds = objCollider.bounds).center, bounds.size.y/2) // Look for objects in a radius
+        Collider[] nearbyItems = Physics.OverlapSphere((bounds = objCollider.bounds).center, bounds.size.y / 2) // Look for objects in a radius
             .Where(hit => hit.CompareTag("Item"))
             .ToArray(); // If it doesn't have item script, it isn't an item
 
@@ -29,8 +29,12 @@ public class Crafter : MonoBehaviour {
         var items = new Dictionary<Item, List<GameObject>>();
         foreach (var obj in nearbyItems) {
             var item = obj.GetComponent<ItemAssociation>().item;
-            if (!items.ContainsKey(item)) items.Add(item, new List<GameObject> {obj.gameObject});
-            else items[item].Add(obj.gameObject);
+            if (!items.ContainsKey(item)) items.Add(item, new List<GameObject> { obj.gameObject });
+            else
+            {
+                if (items[item].Contains(obj.gameObject)) continue;
+                items[item].Add(obj.gameObject);
+            }
         }
 
         availableItems = items;
@@ -46,12 +50,11 @@ public class Crafter : MonoBehaviour {
         foreach (var requiredMaterial in requiredMaterials) {
             var bestObject = availableItems[requiredMaterial][0]; // If you want to do smart picking (closest first, direct raycast, ...) do it here
             availableItems[requiredMaterial].Remove(bestObject);
-            
+
             if (bestObject.transform.parent) {
-                var player = bestObject.transform.parent.GetComponent<PlayerMovement>();
+                var player = bestObject.GetComponentInParent<PlayerMovement>();
                 if (player != null) {
                     player.removeObject(bestObject);
-                    player.releaseObjects();
                 }
             }
             Destroy(bestObject);
@@ -61,13 +64,13 @@ public class Crafter : MonoBehaviour {
     // Executes a recipe by removing the ingredients from the world and spawning the outcome of the recipe
     private void craftPlayerRecipe(Recipe recipe) {
         destroyRequiredMaterials(recipe.requiredItems);
-        Instantiate(recipe.resultingItem, transform.position + transform.rotation * Vector3.forward,
+        Instantiate(recipe.resultingItem, transform.position + Vector3.up + transform.rotation * Vector3.forward,
             Quaternion.identity);
     }
 
     private void craftShipyardRecipe(Recipe recipe, Shipyard shipyard) {
         availableItems[recipe.resultingItem.GetComponent<ItemAssociation>().item] =
-            new List<GameObject>(new[] {Instantiate(recipe.resultingItem, shipyard.transform)});
+            new List<GameObject>(new[] { Instantiate(recipe.resultingItem, shipyard.transform) });
         destroyRequiredMaterials(recipe.requiredItems);
         shipyard.handleBoatPartCreated();
     }
@@ -107,8 +110,13 @@ public class Crafter : MonoBehaviour {
         var itemAssociation = hit.gameObject.GetComponent<ItemAssociation>();
         if (itemAssociation is null) return;
         if (!availableItems.ContainsKey(itemAssociation.item))
-            availableItems.Add(itemAssociation.item, new List<GameObject> {hit.gameObject});
-        else availableItems[itemAssociation.item].Add(hit.gameObject);
+            availableItems.Add(itemAssociation.item, new List<GameObject> { hit.gameObject });
+
+        else {
+            var obj = hit.gameObject;
+            if (availableItems[itemAssociation.item].Contains(obj)) return; //obj has multiple colliders -_-
+            availableItems[itemAssociation.item].Add(obj);
+        }
         craftUI.refreshUI();
     }
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 598088632}
   - component: {fileID: -4205599967010982361}
   - component: {fileID: 136295405765974234}
+  - component: {fileID: -6710670951443389717}
   m_Layer: 0
   m_Name: Tiger
   m_TagString: Animal
@@ -125,6 +126,7 @@ MonoBehaviour:
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
   - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
+  anim: {fileID: -6710670951443389717}
   wanderRadius: 8
   attackDamage: 15
   daySpeed: 4.5
@@ -275,6 +277,25 @@ CapsuleCollider:
   m_Height: 0.9900962
   m_Direction: 2
   m_Center: {x: -0.022332273, y: 0, z: -0.00024497617}
+--- !u!95 &-6710670951443389717
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282684478635323752}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 322f61458859aa047b866293d05f6293, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3277617412013494611
 GameObject:
   m_ObjectHideFlags: 0

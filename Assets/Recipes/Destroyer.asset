@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Destroyer
   m_EditorClassIdentifier: 
-  description: 
+  description: ???
   requiredItems:
   - {fileID: 11400000, guid: 9ca14c4bcfbafac488546ad8a8194e58, type: 2}
   - {fileID: 11400000, guid: 4aec522cfcab57c49a24f28e95986739, type: 2}

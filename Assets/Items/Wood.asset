@@ -14,6 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   title: Wood
   icon: {fileID: 21300000, guid: 53887d5563de44544823bf80bb9d43a9, type: 3}
-  description: 
-  fuelSize: 1
+  fuelSize: 0.6
   isTool: 0

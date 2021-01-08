@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Shipyard Construction Kit
   m_EditorClassIdentifier: 
-  description: Use in the water to build a shipyard
+  description: To start building an escape raft
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   - {fileID: 11400000, guid: d1709d74070cc1f4b89bdc1bb8de5c0b, type: 2}

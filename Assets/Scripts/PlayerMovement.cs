@@ -16,12 +16,16 @@ public class PlayerMovement : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip pickupSound;
     public AudioClip dropSound;
+    public AudioClip damageSound;
 
     public float speed = 6f;
     public float turnSmoothTime = 0.1f;
     public float pushPower = 2f;
     public float maxHealth = 100;
     public int maxToolsOnBack = 2;
+    public Vector3 hache;
+
+
 
     public HealthUI healthUI;
 
@@ -38,23 +42,33 @@ public class PlayerMovement : MonoBehaviour {
         currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
         healthUI.SetHealth(currentHealth);
-        Hints.displayHint("You can pick up things with space");
+        Hints.displayHint("Let's find some wood to put on the fire");
+        Hints.displayHint("Press [Escape] for settings and controls");
     }
 
     // Update is called once per frame
     void Update() {
         handleMovement();
         if (Input.GetKeyDown("space")) handleGrab();
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) handleItemSwitch(true);
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) handleItemSwitch(false);
-        if (Input.GetMouseButtonDown(0) && currentlyGrabbed.Count == 1 && currentlyGrabbed[0].GetComponents<IAction>().Length > 0) {
-            anim.SetInteger("Extract", anim.GetInteger("Extract") + 1);
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) {
+            handleItemSwitch(true);
+        } else if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
+            handleItemSwitch(false);
+        }
+        if (Input.GetMouseButton(0) && currentlyGrabbed.Count == 1 && currentlyGrabbed[0].GetComponents<IAction>().Length > 0) {
+            anim.SetBool("Extract", true);
+        } else {
+            anim.SetBool("Extract", false);
         }
 
         // mainCamera.transform.position = transform.position + cameraOffset;
     }
 
     void handleMovement() {
+        if (
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Grab")
+            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1
+            ) return;
         var originalPos = transform.position; // We save this to revert to it in case we do illegal movement (e.g drown)
 
         // Now we read the inputs and move our character accordingly
@@ -65,7 +79,7 @@ public class PlayerMovement : MonoBehaviour {
         if (impact.magnitude > 0.2) controller.Move(impact * Time.deltaTime);
         else if (direction.magnitude >= 0.1f) {
             anim.SetBool("Walk", true);
-            anim.SetInteger("Extract", 0);
+            anim.SetBool("Extract", false);
             var targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             var angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity,
                 turnSmoothTime);
@@ -111,9 +125,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void grabObject() {
+        anim.SetBool("Grab", false);
+        anim.SetBool("Hold", true);
         var objectToGrab = currentlyGrabbed[currentlyGrabbed.Count - 1];
         if (objectToGrab is null) return; // Player tried to grab something when there was nothing in this range
-        anim.Play("metarig|Grab");
         Hints.displayHintOnGrab(objectToGrab.GetComponent<ItemAssociation>().item.title);
 
         objectToGrab.transform.SetParent(hand); // One day we should make a better holding animation
@@ -123,13 +138,15 @@ public class PlayerMovement : MonoBehaviour {
                 (currentlyGrabbed.Count - 1) * objectToGrab.GetComponent<MeshFilter>().sharedMesh.bounds.size.y *
                 objectToGrab.transform.localScale.y, 0);
         objectToGrab.transform.localPosition = localPosition;
+        objectToGrab.transform.localRotation = Quaternion.identity;
         objectToGrab.GetComponent<Rigidbody>().isKinematic = true;
         audioSource.PlayOneShot(pickupSound);
         objectToGrab.GetComponent<IOnEquip>()?.onEquip();
+
     }
 
     public void releaseObjects() {
-        anim.SetBool("Grab", false);
+        anim.SetBool("Hold", false);
         currentlyGrabbed.ForEach(grabbedItem => {
             grabbedItem.transform.parent = null;
             grabbedItem.GetComponent<Rigidbody>().isKinematic = false;
@@ -140,17 +157,23 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     public void removeObject(GameObject obj) {
-        anim.SetBool("Grab", false);
         obj.GetComponent<IOnEquip>()?.onUnEquip();
         currentlyGrabbed.Remove(obj);
+        if (currentlyGrabbed.Count == 0) anim.SetBool("Hold", false);
+    }
+    public void addObject(GameObject obj) {
+        anim.SetBool("Hold", true);
+        currentlyGrabbed.Add(obj);
+        resetToolsOnBackPositions();
     }
 
     public void handleGrab() {
+        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("Extract") || anim.GetCurrentAnimatorStateInfo(0).IsName("Grab")) && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1) return;
+        if (anim.GetBool("IsFishing")) return;
         if (currentlyGrabbed.Count == 0) {
             var objectToGrab = lookForClosestGrabbableItem(null);
-            if (objectToGrab is null) {
-                return;
-            }
+            if (objectToGrab is null) return;
+
             currentlyGrabbed.Add(objectToGrab);
             anim.SetBool("Grab", true);
 
@@ -167,14 +190,13 @@ public class PlayerMovement : MonoBehaviour {
                     }
 
                     currentlyGrabbed.Add(objectToGrab);
-                    anim.Play("metarig|Grab");
+                    anim.SetBool("Grab", true);
                 }
             }
         }
     }
 
     void handleItemAction() {
-        anim.SetInteger("Extract", anim.GetInteger("Extract") - 1);
         var actions = currentlyGrabbed[0].GetComponents<IAction>();
         foreach (var action in actions) {
             action.execute(this);
@@ -185,6 +207,9 @@ public class PlayerMovement : MonoBehaviour {
         if (currentHealth - damage > 0) {
             currentHealth = Math.Max(currentHealth - damage, 0);
             healthUI.SetHealth(currentHealth);
+            if (audioSource.isPlaying) return;
+            audioSource.clip = damageSound;
+            audioSource.Play();
         } else {
             Game.EndGame(false, "You died...");
         }
@@ -199,36 +224,42 @@ public class PlayerMovement : MonoBehaviour {
 
 
     void handleItemSwitch(bool isForwardScroll) {
+        if (anim.IsInTransition(0) || anim.GetCurrentAnimatorStateInfo(0).IsName("ToolOnBack")) return;
+        if (anim.GetBool("IsFishing")) return;
         var indexOfTool = isForwardScroll ? 0 : toolsOnBack.Count - 1;
-        anim.SetBool("PutOnBack", true);
         if (currentlyGrabbed.Count > 0 && currentlyGrabbed[0].GetComponent<ItemAssociation>().item.isTool) {
             if (toolsOnBack.Count < maxToolsOnBack) {
-                toolsOnBack.Insert(isForwardScroll ? 0 : toolsOnBack.Count, currentlyGrabbed[0]);
+                toolsOnBack.Insert(isForwardScroll ? toolsOnBack.Count : 0, currentlyGrabbed[0]);
                 currentlyGrabbed = new List<GameObject>();
-                anim.SetBool("Grab", false);
+                anim.SetBool("PutOnBack", true);
             } else {
                 return;
             }
-        } else {
-            if (toolsOnBack.Count == 0) return;
-            releaseObjects();
+        } else if (toolsOnBack.Count > 0 && currentlyGrabbed.Count == 0) {
             currentlyGrabbed.Add(toolsOnBack[indexOfTool]);
             toolsOnBack.RemoveAt(indexOfTool);
-            anim.SetBool("Grab", true);
+            anim.SetBool("PutOnBack", true);
+
         }
     }
 
     void resetToolsOnBackPositions() {
         for (int i = 0; i < toolsOnBack.Count; i++) {
-            Debug.Log("reset back");
             toolsOnBack[i].transform.SetParent(back);
-            toolsOnBack[i].transform.localPosition = new Vector3(0, 0, 0);
-        }
-        if (currentlyGrabbed.Count > 0) {
-            Debug.Log("reset hand");
-            currentlyGrabbed[0].transform.SetParent(hand);
+            toolsOnBack[i].transform.localPosition = Vector3.zero;
+            toolsOnBack[i].transform.localRotation = Quaternion.identity;
+            toolsOnBack[i].transform.Rotate(-80 * i, 0, 180 * i);
         }
 
+        if (currentlyGrabbed.Count > 0) {
+            anim.SetBool("Hold", true);
+            currentlyGrabbed[0].transform.SetParent(hand);
+            currentlyGrabbed[0].transform.localPosition = Vector3.zero;
+            currentlyGrabbed[0].transform.localRotation = Quaternion.identity;
+        } else {
+
+            anim.SetBool("Hold", false);
+        }
 
         anim.SetBool("PutOnBack", false);
     }

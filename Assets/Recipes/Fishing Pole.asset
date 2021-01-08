@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4895cc6a3d749f4b869e907e4fec448, type: 3}
   m_Name: Fishing Pole
   m_EditorClassIdentifier: 
-  description: Used for fishing
+  description: I could catch some fish with this
   requiredItems:
   - {fileID: 11400000, guid: 651d41697d91bcf46bec7ce48bb282be, type: 2}
   - {fileID: 11400000, guid: ad940b804e14b5b42a79de95afb5efa6, type: 2}
-  resultingItem: {fileID: 1140708345324109864, guid: 7447b031fe156bc43896255d3269c225, type: 3}
+  resultingItem: {fileID: 7078110499795356433, guid: 388d959a6a660d041b36a9210aaafe93, type: 3}

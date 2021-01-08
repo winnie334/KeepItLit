@@ -22,7 +22,7 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         var targetPos =  determineShipyardLocation();
         if (targetPos.y > maxShipyardSpawnHeight) return;
         
-        Instantiate(shipyard, targetPos, Quaternion.identity);
+        Instantiate(shipyard, targetPos, Quaternion.Euler(determineShipyardRotation()));
         playerMov.removeObject(gameObject);
         playerMov.playSound(buildSound);
         Hints.displayHint("Awesome, here I can craft my boat");
@@ -49,6 +49,7 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         var targetPos = determineShipyardLocation();
         colorProjectedShipyard(targetPos.y < maxShipyardSpawnHeight ? goodLocationMaterial : badLocationMaterial);
         projectedShipyard.transform.position = targetPos;
+        projectedShipyard.transform.eulerAngles = determineShipyardRotation();
     }
 
     private void colorProjectedShipyard(Material color) {
@@ -61,6 +62,10 @@ public class CreateShipyard : MonoBehaviour, IAction, IOnEquip {
         var pos = t.position;
         return new Vector3(pos.x, pos.y - 1f,
             pos.z) + shipyardSpawnDistance * t.forward;
+    }
+
+     private Vector3 determineShipyardRotation() {
+         return new Vector3(0, player.transform.eulerAngles.y - 90 ,0); //TODO -90 because the shipyard model is rotated 90 degrees compared to the player. Is a bit ugly
     }
 
     public void onEquip() {

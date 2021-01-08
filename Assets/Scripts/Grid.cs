@@ -94,7 +94,7 @@ public class Grid : MonoBehaviour {
 		GetComponent<MeshCollider>().sharedMesh = mesh;
 	}
 
-	// Spawns a random amount of trees on the island at the correct heights
+	// Spawns a random amount of objects on the island at the correct heights
 	private void spawnObjects() {
 		chosenLocations = new List<int>(); // Make sure the current list of chosen locations is empty
 		foreach (var objectToSpawn in spawns) {

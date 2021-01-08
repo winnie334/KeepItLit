@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3258610078700460991}
   - component: {fileID: 1263090256812346844}
   - component: {fileID: 6319884967164917643}
-  - component: {fileID: 5916812978472171001}
   - component: {fileID: 2000879731491697434}
   - component: {fileID: 6023779355656511413}
   - component: {fileID: 3513587565980496111}
+  - component: {fileID: 1228342723210284054}
+  - component: {fileID: 6374357734792585744}
   m_Layer: 0
   m_Name: Cooked Fish
   m_TagString: Item
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3620058303927492057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 133.42422, y: 0.2853319, z: 76.66047}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.084586, y: 0.084586, z: 0.084586}
   m_Children:
   - {fileID: 1936936622664815224}
   m_Father: {fileID: 0}
@@ -44,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3620058303927492057}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 6239881831769578202, guid: deca0ac9890f8784593a72c16b743eb7, type: 3}
 --- !u!23 &6319884967164917643
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +65,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0cb38bc8fa6a9654084fbd7b2b37dbbf, type: 2}
+  - {fileID: 2100000, guid: a09ba0bbe638e0742a1898ae5418f87a, type: 2}
+  - {fileID: 2100000, guid: a09ba0bbe638e0742a1898ae5418f87a, type: 2}
+  - {fileID: 2100000, guid: a09ba0bbe638e0742a1898ae5418f87a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,19 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5916812978472171001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3620058303927492057}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2000879731491697434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7016011e241d7a6488d236754948d884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 39ee8ec943a365b4a983dfa6c0eff662, type: 2}
+  item: {fileID: 11400000, guid: cd0cbd3561566d540ba69765ba30fbcd, type: 2}
 --- !u!54 &6023779355656511413
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -142,6 +132,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthFill: 25
   eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}
+--- !u!65 &1228342723210284054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620058303927492057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23.25603, y: 14.7642355, z: 4.7387347}
+  m_Center: {x: -13.910318, y: -1.0591638, z: -1.8702404}
+--- !u!65 &6374357734792585744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620058303927492057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.546318, y: 8.236335, z: 5.7123137}
+  m_Center: {x: -24.542908, y: -12.416745, z: -1.3834516}
 --- !u!1 &4008259654950464286
 GameObject:
   m_ObjectHideFlags: 0
