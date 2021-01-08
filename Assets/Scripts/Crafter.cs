@@ -96,7 +96,8 @@ public class Crafter : MonoBehaviour {
     // Returns the amount of necessary items for a given recipe and how many of those items are available
     public Dictionary<Item, Tuple<int, int>> getNeededItems(Recipe recipe) {
         var availableCount = availableItems.ToDictionary(entry => entry.Key, entry => entry.Value.Count);
-        var requiredCount = recipe.requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
+        var requiredItems = recipe.requiredItems.Where(item => !item.name.Contains("Boat"));
+        var requiredCount = requiredItems.GroupBy(x => x).ToDictionary(x => x.Key, x => x.Count());
         return requiredCount.Keys.ToDictionary(item => item, item =>
             new Tuple<int, int>(availableCount.GetOrDef(item), requiredCount[item]));
     }

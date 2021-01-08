@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 988aa8a270a464c45acc1af27c34172e, type: 3}
   m_Name: Boat_2
   m_EditorClassIdentifier: 
-  title: Mast
+  title: Mast Upgrade
   icon: {fileID: 21300000, guid: 0cd91965f2aec394a8b7457c3ace2d69, type: 3}
-  description: 
   fuelSize: 0
   isTool: 0
