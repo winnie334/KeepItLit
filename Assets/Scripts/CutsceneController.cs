@@ -23,7 +23,7 @@ public class CutsceneController : MonoBehaviour {
     private TextRevealer textRevealer;
     private float timer = 0;
 
-    private float[] volumeChangeSettings = {0.3f, 1f, 4}; // [starting volume, end volume, duration to reach end volume]
+    private float[] volumeChangeSettings = {0.3f, 0.7f, 4}; // [starting volume, end volume, duration to reach end volume]
     private bool shouldChangeVolume;
 
     private Action
@@ -108,7 +108,7 @@ public class CutsceneController : MonoBehaviour {
         yield return new WaitForSeconds(1);
         textRevealer.clearText();
         soundEffect.Play();
-        changeVolumeGraduallyPreparation(new[] {1f, 0.1f, 5f},
+        changeVolumeGraduallyPreparation(new[] {0.8f, 0f, 5f},
             () => { StartCoroutine(playShoreSounds()); });
     }
 
