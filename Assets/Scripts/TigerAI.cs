@@ -172,8 +172,6 @@ public class TigerAI : Animal {
                 anim.SetBool("Attack", false);
                 // Todo play some attack animation
             }
-        } else {
-            return;
         }
     }
 }

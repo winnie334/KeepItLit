@@ -55,7 +55,7 @@ public class Hints : MonoBehaviour {
         string hint = null;
         if (item == "Shipyard Construction Kit") hint = "I can place this in the sea";
         if (item == "RawChicken" || item == "Fish") hint = "This looks edible... but I should cook it first";
-        if (item == "Ore") hint = "This rock has some ore, maybe I can smelt it to metal";
+        if (item == "Ore") hint = "This rock has some ore, maybe I can melt it to metal";
         if (item == "Torch") hint = "This will let me see at night, but it's still dangerous";
         if (hint != null) displayHint(hint);
     }

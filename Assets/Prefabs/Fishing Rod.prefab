@@ -796,7 +796,7 @@ MonoBehaviour:
   fishCatchSound: {fileID: 8300000, guid: 9ee958299c02bd64a9804d0b83dc7c64, type: 3}
   throwBobberSound: {fileID: 8300000, guid: 52c977f767d1274449cef39eb8822123, type: 3}
   cancelFishingSound: {fileID: 8300000, guid: 4a165e165ca7d6d4f8a3ecbccccbae1b, type: 3}
-  durability: 3
+  durability: 5
 --- !u!120 &773168220599318447
 LineRenderer:
   m_ObjectHideFlags: 0

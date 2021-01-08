@@ -32,13 +32,12 @@ namespace Actions {
         }
 
         public void execute(PlayerMovement playerMov) {
+            Hints.displayHint("Hold to throw, Release at the right time to reel in the fish");
             if (currBobber && anim.GetBool("IsFishing")) {
                 anim.SetBool("IsFishing", false);
                 if (currBobber.GetComponent<Bobber>().hasFish()) {
-                    Debug.Log("has fish");
                     var bobberPos = currBobber.transform.position;
                     var fish = Instantiate(FishObject, bobberPos, Quaternion.identity);
-                    Debug.Log("Fish instanciated");
                     var targetDir = (transform.position - bobberPos).normalized;
                     fish.GetComponent<Rigidbody>().AddForce(new Vector3(targetDir.x * 1000, targetDir.y * 2000, targetDir.z * 1000));
                     durability--;

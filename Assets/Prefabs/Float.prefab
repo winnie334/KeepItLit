@@ -397,8 +397,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5ea1975d4dc2b45b26754a7b938a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWaitTime: 6
-  maxWaitTime: 12
+  minWaitTime: 4
+  maxWaitTime: 8
   bobberSubmergeSound: {fileID: 8300000, guid: 755e88cb9f4a2ee40af70378fe50e13b, type: 3}
 --- !u!136 &1665779564154299456
 CapsuleCollider:

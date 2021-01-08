@@ -101,7 +101,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 88863e53c2033984694349bfbe6615a8, type: 2}
   loots:
   - resource: {fileID: 132408523772158365, guid: 243c35a440cb30f4d8680855ab776dd8, type: 3}
-    number: 5
+    number: 2
   - resource: {fileID: 7402110537649807547, guid: 41bedcd398dec924292b44786b97b960, type: 3}
     number: 1
   maxHealth: 100

@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f06f757f6ee4b14ca37ac44f0be5abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthFill: 25
+  healthFill: 50
   eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}
 --- !u!65 &1228342723210284054
 BoxCollider:
