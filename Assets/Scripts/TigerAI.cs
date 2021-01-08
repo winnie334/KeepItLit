@@ -159,7 +159,7 @@ public class TigerAI : Animal {
     }
 #endif
 
-    public void OnTriggerEnter(Collider other) {
+    public void OnTriggerStay(Collider other) {
         if (anim.GetBool("Attack")) {
             if (other.gameObject.CompareTag("Player")) {
                 var playerScript = other.gameObject.GetComponent<PlayerMovement>();
