@@ -81,6 +81,7 @@ public class Fire : MonoBehaviour {
                     if (item.fuelSize > 0) {
                         audioSource.PlayOneShot(addFireSound);
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
+                        Hints.displayHint("Good... maybe I can craft something. [C]");
                         updateParts();
                         StartCoroutine(DestroyItem(other.gameObject));
                     } else if (other.gameObject.GetComponent<IFireInteraction>() != null) {
@@ -107,7 +108,7 @@ public class Fire : MonoBehaviour {
         if (fireSize < warningSize && !warningSymbol.activeInHierarchy) {
             warningSymbol.SetActive(true);
             player.playSound(warningSound);
-            Hints.displayHint("My fire is almost out, \n I should add fuel soon !");
+            Hints.displayHint("My fire is almost out, I should add fuel soon !");
         }
         else if (warningSymbol.activeInHierarchy && fireSize > warningSize) warningSymbol.SetActive(false);
         slider.value = fireSize;
