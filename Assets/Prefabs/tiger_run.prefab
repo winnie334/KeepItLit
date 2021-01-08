@@ -1826,9 +1826,9 @@ MonoBehaviour:
   maxHealth: 50
   recoveryTime: 0.2
   drops:
-  - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
-  - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
-  - {fileID: 3503415072969503526, guid: 48c9ae184a00cdb45a7596f392f7387f, type: 3}
+  - {fileID: 3503415072969503526, guid: 547989d8fe71ca54a9a426e71b489a77, type: 3}
+  - {fileID: 3503415072969503526, guid: 547989d8fe71ca54a9a426e71b489a77, type: 3}
+  - {fileID: 3503415072969503526, guid: 547989d8fe71ca54a9a426e71b489a77, type: 3}
   anim: {fileID: 99321662208218861}
   wanderRadius: 8
   attackDamage: 15
@@ -1994,12 +1994,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8377184782370153525}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 50
-  m_Height: 270
+  m_Radius: 74.37572
+  m_Height: 192.99608
   m_Direction: 2
-  m_Center: {x: 0, y: 80, z: 20}
+  m_Center: {x: -19.88134, y: 75.505585, z: 36.690586}
 --- !u!1 &8472307769389052849
 GameObject:
   m_ObjectHideFlags: 0

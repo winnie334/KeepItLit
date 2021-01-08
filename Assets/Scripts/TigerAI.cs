@@ -160,18 +160,14 @@ public class TigerAI : Animal {
 #endif
 
     public void OnTriggerStay(Collider other) {
-        if (anim.GetBool("Attack")) {
-            if (other.gameObject.CompareTag("Player")) {
-                var playerScript = other.gameObject.GetComponent<PlayerMovement>();
-                var dir = Vector3.Normalize(other.transform.position - transform.position);
-                playerScript.takeDamageWithImpact(new Vector3(dir.x, 0.3f, dir.z), 50, attackDamage);
-                chaseTimer = 0;
-                attackTimer = 0;
-                audioSource.PlayOneShot(attackSound);
-                Hints.displayHint("Argh, these tigers are dangerous. I should be careful at night");
-                anim.SetBool("Attack", false);
-                // Todo play some attack animation
-            }
-        }
+        if (!anim.GetBool("Attack") || !other.gameObject.CompareTag("Player")) return;
+        var playerScript = other.gameObject.GetComponent<PlayerMovement>();
+        var dir = Vector3.Normalize(other.transform.position - transform.position);
+        playerScript.takeDamageWithImpact(new Vector3(dir.x, 0.3f, dir.z), 50, attackDamage);
+        chaseTimer = 0;
+        attackTimer = 0;
+        audioSource.PlayOneShot(attackSound);
+        Hints.displayHint("Argh, these tigers are dangerous. I should be careful at night");
+        anim.SetBool("Attack", false);
     }
 }
