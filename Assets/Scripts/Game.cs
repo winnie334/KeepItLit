@@ -28,10 +28,16 @@ public class Game : MonoBehaviour {
         switchScene("Intro");
     }
 
+    public void RestartGame() {
+        switchScene("CharacterMovement");
+    }
+
     private static void switchScene(string sceneToPlay) {
         scene = sceneToPlay;
         timer = 0;
         shouldFade = true;
+        fadePanel.gameObject.SetActive(true);
+        Debug.Log(fadePanel);
     }
 
     private void Update() {

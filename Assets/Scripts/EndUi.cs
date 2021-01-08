@@ -8,5 +8,6 @@ public class EndUi : MonoBehaviour {
 
     private void Start() {
         text.text = Game.message;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

@@ -6,6 +6,7 @@ using Image = UnityEngine.UI.Image;
 
 public class BlackFadeOut : MonoBehaviour {
 
+    public bool disableOnFadeDone;
     private Image img;
     private float timer;
     public float fadeOutDuration;
@@ -17,7 +18,12 @@ public class BlackFadeOut : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (timer > fadeOutDuration) return;
+        if (timer > fadeOutDuration) {
+            if (disableOnFadeDone) {
+                gameObject.SetActive(false);
+                gameObject.GetComponent<BlackFadeOut>().enabled = false;
+            } else return;
+        };
         timer += Time.deltaTime;
         img.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, timer / fadeOutDuration));
     }

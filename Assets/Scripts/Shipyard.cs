@@ -26,7 +26,7 @@ public class Shipyard : MonoBehaviour {
     }
 
     public void handleBoatPartCreated() {
-        if (isBoatFinished()) Game.EndGame(true, "");
+        if (isBoatFinished()) Game.EndGame(true, "You won! Thanks for playing~");
         else removeRecipe();
     }
 
