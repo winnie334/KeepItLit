@@ -42,7 +42,8 @@ public class PlayerMovement : MonoBehaviour {
         currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
         healthUI.SetHealth(currentHealth);
-        Hints.displayHint("You can pick up things with space");
+        Hints.displayHint("Let's find some wood to put on the fire");
+        Hints.displayHint("Press [Escape] for settings and controls");
     }
 
     // Update is called once per frame

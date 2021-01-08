@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3258610078700460991}
   - component: {fileID: 1263090256812346844}
   - component: {fileID: 6319884967164917643}
-  - component: {fileID: 5916812978472171001}
   - component: {fileID: 2000879731491697434}
   - component: {fileID: 6023779355656511413}
   - component: {fileID: 3513587565980496111}
+  - component: {fileID: 1228342723210284054}
+  - component: {fileID: 6374357734792585744}
   m_Layer: 0
   m_Name: Cooked Fish
   m_TagString: Item
@@ -88,19 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5916812978472171001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3620058303927492057}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2000879731491697434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +132,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthFill: 25
   eatSound: {fileID: 8300000, guid: f19d4ab3c1af1c54c8437e7b0bd9ad69, type: 3}
+--- !u!65 &1228342723210284054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620058303927492057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23.25603, y: 14.7642355, z: 4.7387347}
+  m_Center: {x: -13.910318, y: -1.0591638, z: -1.8702404}
+--- !u!65 &6374357734792585744
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620058303927492057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 14.546318, y: 8.236335, z: 5.7123137}
+  m_Center: {x: -24.542908, y: -12.416745, z: -1.3834516}
 --- !u!1 &4008259654950464286
 GameObject:
   m_ObjectHideFlags: 0
