@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 578200190}
   - component: {fileID: 578200189}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2039,8 +2039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2790a1accd090a847a4022bf70fe58ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 578200189}
-  fadeInDuration: 3
+  fadeDuration: 3
 --- !u!222 &2013250714
 CanvasRenderer:
   m_ObjectHideFlags: 0
