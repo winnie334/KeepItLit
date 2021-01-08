@@ -6,33 +6,45 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour {
 
     public static string message;
-    public Image img;
+    private static Image fadePanel;
 
-    private bool shouldStartGame;
-    private float timer;
-    public float fadeInDuration;
-    
+    private static bool shouldFade;
+    private static float timer;
+    public float fadeDuration;
+
+    private static string scene;
+
+    private void Start() {
+        fadePanel = GameObject.Find("Fade").GetComponent<Image>();
+    }
+
     public static void EndGame(bool victory, string msg) {
+        if (shouldFade) return;
         message = msg;
-        SceneManager.LoadScene(victory ? "Victory" : "Defeat");
+        switchScene(victory ? "Victory" : "Defeat");
     }
 
     public void StartGame() {
-        shouldStartGame = true;
+        switchScene("Intro");
+    }
+
+    private static void switchScene(string sceneToPlay) {
+        scene = sceneToPlay;
+        timer = 0;
+        shouldFade = true;
     }
 
     private void Update() {
-        if (!shouldStartGame) return;
+        if (!shouldFade) return;
 
-        if (timer > fadeInDuration) {
-            SceneManager.LoadScene("Intro");
-            shouldStartGame = false;
-            timer = 0;
-            return;
+        if (timer > fadeDuration) {
+            SceneManager.LoadScene(scene);
+            shouldFade = false;
         }
-
-        timer += Time.deltaTime;
-        img.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, timer / fadeInDuration));
+        else {
+            timer += Time.deltaTime;
+            fadePanel.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, timer / fadeDuration));
+        }
     }
 
     public void CloseGame() {
