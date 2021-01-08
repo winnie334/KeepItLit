@@ -50,6 +50,11 @@ public class CraftUI : MonoBehaviour {
         }
     }
 
+    public void changeSensibility(Slider slid) {
+        cam.m_XAxis.m_MaxSpeed = slid.value * 30;
+        cam.m_YAxis.m_MaxSpeed = slid.value * 0.3f;
+    }
+
     // If we ever want to craft using workbenches or other special stations, this is where you should set them
     public void setCrafter(Crafter newCrafter) {
         crafter = newCrafter ? newCrafter : playerBrain.GetComponent<Crafter>();

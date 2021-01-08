@@ -62,7 +62,6 @@ public class TigerAI : Animal {
     }
 
     new void Update() {
-        Debug.Log(player);
         base.Update();
         if (!agent.enabled) return;
 

@@ -172,7 +172,7 @@ public class PlayerMovement : MonoBehaviour {
         if (currentlyGrabbed.Count == 0) {
             var objectToGrab = lookForClosestGrabbableItem(null);
             if (objectToGrab is null) return;
-            
+
             currentlyGrabbed.Add(objectToGrab);
             anim.SetBool("Grab", true);
 
@@ -188,7 +188,6 @@ public class PlayerMovement : MonoBehaviour {
                         return;
                     }
 
-                    Debug.Log("Tst");
                     currentlyGrabbed.Add(objectToGrab);
                     anim.SetBool("Grab", true);
                 }
