@@ -145,6 +145,7 @@ public class TigerAI : Animal {
     }
 
     public void resetAttack() {
+        Debug.Log("Reset");
         anim.SetBool("Attack", false);
     }
 
