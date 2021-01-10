@@ -61,6 +61,9 @@ public class CraftUI : MonoBehaviour {
         if (craftUI.activeInHierarchy) {
             refreshUI();
         }
+
+        currentlySelected = null;
+        detailPanel.SetActive(false);
     }
 
     // Fetches all the possible recipes again

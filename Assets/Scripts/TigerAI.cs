@@ -85,7 +85,7 @@ public class TigerAI : Animal {
     }
 
     private void handleIdle() {
-        anim.SetBool("Walk", Vector3.Distance(transform.position, agent.destination) > 1);
+        anim.SetBool("Walk", Vector3.Distance(transform.position, agent.destination) > 0.5f);
         cooldownTimer += Time.deltaTime;
         growlWait += Time.deltaTime;
         if (canSeePlayer() && cooldownTimer > cooldownThreshold) {
@@ -145,8 +145,8 @@ public class TigerAI : Animal {
     }
 
     public void resetAttack() {
-        Debug.Log("Reset");
         anim.SetBool("Attack", false);
+        // anim.SetBool("Walk", true);
     }
 
 #if UNITY_EDITOR

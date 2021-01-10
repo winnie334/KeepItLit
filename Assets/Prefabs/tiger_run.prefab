@@ -1830,14 +1830,14 @@ MonoBehaviour:
   - {fileID: 3503415072969503526, guid: 547989d8fe71ca54a9a426e71b489a77, type: 3}
   - {fileID: 3503415072969503526, guid: 547989d8fe71ca54a9a426e71b489a77, type: 3}
   anim: {fileID: 99321662208218861}
-  wanderRadius: 8
+  wanderRadius: 10
   attackDamage: 15
   daySpeed: 4.5
   nightSpeed: 8
   jumpDistance: 5
   viewDistanceDay: 12
   viewDistanceNight: 21
-  wanderTimer: {x: 7, y: 15}
+  wanderTimer: {x: 7, y: 11}
   boredTimer: 8
   playerLostTimer: 3
   cooldownThreshold: 1.5
