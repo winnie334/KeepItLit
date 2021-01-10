@@ -75,7 +75,6 @@ public class TigerAI : Animal {
 
         switch (state) {
             case tigerState.IDLE:
-                anim.SetBool("Walk", false);
                 handleIdle();
                 break;
             case tigerState.CHASING:
@@ -86,6 +85,7 @@ public class TigerAI : Animal {
     }
 
     private void handleIdle() {
+        anim.SetBool("Walk", Vector3.Distance(transform.position, agent.destination) > 1);
         cooldownTimer += Time.deltaTime;
         growlWait += Time.deltaTime;
         if (canSeePlayer() && cooldownTimer > cooldownThreshold) {
@@ -101,7 +101,6 @@ public class TigerAI : Animal {
 
         idleTimer += Time.deltaTime;
         if (!(idleTimer >= nextWanderTimer)) return;
-        anim.SetBool("Walk", true);
         agent.SetDestination(RandomNearAboveWater(transform.position, wanderRadius * (dayNightCycle.isDay() ? 1 : 2), -1));
         idleTimer = 0;
         nextWanderTimer = Random.Range(wanderTimer.x, wanderTimer.y);
