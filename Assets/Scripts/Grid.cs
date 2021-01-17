@@ -37,6 +37,7 @@ public class Grid : MonoBehaviour {
 	}
 	public SpawnOption[] spawns;
 	private List<int> chosenLocations; // Saves the vertices indices on which we already spawned an object
+	private List<GameObject> thingsSpawned; // List of all the things we have spawned so far
 
 	private Mesh mesh;
 	private Vector3[] vertices;
@@ -97,13 +98,14 @@ public class Grid : MonoBehaviour {
 	// Spawns a random amount of objects on the island at the correct heights
 	private void spawnObjects() {
 		chosenLocations = new List<int>(); // Make sure the current list of chosen locations is empty
+		thingsSpawned = new List<GameObject>();
 		foreach (var objectToSpawn in spawns) {
 			var amount = Random.Range(objectToSpawn.minAmount, objectToSpawn.maxAmount);
 			// If it is an item, we should spawn it slightly higher to ensure it doesn't clip through the ground
 			var spawnHigher = objectToSpawn.obj.GetComponent<Rigidbody>() != null;
 			for (var i = 0; i < amount; i++) {
 				var spawnPos = getRandomSpawnLocation() + (spawnHigher ? Vector3.up : Vector3.zero);
-				Instantiate(objectToSpawn.obj, spawnPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0)));
+				thingsSpawned.Add(Instantiate(objectToSpawn.obj, spawnPos, Quaternion.Euler(new Vector3(0, Random.Range(0, 360), 0))));
 			}
 		}
 	}
@@ -144,6 +146,13 @@ public class Grid : MonoBehaviour {
 		for(var i = 0; i < 100; i++) spawnPositions.Add(getRandomSpawnLocation());
 		spawnPos = spawnPositions.OrderBy(pos => Vector3.Distance(spawnPos, pos)).First();
 		fire.transform.position = spawnPos;
+
+		foreach (var spawnedThing in thingsSpawned) {
+			if (Vector3.Distance(spawnedThing.transform.position, fire.transform.position) < 4) {
+				Debug.Log("Destroyed " + spawnedThing.name);
+				Destroy(spawnedThing);
+			}
+		}
 	}
 
 	private void bakeNavMesh() {

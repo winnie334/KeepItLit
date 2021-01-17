@@ -129,4 +129,8 @@ public class Crafter : MonoBehaviour {
             availableItems[itemAssociation.item].Remove(hit.gameObject);
         craftUI.refreshUI();
     }
+
+    public bool craftMenuIsOpen() {
+        return craftUI.craftUI.activeInHierarchy;
+    }
 }

@@ -78,7 +78,7 @@ public class Fire : MonoBehaviour {
             default:
                 if (other.gameObject.CompareTag("Item")) {
                     var item = other.gameObject.GetComponent<ItemAssociation>().item;
-                    if (item.fuelSize > 0) {
+                    if (item.fuelSize > 0 && Time.timeSinceLevelLoad > 1) { // Don't consume initially spawned wood
                         audioSource.PlayOneShot(addFireSound);
                         fireSize = Math.Min(fireSize + item.fuelSize, maximalSizeFire);
                         Hints.displayHint("Good... maybe I can craft something. [C]");

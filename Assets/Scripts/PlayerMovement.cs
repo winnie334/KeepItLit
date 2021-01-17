@@ -38,10 +38,13 @@ public class PlayerMovement : MonoBehaviour {
     private List<GameObject> toolsOnBack = new List<GameObject>(); //the tool the player has on its back
     private Vector3 impact = Vector3.zero;
 
+    private Crafter brain;
+
     private void Start() {
         currentHealth = maxHealth;
         healthUI.SetMaxHealth(maxHealth);
         healthUI.SetHealth(currentHealth);
+        brain = transform.Find("brain").GetComponent<Crafter>();
         Hints.displayHint("Let's find some wood to put on the fire");
         Hints.displayHint("Press [Escape] for settings and controls");
     }
@@ -55,7 +58,7 @@ public class PlayerMovement : MonoBehaviour {
         } else if (Input.GetAxis("Mouse ScrollWheel") < 0f) {
             handleItemSwitch(false);
         }
-        if (Input.GetMouseButton(0) && currentlyGrabbed.Count == 1 && currentlyGrabbed[0].GetComponents<IAction>().Length > 0) {
+        if (Input.GetMouseButton(0) && currentlyGrabbed.Count == 1 && currentlyGrabbed[0].GetComponents<IAction>().Length > 0 && !brain.craftMenuIsOpen()) {
             anim.SetBool("Extract", true);
         } else {
             anim.SetBool("Extract", false);
@@ -198,6 +201,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void handleItemAction() {
         var actions = currentlyGrabbed[0].GetComponents<IAction>();
+        if (actions.Length == 0 || brain.craftMenuIsOpen()) return;
         foreach (var action in actions) {
             action.execute(this);
         }
