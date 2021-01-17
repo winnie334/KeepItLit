@@ -31,7 +31,7 @@ public class DayNightCycle : MonoBehaviour {
         float moonIntensity;
         float rotationX;
         if (time < dayTime) { // Intensity ranges from 0 to maxIntensity based on time distance to noon
-            sunIntensity = HelperFunctions.p5Map(Math.Abs(time - dayTime / 2), 0, dayTime / 2, maxIntensity + 0.5f, 0);
+            sunIntensity = HelperFunctions.p5Map(Math.Abs(time - dayTime / 2), 0, dayTime / 2, maxIntensity + 0.6f, 0);
             moonIntensity = 0;
             rotationX = time / dayTime * 180;
         } else {
