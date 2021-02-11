@@ -1,0 +1,24 @@
+ship_creaking https://freesound.org/people/Kodack/sounds/257752/
+thunder https://www.soundsnap.com/tags/lightning
+fire https://www.epidemicsound.com/track/c2CXCJAW4X/
+seashore https://www.soundsnap.com/tags/seashore
+
+Torch https://skfb.ly/6RWGE
+axe https://skfb.ly/6UuGS
+toolbox https://skfb.ly/6UXZq
+stone ore https://skfb.ly/UG9U
+chicken https://skfb.ly/6RoRq
+plant https://skfb.ly/6UoDC
+pickaxe https://skfb.ly/6WOAw (maybe)
+iron_bar https://skfb.ly/6wOXO
+float https://skfb.ly/6XGzP
+fishing rod https://skfb.ly/6r7C7
+animals ?
+screw ?
+fish ?
+machete ?
+vegetation ?
+single plant leaf https://skfb.ly/6XI7y
+
+
+
