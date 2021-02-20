@@ -1,0 +1,36 @@
+SFX
+ship_creaking https://freesound.org/people/Kodack/sounds/257752/
+thunder https://www.soundsnap.com/tags/lightning
+background music https://www.youtube.com/watch?v=YJyhhNQ3IuQ
+UI https://www.soundsnap.com/tags/ui
+fire https://www.epidemicsound.com/track/c2CXCJAW4X/
+seashore https://www.soundsnap.com/tags/seashore
+tiger https://www.soundsnap.com/
+chopping tree https://www.youtube.com/watch?v=j_VfxvK7yF0
+
+MODELS
+Torch https://skfb.ly/6RWGE
+axe https://skfb.ly/6UuGS
+toolbox https://skfb.ly/6UXZq
+stone ore https://skfb.ly/UG9U
+chicken https://skfb.ly/6RoRq
+plant https://skfb.ly/6UoDC
+pickaxe https://skfb.ly/6WOAw
+iron_bar https://skfb.ly/6wOXO
+float https://skfb.ly/6XGzP
+fishing rod https://skfb.ly/6RACF
+tiger https://skfb.ly/6SuVt
+screw https://skfb.ly/6vHu9
+rope https://skfb.ly/UEJH
+single plant leaf https://skfb.ly/6XI7y
+shipyard https://assetstore.unity.com/packages/3d/environments/island-assets-56989
+mushrooms & branch https://assetstore.unity.com/packages/3d/environments/landscapes/low-poly-simple-nature-pack-162153
+skybox https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633
+
+PLUGINS
+ezy-slice https://github.com/DavidArayan/ezy-slice
+grass https://assetstore.unity.com/packages/vfx/shaders/directx-11/directx-11-grass-shader-36335
+
+
+
+
