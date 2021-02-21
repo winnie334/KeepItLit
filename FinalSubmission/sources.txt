@@ -1,3 +1,5 @@
+Developed for the Video game Design and Programming course of the Politecnico di Milano
+
 SFX
 ship_creaking https://freesound.org/people/Kodack/sounds/257752/
 thunder https://www.soundsnap.com/tags/lightning
